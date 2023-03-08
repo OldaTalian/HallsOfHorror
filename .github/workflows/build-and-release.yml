@@ -7,7 +7,11 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -25,26 +29,55 @@ jobs:
           dotnet publish --configuration Release --runtime win-x86 --self-contained false -o publish/win-x86
           dotnet publish --configuration Release --runtime win-x64 --self-contained false -o publish/win-x64
       
-      - name: Upload artifacts linux
+      - name: Create setup files
+        if: matrix.os == 'windows-latest'
+        run: |
+          cd publish/win-x86
+          choco pack
+          cd ../win-x64
+          choco pack
+          
+      - name: Create setup files
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          cd publish/linux-x64
+          mkdir deb
+          dotnet deb --output deb/ ./MyApp
+          cd deb
+          dpkg-deb --build MyApp
+          cd ../..
+          
+      - name: Create setup files
+        if: matrix.os == 'macos-latest'
+        run: |
+          cd publish/osx-x64
+          hdiutil create -format UDZO -srcfolder MyApp.app MyApp.dmg
+          cd ..
+          
+      - name: Upload artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: Linux 64x
-          path: publish/linux-x64
-
-      - name: Upload artifacts macos
+          name: ${{ matrix.os }} 64x
+          path: publish/${{ matrix.os }}-x64
+          
+      - name: Upload setup files
+        if: matrix.os == 'windows-latest'
         uses: actions/upload-artifact@v2
         with:
-          name: MacOs 64x
-          path: publish/osx-x64
-
-      - name: Upload artifacts Windows 86x
+          name: Windows Setup Files
+          path: publish/win-x86/*.nupkg, publish/win-x64/*.nupkg
+          
+      - name: Upload setup files
+        if: matrix.os == 'ubuntu-latest'
         uses: actions/upload-artifact@v2
         with:
-          name: Windows 86x
-          path: publish/win-x86
-
-      - name: Upload artifacts Windows 64x
+          name: Ubuntu Setup Files
+          path: publish/linux-x64/deb/MyApp.deb
+          
+      - name: Upload setup files
+        if: matrix.os == 'macos-latest'
         uses: actions/upload-artifact@v2
         with:
-          name: Windows 64x
-          path: publish/win-x64
+          name: MacOS Setup Files
+          path: publish/osx-x64/MyApp.dmg
+          
