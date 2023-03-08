@@ -7,11 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
-
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -25,59 +21,51 @@ jobs:
         run: |
           dotnet build --configuration Release
           dotnet publish --configuration Release --runtime linux-x64 --self-contained false -o publish/linux-x64
-          dotnet publish --configuration Release --runtime osx-x64 --self-contained false -o publish/osx-x64
-          dotnet publish --configuration Release --runtime win-x86 --self-contained false -o publish/win-x86
-          dotnet publish --configuration Release --runtime win-x64 --self-contained false -o publish/win-x64
+          dotnet publish --configuration Release --runtime osx-x64 --self-contained false
+          dotnet publish --configuration Release --runtime win-x86 --self-contained false -o publish/win-x86-portable
+          dotnet publish --configuration Release --runtime win-x64 --self-contained false -o publish/win-x64-portable
+          dotnet publish --configuration Release --runtime win-x86 --self-contained true -o publish/win-x86-installer
+          dotnet publish --configuration Release --runtime win-x64 --self-contained true -o publish/win-x64-installer
+          dpkg-deb --build publish/linux-x64 publish/dungeon-crawler-linux.deb
       
-      - name: Create setup files
-        if: matrix.os == 'windows-latest'
-        run: |
-          cd publish/win-x86
-          choco pack
-          cd ../win-x64
-          choco pack
-          
-      - name: Create setup files
-        if: matrix.os == 'ubuntu-latest'
-        run: |
-          cd publish/linux-x64
-          mkdir deb
-          dotnet deb --output deb/ ./MyApp
-          cd deb
-          dpkg-deb --build MyApp
-          cd ../..
-          
-      - name: Create setup files
-        if: matrix.os == 'macos-latest'
-        run: |
-          cd publish/osx-x64
-          hdiutil create -format UDZO -srcfolder MyApp.app MyApp.dmg
-          cd ..
-          
-      - name: Upload artifacts
+      - name: Upload artifacts linux
         uses: actions/upload-artifact@v2
         with:
-          name: ${{ matrix.os }} 64x
-          path: publish/${{ matrix.os }}-x64
-          
-      - name: Upload setup files
-        if: matrix.os == 'windows-latest'
+          name: Linux 64x
+          path: publish/linux-x64
+
+      - name: Upload artifacts macos
         uses: actions/upload-artifact@v2
         with:
-          name: Windows Setup Files
-          path: publish/win-x86/*.nupkg, publish/win-x64/*.nupkg
-          
-      - name: Upload setup files
-        if: matrix.os == 'ubuntu-latest'
+          name: MacOs 64x
+          path: publish/osx-x64
+
+      - name: Upload artifacts Windows 86x Portable
         uses: actions/upload-artifact@v2
         with:
-          name: Ubuntu Setup Files
-          path: publish/linux-x64/deb/MyApp.deb
-          
-      - name: Upload setup files
-        if: matrix.os == 'macos-latest'
+          name: Windows 86x Portable
+          path: publish/win-x86-portable
+
+      - name: Upload artifacts Windows 64x Portable
         uses: actions/upload-artifact@v2
         with:
-          name: MacOS Setup Files
-          path: publish/osx-x64/MyApp.dmg
-          
+          name: Windows 64x Portable
+          path: publish/win-x64-portable
+
+      - name: Upload artifacts Windows 86x Installer
+        uses: actions/upload-artifact@v2
+        with:
+          name: Windows 86x Installer
+          path: publish/win-x86-installer.exe
+
+      - name: Upload artifacts Windows 64x Installer
+        uses: actions/upload-artifact@v2
+        with:
+          name: Windows 64x Installer
+          path: publish/win-x64-installer.exe
+
+      - name: Upload artifacts Linux Installer
+        uses: actions/upload-artifact@v2
+        with:
+          name: Linux Installer
+          path: publish/dungeon-crawler-linux.deb
