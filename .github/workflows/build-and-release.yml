@@ -51,20 +51,20 @@ jobs:
           name: Linux 64x
           path: artifactsl/
 
-     - name: Upload artifacts macos
-        uses: actions/upload-artifact@v2
-        with:
-          name: MacOs 64x
-          path: artifactsm/
+      - name: Upload artifacts macos
+         uses: actions/upload-artifact@v2
+         with:
+           name: MacOs 64x
+           path: artifactsm/
 
-     - name: Upload artifacts Windows 86x
-        uses: actions/upload-artifact@v2
-        with:
-          name: Windows 86x
-          path: artifactsw86/
+      - name: Upload artifacts Windows 86x
+         uses: actions/upload-artifact@v2
+         with:
+           name: Windows 86x
+           path: artifactsw86/
 
-     - name: Upload artifacts Windows 64x
-        uses: actions/upload-artifact@v2
-        with:
-          name: Windows 64x
-          path: artifactsw64/
+      - name: Upload artifacts Windows 64x
+         uses: actions/upload-artifact@v2
+         with:
+           name: Windows 64x
+           path: artifactsw64/
