@@ -26,7 +26,16 @@ jobs:
           dotnet publish --configuration Release --runtime win-x64 --self-contained false -o publish/win-x64
       
       - name: Create artifacts
+        run: |
+          mkdir -p artifacts
+          cp -r publish/linux-x64 artifacts/MyApp-Linux-x64
+          cp -r publish/osx-x64 artifacts/MyApp-OSX-x64
+          cp -r publish/win-x86 artifacts/MyApp-Windows-x86
+          cp -r publish/win-x64 artifacts/MyApp-Windows-x64
+        working-directory: .
+      
+      - name: Upload artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: Artifacts
-          path: publish/
+          name: MyApp-Artifacts
+          path: artifacts/
