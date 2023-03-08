@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Admin\\source\\repos\\dungeon_crawler\\DungeonCrawler\\DungeonCrawler.csproj",
+      "projectUniqueName": "C:\\Users\\Admin\\Source\\Repos\\DungeonCrawlerC-\\DungeonCrawler\\DungeonCrawler.csproj",
       "projectName": "DungeonCrawler",
-      "projectPath": "C:\\Users\\Admin\\source\\repos\\dungeon_crawler\\DungeonCrawler\\DungeonCrawler.csproj",
+      "projectPath": "C:\\Users\\Admin\\Source\\Repos\\DungeonCrawlerC-\\DungeonCrawler\\DungeonCrawler.csproj",
       "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Admin\\source\\repos\\dungeon_crawler\\DungeonCrawler\\obj\\",
+      "outputPath": "C:\\Users\\Admin\\Source\\Repos\\DungeonCrawlerC-\\DungeonCrawler\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
