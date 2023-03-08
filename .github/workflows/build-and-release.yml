@@ -11,12 +11,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      
+
       - name: Install .NET SDK
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: '6.0.x'
-      
+
       - name: Build and publish
         run: |
           dotnet build --configuration Release
@@ -24,18 +24,47 @@ jobs:
           dotnet publish --configuration Release --runtime osx-x64 --self-contained false -o publish/osx-x64
           dotnet publish --configuration Release --runtime win-x86 --self-contained false -o publish/win-x86
           dotnet publish --configuration Release --runtime win-x64 --self-contained false -o publish/win-x64
-      
-      - name: Create artifacts
+
+      - name: Create artifacts for Linux
         run: |
-          mkdir -p artifacts
-          cp -r publish/linux-x64 artifacts/MyApp-Linux-x64
-          cp -r publish/osx-x64 artifacts/MyApp-OSX-x64
-          cp -r publish/win-x86 artifacts/MyApp-Windows-x86
-          cp -r publish/win-x64 artifacts/MyApp-Windows-x64
-        working-directory: .
-      
-      - name: Upload artifacts
+          mkdir -p artifactsl/linux
+          tar -czvf artifactsl/linux/MyApp-Linux-x64.tar.gz -C publish/linux-x64 .
+
+      - name: Create artifacts for MacOS
+        run: |
+          mkdir -p artifactsm/macos
+          tar -czvf artifactsm/macos/MyApp-OSX-x64.tar.gz -C publish/osx-x64 .
+
+      - name: Create artifacts for Windows x86
+        run: |
+          mkdir -p artifactsw86/windows-x86
+          7z a -tzip artifacts_86/windows-x86/MyApp-Windows-x86.zip publish/win-x86
+
+      - name: Create artifacts for Windows x64
+        run: |
+          mkdir -p artifactsw64/windows-x64
+          7z a -tzip artifactsw64/windows-x64/MyApp-Windows-x64.zip publish/win-x64
+
+      - name: Upload artifacts linux
         uses: actions/upload-artifact@v2
         with:
-          name: MyApp-Artifacts
-          path: artifacts/
+          name: Linux 64x
+          path: artifactsl/
+
+     - name: Upload artifacts macos
+        uses: actions/upload-artifact@v2
+        with:
+          name: MacOs 64x
+          path: artifactsm/
+
+     - name: Upload artifacts Windows 86x
+        uses: actions/upload-artifact@v2
+        with:
+          name: Windows 86x
+          path: artifactsw86/
+
+     - name: Upload artifacts Windows 64x
+        uses: actions/upload-artifact@v2
+        with:
+          name: Windows 64x
+          path: artifactsw64/
