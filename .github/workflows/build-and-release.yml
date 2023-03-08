@@ -25,46 +25,26 @@ jobs:
           dotnet publish --configuration Release --runtime win-x86 --self-contained false -o publish/win-x86
           dotnet publish --configuration Release --runtime win-x64 --self-contained false -o publish/win-x64
       
-      - name: Create artifacts for Linux
-        run: |
-          mkdir -p artifactsl/linux
-          tar -czvf artifactsl/linux/MyApp-Linux-x64.tar.gz -C publish/linux-x64 .
-
-      - name: Create artifacts for MacOS
-        run: |
-          mkdir -p artifactsm/macos
-          tar -czvf artifactsm/macos/MyApp-OSX-x64.tar.gz -C publish/osx-x64 .
-
-      - name: Create artifacts for Windows x86
-        run: |
-          mkdir -p artifactsw86/windows-x86
-          7z a -tzip artifactsw86/windows-x86/MyApp-Windows-x86.zip publish/win-x86
-
-      - name: Create artifacts for Windows x64
-        run: |
-          mkdir -p artifactsw64/windows-x64
-          7z a -tzip artifactsw64/windows-x64/MyApp-Windows-x64.zip publish/win-x64
-      
       - name: Upload artifacts linux
         uses: actions/upload-artifact@v2
         with:
           name: Linux 64x
-          path: artifactsl/
+          path: publish/linux-x64
 
       - name: Upload artifacts macos
         uses: actions/upload-artifact@v2
         with:
           name: MacOs 64x
-          path: artifactsm/
+          path: publish/osx-x64
 
       - name: Upload artifacts Windows 86x
         uses: actions/upload-artifact@v2
         with:
           name: Windows 86x
-          path: artifactsw86/
+          path: publish/win-x86
 
       - name: Upload artifacts Windows 64x
         uses: actions/upload-artifact@v2
         with:
           name: Windows 64x
-          path: artifactsw64/
+          path: publish/win-x64
