@@ -7,11 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
-        dotnet-version: ['6.0.x']
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -19,52 +15,19 @@ jobs:
       - name: Install .NET SDK
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: ${{ matrix.dotnet-version }}
+          dotnet-version: '6.0.x'
 
       - name: Build and publish
         run: |
           dotnet build --configuration Release
           dotnet publish --configuration Release --runtime linux-x64 --self-contained false -o publish/linux-x64
-          dotnet publish --configuration Release --runtime osx-x64 --self-contained false -o publish/osx-x64
-          dotnet publish --configuration Release --runtime win-x86 --self-contained false -o publish/win-x86
-          dotnet publish --configuration Release --runtime win-x64 --self-contained false -o publish/win-x64
+          dotnet publish --configuration Release --runtime osx-x64 --self-contained false
+          dotnet publish --configuration Release --runtime win-x86 --self-contained false -o publish/win-x86-portable
+          dotnet publish --configuration Release --runtime win-x64 --self-contained false -o publish/win-x64-portable
+          dotnet publish --configuration Release --runtime win-x86 --self-contained true -o publish/win-x86-installer
+          dotnet publish --configuration Release --runtime win-x64 --self-contained true -o publish/win-x64-installer
+          # dpkg-deb --build publish/linux-x64 publish/dungeon-crawler-linux.deb
       
-      - name: Create Debian package
-        if: matrix.os == 'ubuntu-latest'
-        run: |
-          sudo apt-get -y install dpkg
-          mkdir -p publish/linux-x64/DEBIAN
-          echo "Package: dungeon-crawler" >> publish/linux-x64/DEBIAN/control
-          echo "Version: 1.0.0" >> publish/linux-x64/DEBIAN/control
-          echo "Architecture: amd64" >> publish/linux-x64/DEBIAN/control
-          echo "Maintainer: Your Name <you@example.com>" >> publish/linux-x64/DEBIAN/control
-          echo "Description: A fun dungeon crawler game" >> publish/linux-x64/DEBIAN/control
-          dpkg-deb --build publish/linux-x64
-        artifacts:
-          name: Linux 64x DEB
-          path: publish/linux-x64.deb
-
-      - name: Create Portable Windows package
-        if: matrix.os == 'windows-latest'
-        run: |
-          mkdir -p publish/win-x64-portable
-          cp -r publish/win-x64/* publish/win-x64-portable
-          7z a -r publish/win-x64-portable.zip publish/win-x64-portable/*
-        artifacts:
-          name: Windows 64x Portable
-          path: publish/win-x64-portable.zip
-
-      - name: Create Windows Installer package
-        if: matrix.os == 'windows-latest'
-        uses: joshua-rutherford/create-windows-installer@v1
-        with:
-          appDirectory: publish/win-x64
-          outputDirectory: publish/win-x64-installer
-          setupIconPath: ./icon.ico
-        artifacts:
-          name: Windows 64x Installer
-          path: publish/win-x64-installer/DungeonCrawlerCSetup.exe
-
       - name: Upload artifacts linux
         uses: actions/upload-artifact@v2
         with:
@@ -77,8 +40,32 @@ jobs:
           name: MacOs 64x
           path: publish/osx-x64
 
-      - name: Upload artifacts Windows 86x
+      - name: Upload artifacts Windows 86x Portable
         uses: actions/upload-artifact@v2
         with:
-          name: Windows 86x
-          path: publish/win-x
+          name: Windows 86x Portable
+          path: publish/win-x86-portable
+
+      - name: Upload artifacts Windows 64x Portable
+        uses: actions/upload-artifact@v2
+        with:
+          name: Windows 64x Portable
+          path: publish/win-x64-portable
+
+      - name: Upload artifacts Windows 86x Installer
+        uses: actions/upload-artifact@v2
+        with:
+          name: Windows 86x Installer
+          path: publish/win-x86-installer.exe
+
+      - name: Upload artifacts Windows 64x Installer
+        uses: actions/upload-artifact@v2
+        with:
+          name: Windows 64x Installer
+          path: publish/win-x64-installer.exe
+
+      # - name: Upload artifacts Linux Installer
+      #  uses: actions/upload-artifact@v2
+      #  with:
+      #    name: Linux Installer
+      #    path: publish/dungeon-crawler-linux.deb
