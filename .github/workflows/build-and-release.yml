@@ -21,7 +21,7 @@ jobs:
         run: |
           dotnet build --configuration Release
           dotnet publish --configuration Release --runtime linux-x64 --self-contained false -o publish/linux-x64
-          dotnet publish --configuration Release --runtime osx-x64 --self-contained false
+          dotnet publish --configuration Release --runtime osx-x64 --self-contained false -o publish/osx-x64 
           dotnet publish --configuration Release --runtime win-x86 --self-contained false -o publish/win-x86-portable
           dotnet publish --configuration Release --runtime win-x64 --self-contained false -o publish/win-x64-portable
           dotnet publish --configuration Release --runtime win-x86 --self-contained true -o publish/win-x86-installer
@@ -56,13 +56,13 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: Windows 86x Installer
-          path: publish/win-x86-installer.exe
+          path: publish/win-x86-installer
 
       - name: Upload artifacts Windows 64x Installer
         uses: actions/upload-artifact@v2
         with:
           name: Windows 64x Installer
-          path: publish/win-x64-installer.exe
+          path: publish/win-x64-installer
 
       # - name: Upload artifacts Linux Installer
       #  uses: actions/upload-artifact@v2
