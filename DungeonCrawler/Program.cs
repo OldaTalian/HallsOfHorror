@@ -1,20 +1,12 @@
+using static DungeonCrawler.maps;
 namespace DungeonCrawler
 {
     internal class Program
     {
-        public static char[][] Map =
-        {
-            // Test mapa.... # = zeď
-            "          #     #    ".ToCharArray(),
-            "                     ".ToCharArray(),
-            "    #     X          ".ToCharArray(),
-            "                     ".ToCharArray(),
-            "                 #   ".ToCharArray(),
-            "                     ".ToCharArray(),
-            "   #                 ".ToCharArray(),
-            "          #          ".ToCharArray(),
-            "                     ".ToCharArray(),
-        };
+        public static char player = '☺';
+        public static char lastStepOn = '░';
+        public static int ThisRoom = 0;
+        public static char[][] Map = StartRoom;
         public static int[] FindPlayer()
         {
             // Vyhledá hráče n mapě a potom returne jeho souřadnice
@@ -23,7 +15,7 @@ namespace DungeonCrawler
             {
                 for (int j = 0; j < Map[i].Length; j++)
                 {
-                    if (Map[i][j] == 'X')
+                    if (Map[i][j] == player)
                     {
                         playerPos[0] = j;
                         playerPos[1] = i;
@@ -32,7 +24,7 @@ namespace DungeonCrawler
                 }
             }
             return playerPos;
-        }
+        }   
         public static void Move()
         {
             int[] playerPos = FindPlayer(); // Zjistím  souřadnice hráče
@@ -41,35 +33,46 @@ namespace DungeonCrawler
             switch (Console.ReadKey(true).Key) // a zjistím klávesu, podle které potom posunu hráče
             {
                 case ConsoleKey.UpArrow: // NAHORU
-                case ConsoleKey.W:
-                    if (y != 0 && Map[y-1][x] != '#')
+                case ConsoleKey.W:  
+                    if (y != 0 && Map[y-1][x] != '█')
                     {
-                        Map[y][x] = ' ';
-                        Map[y-1][x] = 'X';
+                        Map[y][x] = lastStepOn;
+                        lastStepOn = Map[y - 1][x];
+                        Map[y-1][x] = player;
                     }
                     break;
                 case ConsoleKey.DownArrow: // DOLŮ
                 case ConsoleKey.S:
-                    if (y != (Map.Length - 1) && Map[y + 1][x] != '#')
+                    if (y != (Map.Length - 1) && Map[y + 1][x] != '█')
                     {
-                        Map[y][x] = ' ';
-                        Map[y + 1][x] = 'X';
+                        Map[y][x] = lastStepOn;
+                        lastStepOn = Map[y + 1][x];
+                        Map[y + 1][x] = player;
                     }
                     break;
                 case ConsoleKey.LeftArrow: // DOLEVA
                 case ConsoleKey.A:
-                    if (x != 0 && Map[y][x - 1] != '#')
+                    if (x != 0 && Map[y][x - 1] != '█')
                     {
-                        Map[y][x] = ' ';
-                        Map[y][x - 1] = 'X';
+                        Map[y][x] = lastStepOn;
+                        lastStepOn = Map[y][x - 1];
+                        Map[y][x - 1] = player;
                     }
                     break;
                 case ConsoleKey.RightArrow: // DOPRAVA
                 case ConsoleKey.D:
-                    if (x != (Map[y].Length) && Map[y][x + 1] != '#')
+                    if (x != (Map[y].Length - 1) && Map[y][x + 1] == '|')
                     {
-                        Map[y][x] = ' ';
-                        Map[y][x + 1] = 'X';
+                        Map = Room2;
+                        Map[4][1] = player;
+                        lastStepOn = '░';
+                        break;
+                    }
+                    if (x != (Map[y].Length - 1) && Map[y][x + 1] != '█')
+                    {
+                        Map[y][x] = lastStepOn;
+                        lastStepOn = Map[y][x + 1];
+                        Map[y][x + 1] = player;
                     }
                     break;
             }
@@ -81,13 +84,22 @@ namespace DungeonCrawler
             {
                 for (int j = 0; j < Map[i].Length; j++)
                 {
-                    Console.Write(Map[i][j]);
+                    if (Map[i][j] == '░' || Map[i][j] == '▒') {
+                        Console.ForegroundColor= ConsoleColor.DarkGray;
+                        Console.Write(Map[i][j]);
+                        Console.ForegroundColor = ConsoleColor.White;
+                    }
+                    else
+                    {
+                        Console.Write(Map[i][j]);
+                    }
                 }
                 Console.WriteLine();
             }
         }
         static void Main(string[] args)
         {
+            Map[4][1] = player;
             Render();
             Console.SetWindowSize(Map[0].Length + 2,Map.Length + 1); // Změní velikost okna aby nešly vidět předchozí pohyby
             while (true) // Hra: 
