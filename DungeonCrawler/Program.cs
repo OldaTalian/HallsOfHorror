@@ -7,6 +7,7 @@ namespace DungeonCrawler
         public static char lastStepOn = '░';
         public static int ThisRoom = 0;
         public static char[][] Map = StartRoom;
+        public static bool moved = false;
         public static int[] FindPlayer()
         {
             // Vyhledá hráče n mapě a potom returne jeho souřadnice
@@ -24,7 +25,16 @@ namespace DungeonCrawler
                 }
             }
             return playerPos;
-        }   
+        }
+        public static int MeasureDistance(int[] pos1, int[] pos2)
+        {
+            int x1 = pos1[0];
+            int y1 = pos1[1];
+            int x2 = pos2[0];
+            int y2 = pos2[1];
+            int distance = (x2 - x1)+(y2 - y1);
+            return distance;
+        }
 
         public static bool CheckForTiles(int[] playerPos, char direction, char tile)
         {
@@ -64,6 +74,7 @@ namespace DungeonCrawler
         public static void Move()
         {
             int[] playerPos = FindPlayer(); // Zjistím  souřadnice hráče
+            moved = true;
             int x = playerPos[0]; // z nich zjistím X
             int y = playerPos[1]; // a Y
             switch (Console.ReadKey(true).Key) // a zjistím klávesu, podle které potom posunu hráče
@@ -83,6 +94,10 @@ namespace DungeonCrawler
                         lastStepOn = Map[y - 1][x]; // ukládám si na co šlapu
                         Map[y-1][x] = player; // posunu hráče
                     }
+                    else
+                    {
+                        moved = false;
+                    }
                     break;
                 case ConsoleKey.DownArrow: // DOLŮ
                 case ConsoleKey.S:
@@ -99,7 +114,10 @@ namespace DungeonCrawler
                         lastStepOn = Map[y + 1][x];
                         Map[y + 1][x] = player;
                     }
-                    
+                    else
+                    {
+                        moved = false;
+                    }
                     break;
                 case ConsoleKey.LeftArrow: // DOLEVA
                 case ConsoleKey.A:
@@ -115,6 +133,10 @@ namespace DungeonCrawler
                         Map[y][x] = lastStepOn;
                         lastStepOn = Map[y][x - 1];
                         Map[y][x - 1] = player;
+                    }
+                    else
+                    {
+                        moved = false;
                     }
                     break;
                 case ConsoleKey.RightArrow: // DOPRAVA
@@ -132,13 +154,20 @@ namespace DungeonCrawler
                         lastStepOn = Map[y][x + 1];
                         Map[y][x + 1] = player;
                     }
+                    else
+                    {
+                        moved = false;
+                    }
                     break;
             }
         }
+            public static int[] locate = { 2, 15 };
         public static void Render()
         {
+            Console.Clear();
             if (Map == null) return;
-            Console.WriteLine(ThisRoom+1 + " " + AllRooms().Length + "|  x:" + FindPlayer()[0] + " y:" + FindPlayer()[1]); // Vypisuje v jaké místnosti z kolika hráč je (pro debug)
+
+            Console.WriteLine(ThisRoom+1 + " " + AllRooms().Length + " |  x:" + FindPlayer()[0] + " y:" + FindPlayer()[1] + " D: " + MeasureDistance(FindPlayer(),locate)); // Vypisuje v jaké místnosti z kolika hráč je (pro debug)
             
             // Vytiskne Mapu do konzole
             for (int i = 0; i < Map.Length; i++)
@@ -160,12 +189,16 @@ namespace DungeonCrawler
         }
         static void Main(string[] args)
         {
+            Map[locate[0]][locate[1]] = 'E';
             AllPlayers();//změním všechny * na ☺
             Render();
             while (true) // Hra: 
             {
-                Console.SetWindowSize(Map[0].Length + 2,Map.Length + 2); // Změní velikost okna aby nešly vidět předchozí pohyby
-                Move();
+                Console.SetWindowSize(Map[0].Length + 1,Map.Length + 2); // Změní velikost okna aby nešly vidět předchozí pohyby
+                do
+                {
+                    Move();
+                } while (!moved);
                 Render();
             }
 
