@@ -25,6 +25,42 @@ namespace DungeonCrawler
             }
             return playerPos;
         }   
+
+        public static bool CheckForTiles(int[] playerPos, char direction, char tile)
+        {
+            bool output = false;
+            int x = playerPos[0];
+            int y = playerPos[1];
+            if (direction== 'u') // UP
+            {
+                if(y != 0 && Map[y - 1][x] == tile)
+                {
+                    output = true;
+                }
+            }
+            else if (direction == 'd') // DOWN
+            {
+                if (y != (Map.Length - 1) && Map[y + 1][x] == tile)
+                {
+                    output = true;
+                }
+            }
+            else if (direction == 'l') // LEFT
+            {
+                if (x != 0 && Map[y][x - 1] == tile)
+                {
+                    output = true;
+                }
+            }
+            else // RIGHT
+            {
+                if (x != (Map[y].Length - 1) && Map[y][x + 1] == tile)
+                {
+                    output = true;
+                }
+            }
+            return output;
+        }
         public static void Move()
         {
             int[] playerPos = FindPlayer(); // Zjistím  souřadnice hráče
@@ -33,26 +69,48 @@ namespace DungeonCrawler
             switch (Console.ReadKey(true).Key) // a zjistím klávesu, podle které potom posunu hráče
             {
                 case ConsoleKey.UpArrow: // NAHORU
-                case ConsoleKey.W:  
-                    if (y != 0 && Map[y-1][x] != '█')
+                case ConsoleKey.W:
+                    if (CheckForTiles(playerPos, 'u', '-'))
                     {
-                        Map[y][x] = lastStepOn;
-                        lastStepOn = Map[y - 1][x];
-                        Map[y-1][x] = player;
+                        ThisRoom++;
+                        Map = AllRooms()[ThisRoom];
+                        lastStepOn = '░';
+                        break;
+                    }
+                    if (!CheckForTiles(playerPos,'u', '█'))
+                    {
+                        Map[y][x] = lastStepOn; // nastavuji to z čeho jsem přišel zpátky na to co tam bylo
+                        lastStepOn = Map[y - 1][x]; // ukládám si na co šlapu
+                        Map[y-1][x] = player; // posunu hráče
                     }
                     break;
                 case ConsoleKey.DownArrow: // DOLŮ
                 case ConsoleKey.S:
-                    if (y != (Map.Length - 1) && Map[y + 1][x] != '█')
+                    if (CheckForTiles(playerPos, 'd', '/'))
+                    {
+                        ThisRoom--;
+                        Map = AllRooms()[ThisRoom];
+                        lastStepOn = '░';
+                        break;
+                    }
+                    else if (!CheckForTiles(playerPos, 'd', '█'))
                     {
                         Map[y][x] = lastStepOn;
                         lastStepOn = Map[y + 1][x];
                         Map[y + 1][x] = player;
                     }
+                    
                     break;
                 case ConsoleKey.LeftArrow: // DOLEVA
                 case ConsoleKey.A:
-                    if (x != 0 && Map[y][x - 1] != '█')
+                    if (CheckForTiles(playerPos, 'l', '\\'))
+                    {
+                        ThisRoom--;
+                        Map = AllRooms()[ThisRoom];
+                        lastStepOn = '░';
+                        break;
+                    }
+                    else if (!CheckForTiles(playerPos, 'l', '█'))
                     {
                         Map[y][x] = lastStepOn;
                         lastStepOn = Map[y][x - 1];
@@ -61,14 +119,14 @@ namespace DungeonCrawler
                     break;
                 case ConsoleKey.RightArrow: // DOPRAVA
                 case ConsoleKey.D:
-                    if (x != (Map[y].Length - 1) && Map[y][x + 1] == '|')
+                    if (CheckForTiles(playerPos, 'r', '|'))
                     {
-                        Map = Room2;
-                        Map[4][1] = player;
+                        ThisRoom++;
+                        Map = AllRooms()[ThisRoom];
                         lastStepOn = '░';
                         break;
                     }
-                    if (x != (Map[y].Length - 1) && Map[y][x + 1] != '█')
+                    else if (!CheckForTiles(playerPos, 'r', '█'))
                     {
                         Map[y][x] = lastStepOn;
                         lastStepOn = Map[y][x + 1];
@@ -79,6 +137,9 @@ namespace DungeonCrawler
         }
         public static void Render()
         {
+            if (Map == null) return;
+            Console.WriteLine(ThisRoom+1 + " " + AllRooms().Length + "|  x:" + FindPlayer()[0] + " y:" + FindPlayer()[1]); // Vypisuje v jaké místnosti z kolika hráč je (pro debug)
+            
             // Vytiskne Mapu do konzole
             for (int i = 0; i < Map.Length; i++)
             {
@@ -99,11 +160,11 @@ namespace DungeonCrawler
         }
         static void Main(string[] args)
         {
-            Map[4][1] = player;
+            AllPlayers();//změním všechny * na ☺
             Render();
-            Console.SetWindowSize(Map[0].Length + 2,Map.Length + 1); // Změní velikost okna aby nešly vidět předchozí pohyby
             while (true) // Hra: 
             {
+                Console.SetWindowSize(Map[0].Length + 2,Map.Length + 2); // Změní velikost okna aby nešly vidět předchozí pohyby
                 Move();
                 Render();
             }
