@@ -26,13 +26,13 @@ namespace DungeonCrawler
             }
             return playerPos;
         }
-        public static int MeasureDistance(int[] pos1, int[] pos2)
+        public static int[] MeasureDistance(int[] pos1, int[] pos2)
         {
             int x1 = pos1[0];
             int y1 = pos1[1];
-            int x2 = pos2[0];
-            int y2 = pos2[1];
-            int distance = (x2 - x1)+(y2 - y1);
+            int x2 = pos2[1];
+            int y2 = pos2[0];
+            int[] distance = { (x2 - x1) , (y2 - y1) };
             return distance;
         }
 
@@ -167,7 +167,8 @@ namespace DungeonCrawler
             Console.Clear();
             if (Map == null) return;
 
-            Console.WriteLine(ThisRoom+1 + " " + AllRooms().Length + " |  x:" + FindPlayer()[0] + " y:" + FindPlayer()[1] + " D: " + MeasureDistance(FindPlayer(),locate)); // Vypisuje v jaké místnosti z kolika hráč je (pro debug)
+            Console.WriteLine(ThisRoom+1 + " " + AllRooms().Length + " |  x:" + FindPlayer()[0] + " y:" + FindPlayer()[1] + 
+                " D: " + MeasureDistance(FindPlayer(), locate)[0] + " " + MeasureDistance(FindPlayer(), locate)[1]); // Vypisuje v jaké místnosti z kolika hráč je (pro debug)
             
             // Vytiskne Mapu do konzole
             for (int i = 0; i < Map.Length; i++)
