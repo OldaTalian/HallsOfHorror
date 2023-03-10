@@ -24,8 +24,6 @@ jobs:
           dotnet publish --configuration Release --runtime osx-x64 --self-contained false -o publish/osx-x64 
           dotnet publish --configuration Release --runtime win-x86 --self-contained false -o publish/win-x86-portable
           dotnet publish --configuration Release --runtime win-x64 --self-contained false -o publish/win-x64-portable
-          dotnet publish --configuration Release --runtime win-x86 --self-contained true -o publish/win-x86-installer
-          dotnet publish --configuration Release --runtime win-x64 --self-contained true -o publish/win-x64-installer
           # dpkg-deb --build publish/linux-x64 publish/dungeon-crawler-linux.deb
       
       - name: Upload artifacts linux
@@ -51,18 +49,6 @@ jobs:
         with:
           name: Windows 64x Portable
           path: publish/win-x64-portable
-
-      - name: Upload artifacts Windows 86x Installer
-        uses: actions/upload-artifact@v2
-        with:
-          name: Windows 86x Installer
-          path: publish/win-x86-installer
-
-      - name: Upload artifacts Windows 64x Installer
-        uses: actions/upload-artifact@v2
-        with:
-          name: Windows 64x Installer
-          path: publish/win-x64-installer
 
       # - name: Upload artifacts Linux Installer
       #  uses: actions/upload-artifact@v2
