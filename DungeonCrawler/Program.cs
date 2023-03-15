@@ -1,32 +1,13 @@
 using static DungeonCrawler.maps;
+using static DungeonCrawler.Player;
+using static DungeonCrawler.variables;
+
 namespace DungeonCrawler
 {
     internal class Program
     {
-        public static char player = '☺';
-        public static char lastStepOn = '░';
-        public static int ThisRoom = 0;
-        public static char[][] Map = StartRoom;
-        public static bool moved = false;
-        public static int[] FindPlayer()
-        {
-            // Vyhledá hráče n mapě a potom returne jeho souřadnice
-            int[] playerPos = { -1, -1 };
-            for (int i = 0; i < Map.Length; i++)
-            {
-                for (int j = 0; j < Map[i].Length; j++)
-                {
-                    if (Map[i][j] == player)
-                    {
-                        playerPos[0] = j;
-                        playerPos[1] = i;
-                        return playerPos;
-                    }
-                }
-            }
-            return playerPos;
-        }
-        public static int[] MeasureDistance(int[] pos1, int[] pos2)
+
+        public static int[] MeasureDistance(int[] pos1, int[] pos2)//Měří vzdálenost mezi dvěma body (pos2 je obráceně FIXNOUT)
         {
             int x1 = pos1[0];
             int y1 = pos1[1];
@@ -34,9 +15,9 @@ namespace DungeonCrawler
             int y2 = pos2[0];
             int[] distance = { (x2 - x1) , (y2 - y1) };
             return distance;
-        }
+        } 
 
-        public static bool CheckForTiles(int[] playerPos, char direction, char tile)
+        public static bool CheckForTiles(int[] playerPos, char direction, char tile) // zjišťuje jestli je na dané straně od pozice nějaký Tile
         {
             bool output = false;
             int x = playerPos[0];
@@ -71,98 +52,7 @@ namespace DungeonCrawler
             }
             return output;
         }
-        public static void Move()
-        {
-            int[] playerPos = FindPlayer(); // Zjistím  souřadnice hráče
-            moved = true;
-            int x = playerPos[0]; // z nich zjistím X
-            int y = playerPos[1]; // a Y
-            switch (Console.ReadKey(true).Key) // a zjistím klávesu, podle které potom posunu hráče
-            {
-                case ConsoleKey.UpArrow: // NAHORU
-                case ConsoleKey.W:
-                    if (CheckForTiles(playerPos, 'u', '-'))
-                    {
-                        ThisRoom++;
-                        Map = AllRooms()[ThisRoom];
-                        lastStepOn = '░';
-                        break;
-                    }
-                    if (!CheckForTiles(playerPos,'u', '█'))
-                    {
-                        Map[y][x] = lastStepOn; // nastavuji to z čeho jsem přišel zpátky na to co tam bylo
-                        lastStepOn = Map[y - 1][x]; // ukládám si na co šlapu
-                        Map[y-1][x] = player; // posunu hráče
-                    }
-                    else
-                    {
-                        moved = false;
-                    }
-                    break;
-                case ConsoleKey.DownArrow: // DOLŮ
-                case ConsoleKey.S:
-                    if (CheckForTiles(playerPos, 'd', '/'))
-                    {
-                        ThisRoom--;
-                        Map = AllRooms()[ThisRoom];
-                        lastStepOn = '░';
-                        break;
-                    }
-                    else if (!CheckForTiles(playerPos, 'd', '█'))
-                    {
-                        Map[y][x] = lastStepOn;
-                        lastStepOn = Map[y + 1][x];
-                        Map[y + 1][x] = player;
-                    }
-                    else
-                    {
-                        moved = false;
-                    }
-                    break;
-                case ConsoleKey.LeftArrow: // DOLEVA
-                case ConsoleKey.A:
-                    if (CheckForTiles(playerPos, 'l', '\\'))
-                    {
-                        ThisRoom--;
-                        Map = AllRooms()[ThisRoom];
-                        lastStepOn = '░';
-                        break;
-                    }
-                    else if (!CheckForTiles(playerPos, 'l', '█'))
-                    {
-                        Map[y][x] = lastStepOn;
-                        lastStepOn = Map[y][x - 1];
-                        Map[y][x - 1] = player;
-                    }
-                    else
-                    {
-                        moved = false;
-                    }
-                    break;
-                case ConsoleKey.RightArrow: // DOPRAVA
-                case ConsoleKey.D:
-                    if (CheckForTiles(playerPos, 'r', '|'))
-                    {
-                        ThisRoom++;
-                        Map = AllRooms()[ThisRoom];
-                        lastStepOn = '░';
-                        break;
-                    }
-                    else if (!CheckForTiles(playerPos, 'r', '█'))
-                    {
-                        Map[y][x] = lastStepOn;
-                        lastStepOn = Map[y][x + 1];
-                        Map[y][x + 1] = player;
-                    }
-                    else
-                    {
-                        moved = false;
-                    }
-                    break;
-            }
-        }
-            public static int[] locate = { 2, 15 };
-        public static void Render()
+        public static void Render() //Vyrenderuje mapu
         {
             Console.Clear();
             if (Map == null) return;
@@ -173,12 +63,18 @@ namespace DungeonCrawler
             // Vytiskne Mapu do konzole
             for (int i = 0; i < Map.Length; i++)
             {
-                for (int j = 0; j < Map[i].Length; j++)
-                {
-                    if (Map[i][j] == '░' || Map[i][j] == '▒') {
+                for (int j = 0; j < Map[i].Length; j++)//Zde se dají upravovat jednotlivé Tiles
+                { 
+                    if (Map[i][j] == '░' || Map[i][j] == '▒') { 
                         Console.ForegroundColor= ConsoleColor.DarkGray;
                         Console.Write(Map[i][j]);
                         Console.ForegroundColor = ConsoleColor.White;
+                    }
+                    else if (Map[i][j] == '$')
+                    {
+                        Console.BackgroundColor = ConsoleColor.White;
+                        Console.Write(" ");
+                        Console.BackgroundColor = ConsoleColor.Black;
                     }
                     else
                     {
@@ -193,13 +89,18 @@ namespace DungeonCrawler
             Map[locate[0]][locate[1]] = 'E';
             AllPlayers();//změním všechny * na ☺
             Render();
+
+            // HUDBA:
+            // potřebuje ffmpeg nainstalovaný
+            // a potom se jenom použije ffplay a rozjede se ta hudba
+            System.Diagnostics.Process.Start("C:\\Program Files (x86)\\ffmpeg\\bin\\ffplay.exe", $"{AppDomain.CurrentDomain.BaseDirectory}\\..\\..\\..\\muzika10.wav -loglevel quiet -nodisp");
             while (true) // Hra: 
             {
                 Console.SetWindowSize(Map[0].Length + 1,Map.Length + 2); // Změní velikost okna aby nešly vidět předchozí pohyby
                 do
                 {
                     Move();
-                } while (!moved);
+                } while (!moved); //pokud se snaží jít do zdi tak to nic neudělá
                 Render();
             }
 
