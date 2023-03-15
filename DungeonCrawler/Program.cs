@@ -1,6 +1,10 @@
 using static DungeonCrawler.maps;
 using static DungeonCrawler.Player;
 using static DungeonCrawler.variables;
+using static DungeonCrawler.Sounds;
+using System.Configuration;
+using System.Collections.Specialized;
+using System.Text.Json;
 
 namespace DungeonCrawler
 {
@@ -54,7 +58,7 @@ namespace DungeonCrawler
         }
         public static void Render() //Vyrenderuje mapu
         {
-            Console.Clear();
+            //Console.Clear();
             if (Map == null) return;
 
             Console.WriteLine(ThisRoom+1 + " " + AllRooms().Length + " |  x:" + FindPlayer()[0] + " y:" + FindPlayer()[1] + 
@@ -86,17 +90,19 @@ namespace DungeonCrawler
         }
         static void Main(string[] args)
         {
-            Map[locate[0]][locate[1]] = 'E';
-            AllPlayers();//změním všechny * na ☺
-            Render();
-
             // HUDBA:
             // potřebuje ffmpeg nainstalovaný
             // a potom se jenom použije ffplay a rozjede se ta hudba
-            System.Diagnostics.Process.Start("C:\\Program Files (x86)\\ffmpeg\\bin\\ffplay.exe", $"{AppDomain.CurrentDomain.BaseDirectory}\\..\\..\\..\\muzika10.wav -loglevel quiet -nodisp");
+            LoadMusic();
+            PlaySound("muzika10.wav");
+
+            Map[locate[0]][locate[1]] = 'E';
+            AllPlayers();//změním všechny * na ☺
+            Render();
             while (true) // Hra: 
             {
                 Console.SetWindowSize(Map[0].Length + 1,Map.Length + 2); // Změní velikost okna aby nešly vidět předchozí pohyby
+
                 do
                 {
                     Move();

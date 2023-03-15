@@ -6,6 +6,7 @@ namespace DungeonCrawler
 {
     class Player
     {
+
         public static void Move() // posunutí hráče
         {
             int[] playerPos = FindPlayer(); // Zjistím  souřadnice hráče
