@@ -13,13 +13,13 @@ namespace DungeonCrawler
         public static char[][] StartRoom =
         {
             "█████████████████████████████".ToCharArray(),
-            "█░░░░░░░░░░░░░░░░░░░░░░░░░░░█".ToCharArray(),
+            "█░░░░░░░░░░░░░░░░░☻░░░░░░░░░█".ToCharArray(),
             "█░░░░░░░░░░░░░▒░░░░░░░░░▒░░░█".ToCharArray(),
             "█░░░░░░░░░░░░░░░░░░░░░░░░░░░█".ToCharArray(),
            $"█░*░░▒░░░░░░░░░░░░░░░░░░░░░░|".ToCharArray(),
             "█░░░░░░░░░░░░░░░░░░░░░░░░░░░█".ToCharArray(),
             "█░░░░░░░░░░░░░░░░▒░░░░░██████".ToCharArray(),
-            "█░░░░░░░░░░░░░░░░░░░░░░$░░░░█".ToCharArray(), //ten dolar je průchozí stěna zatím
+            "█░░░░☻░░░░░░░░░░░░░░☻░░$░░░░█".ToCharArray(), //ten dolar je průchozí stěna zatím
             "█████████████████████████████".ToCharArray(),
         };
         public static char[][] Room2 =

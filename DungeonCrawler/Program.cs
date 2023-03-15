@@ -2,6 +2,7 @@ using static DungeonCrawler.maps;
 using static DungeonCrawler.Player;
 using static DungeonCrawler.variables;
 using static DungeonCrawler.Sounds;
+using static DungeonCrawler.Enemy;
 using System.Configuration;
 using System.Collections.Specialized;
 using System.Text.Json;
@@ -99,14 +100,16 @@ namespace DungeonCrawler
             Map[locate[0]][locate[1]] = 'E';
             AllPlayers();//změním všechny * na ☺
             Render();
+            Console.SetWindowSize(100, 20);
             while (true) // Hra: 
             {
-                Console.SetWindowSize(Map[0].Length + 1,Map.Length + 2); // Změní velikost okna aby nešly vidět předchozí pohyby
+                //Console.SetWindowSize(Map[0].Length + 1,Map.Length + 2); // Změní velikost okna aby nešly vidět předchozí pohyby
 
                 do
                 {
                     Move();
                 } while (!moved); //pokud se snaží jít do zdi tak to nic neudělá
+                MoveEnemy();
                 Render();
             }
 

@@ -22,7 +22,7 @@ namespace DungeonCrawler
                         NextRoom();
                         break;
                     }
-                    else if (!CheckForTiles(playerPos, 'u', '█'))
+                    else if (!CheckForTiles(playerPos, 'u', '█') && !CheckForTiles(playerPos, 'u', '☻'))
                     {
                         MoveUp(x,y);
                     }
@@ -38,7 +38,7 @@ namespace DungeonCrawler
                         PrevRoom();
                         break;
                     }
-                    else if (!CheckForTiles(playerPos, 'd', '█'))
+                    else if (!CheckForTiles(playerPos, 'd', '█') && !CheckForTiles(playerPos, 'd', '☻'))
                     {
                         MoveDown(x,y);
                     }
@@ -54,7 +54,7 @@ namespace DungeonCrawler
                         PrevRoom();
                         break;
                     }
-                    else if (!CheckForTiles(playerPos, 'l', '█'))
+                    else if (!CheckForTiles(playerPos, 'l', '█') && !CheckForTiles(playerPos, 'l', '☻'))
                     {
                        MoveLeft(x,y);
                     }
@@ -70,7 +70,7 @@ namespace DungeonCrawler
                         NextRoom();
                         break;
                     }
-                    else if (!CheckForTiles(playerPos, 'r', '█'))
+                    else if (!CheckForTiles(playerPos, 'r', '█') && !CheckForTiles(playerPos, 'r', '☻'))
                     {
                         MoveRight(x,y);
                     }
