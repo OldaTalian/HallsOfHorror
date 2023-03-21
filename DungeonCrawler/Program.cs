@@ -22,44 +22,10 @@ namespace DungeonCrawler
             return distance;
         } 
 
-        public static bool CheckForTiles(int[] playerPos, char direction, char tile) // zjišťuje jestli je na dané straně od pozice nějaký Tile
-        {
-            bool output = false;
-            int x = playerPos[0];
-            int y = playerPos[1];
-            if (direction== 'u') // UP
-            {
-                if(y != 0 && Map[y - 1][x] == tile)
-                {
-                    output = true;
-                }
-            }
-            else if (direction == 'd') // DOWN
-            {
-                if (y != (Map.Length - 1) && Map[y + 1][x] == tile)
-                {
-                    output = true;
-                }
-            }
-            else if (direction == 'l') // LEFT
-            {
-                if (x != 0 && Map[y][x - 1] == tile)
-                {
-                    output = true;
-                }
-            }
-            else // RIGHT
-            {
-                if (x != (Map[y].Length - 1) && Map[y][x + 1] == tile)
-                {
-                    output = true;
-                }
-            }
-            return output;
-        }
+
         public static void Render() //Vyrenderuje mapu
         {
-            //Console.Clear();
+            Console.Clear();
             if (Map == null) return;
 
             Console.WriteLine(ThisRoom+1 + " " + AllRooms().Length + " |  x:" + FindPlayer()[0] + " y:" + FindPlayer()[1] + 
@@ -97,13 +63,22 @@ namespace DungeonCrawler
             LoadMusic();
             PlaySound("muzika10.wav");
 
+
+
+            for (int i = 0; i < AllEnemies( Map,enemy); i++)
+            {
+                enemyLastTile[i] = '░';
+            }
+
+
+
             Map[locate[0]][locate[1]] = 'E';
             AllPlayers();//změním všechny * na ☺
             Render();
-            Console.SetWindowSize(100, 20);
+            //Console.SetWindowSize(100, 20);
             while (true) // Hra: 
             {
-                //Console.SetWindowSize(Map[0].Length + 1,Map.Length + 2); // Změní velikost okna aby nešly vidět předchozí pohyby
+                Console.SetWindowSize(Map[0].Length + 1,Map.Length + 2); // Změní velikost okna aby nešly vidět předchozí pohyby
 
                 do
                 {

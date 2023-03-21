@@ -27,5 +27,41 @@ namespace DungeonCrawler
 
             return newArray;
         }
+
+        public static bool CheckForTiles(int[] playerPos, char direction, char tile) // zjišťuje jestli je na dané straně od pozice nějaký Tile
+        {
+            bool output = false;
+            int x = playerPos[0];
+            int y = playerPos[1];
+            if (direction == 'u') // UP
+            {
+                if (y != 0 && Map[y - 1][x] == tile)
+                {
+                    output = true;
+                }
+            }
+            else if (direction == 'd') // DOWN
+            {
+                if (y != (Map.Length - 1) && Map[y + 1][x] == tile)
+                {
+                    output = true;
+                }
+            }
+            else if (direction == 'l') // LEFT
+            {
+                if (x != 0 && Map[y][x - 1] == tile)
+                {
+                    output = true;
+                }
+            }
+            else // RIGHT
+            {
+                if (x != (Map[y].Length - 1) && Map[y][x + 1] == tile)
+                {
+                    output = true;
+                }
+            }
+            return output;
+        }
     }
 }
