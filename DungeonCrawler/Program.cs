@@ -13,6 +13,8 @@ namespace DungeonCrawler
         {
             //Load map
             Map = AllRooms()[0];
+            RegisterSpawns(); // Spawn locations
+            RegisterEnemies(enemy); // Enemies
 
             // MUSIC:
             // You need to have installed ffmpeg to use it
@@ -23,13 +25,8 @@ namespace DungeonCrawler
 
             //PlaySound("muzika10.wav");
 
-            for (int i = 0; i < AllEnemies(Map, enemy); i++)
-            {
-                enemyLastTile[i] = '░';
-            }
+            
 
-            Map[locate[0]][locate[1]] = 'E';
-            AllPlayers();//změním všechny * na ☺
             Render();
             //Console.SetWindowSize(100, 20);
 

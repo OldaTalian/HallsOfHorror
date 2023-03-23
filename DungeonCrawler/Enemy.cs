@@ -145,5 +145,13 @@ namespace DungeonCrawler
 
             }
         }
+
+        public static void RegisterEnemies( char enemyType)
+        {
+            for (int i = 0; i < AllEnemies(Map, enemyType); i++)
+            {
+                enemyLastTile[i] = '░';
+            }
+        }
     }
 }

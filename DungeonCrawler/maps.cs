@@ -100,7 +100,7 @@ namespace DungeonCrawler
         };
 
 
-        public static void AllPlayers()
+        public static void RegisterSpawns()
         {
             for (int i = 0; i < AllRooms().Length; i++)
             {

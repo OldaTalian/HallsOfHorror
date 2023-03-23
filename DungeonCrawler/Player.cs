@@ -1,12 +1,11 @@
-﻿using static DungeonCrawler.Program;
-using static DungeonCrawler.maps;
+﻿using static DungeonCrawler.maps;
 using static DungeonCrawler.variables;
+using static DungeonCrawler.Enemy;
 
 namespace DungeonCrawler
 {
-    class Player
+    internal class Player
     {
-
         public static void Move() // Define a function to move the player
         {
             int[] playerPos = FindPlayer(); // Get the current position of the player
@@ -26,16 +25,11 @@ namespace DungeonCrawler
                     if (CheckForTiles(playerPos, 'u', '-'))
                     {
                         NextRoom(); // Move to the next room
-                        break;
                     }
                     // If there are no obstacles, move the player up
                     else if (!CheckForTiles(playerPos, 'u', '█') && !CheckForTiles(playerPos, 'u', '☻'))
                     {
                         MoveUp(x, y); // Move the player up
-                    }
-                    else // If there is an obstacle, do not move the player
-                    {
-                        moved = false; // Set the flag indicating that the player has not moved
                     }
                     break;
 
@@ -46,16 +40,11 @@ namespace DungeonCrawler
                     if (CheckForTiles(playerPos, 'd', '/'))
                     {
                         PrevRoom(); // Move to the previous room
-                        break;
                     }
                     // If there are no obstacles, move the player down
                     else if (!CheckForTiles(playerPos, 'd', '█') && !CheckForTiles(playerPos, 'd', '☻'))
                     {
                         MoveDown(x, y); // Move the player down
-                    }
-                    else // If there is an obstacle, do not move the player
-                    {
-                        moved = false; // Set the flag indicating that the player has not moved
                     }
                     break;
 
@@ -66,31 +55,26 @@ namespace DungeonCrawler
                     if (CheckForTiles(playerPos, 'l', '\\'))
                     {
                         PrevRoom(); // Move to the previous room
-                        break;
                     }
                     // If there are no obstacles, move the player left
                     else if (!CheckForTiles(playerPos, 'l', '█') && !CheckForTiles(playerPos, 'l', '☻'))
                     {
                         MoveLeft(x, y); // Move the player left
                     }
-                    else // If there is an obstacle, do not move the player
-                    {
-                        moved = false; // Set the flag indicating that the player has not moved
-                    }
                     break;
+
                 // If the right arrow key or D key was pressed
                 case ConsoleKey.RightArrow:
                 case ConsoleKey.D:
                     // Check if the player can move right to the next room
                     if (CheckForTiles(playerPos, 'r', '|'))
                     {
-                        NextRoom();
-                        break;
+                        NextRoom(); // Move to the next room
                     }
                     // If there are no obstacles, move the player right
                     else if (!CheckForTiles(playerPos, 'r', '█') && !CheckForTiles(playerPos, 'r', '☻'))
                     {
-                        MoveRight(x,y);// Move the player right
+                        MoveRight(x, y);// Move the player right
                     }
                     else
                     {
@@ -128,20 +112,22 @@ namespace DungeonCrawler
             Map[y][x + 1] = player; // Set the new tile to the player symbol
         }
 
-        public static void NextRoom(char tile = '░')//Další místnost wow
+        public static void NextRoom(char tile = '░') // Go to the next room
         {
             ThisRoom++;
             Map = AllRooms()[ThisRoom];
+            RegisterEnemies(enemy); // !!! ---- !!! This will have to be changed
             lastStepOn = tile;
         }
-        public static void PrevRoom(char tile = '░')//Předchozí místnost
+
+        public static void PrevRoom(char tile = '░') // Go to the previous room
         {
             ThisRoom--;
             Map = AllRooms()[ThisRoom];
             lastStepOn = tile;
         }
 
-        public static int[] FindPlayer() // Vyhledá hráče n mapě a potom returne jeho souřadnice
+        public static int[] FindPlayer() //  Finds the player on the map and returns their coordinates
         {
             int[] playerPos = { -1, -1 };
             for (int i = 0; i < Map.Length; i++)
@@ -158,6 +144,5 @@ namespace DungeonCrawler
             }
             return playerPos;
         }
-
     }
 }

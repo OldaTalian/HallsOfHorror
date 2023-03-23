@@ -13,9 +13,10 @@
         public static byte playerHealth = 100;
         public static byte enemyAttack = 5;
 
-        public static int[] locate = { 2, 15 }; //delete
 
         // Useful functions
+
+        // Adds a new value to the end of an array and returns the new array
         private static char[] AddToArray(char[] array, char newValue)
         {
             char[] newArray = new char[array.Length + 1];
@@ -30,7 +31,8 @@
             return newArray;
         }
 
-        public static bool CheckForTiles(int[] playerPos, char direction, char tile) // zjišťuje jestli je na dané straně od pozice nějaký Tile
+        // Checks if there is a specific tile in a specific direction from the player's position
+        public static bool CheckForTiles(int[] playerPos, char direction, char tile)
         {
             bool output = false;
             int x = playerPos[0];
@@ -66,6 +68,7 @@
             return output;
         }
 
+        // Calculates the Manhattan distance between two positions
         public static int MeasureDistance(int[] pos1, int[] pos2)
         {
             int x1 = pos1[0];
@@ -76,6 +79,7 @@
             return distance;
         }
 
+        // Checks if a specific tile is within a certain distance of a position
         public static bool IsNear(char search, int[] pos, int distance)
         {
             for (int i = 0; i < Map.Length; i++)
@@ -92,7 +96,7 @@
                     }
                 }
             }
-            return false; // no tiles found near pos
+            return false;
         }
 
     }
