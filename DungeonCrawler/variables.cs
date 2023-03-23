@@ -1,14 +1,13 @@
-﻿using static DungeonCrawler.maps;
-
-namespace DungeonCrawler
+﻿namespace DungeonCrawler
 {
     internal class variables
     {
         public static char player = '☺';
         public static char enemy = '☻';
         public static char lastStepOn = '░';
+
         public static int ThisRoom = 0;
-        public static char[][] Map = StartRoom;
+        public static char[][] Map = new char[0][];
         public static bool moved = false;
         public static long currentTick = 0;
         public static byte playerHealth = 100;
@@ -16,8 +15,8 @@ namespace DungeonCrawler
 
         public static int[] locate = { 2, 15 }; //delete
 
-
-        static char[] AddToArray(char[] array, char newValue)
+        // Useful functions
+        private static char[] AddToArray(char[] array, char newValue)
         {
             char[] newArray = new char[array.Length + 1];
 
@@ -66,5 +65,35 @@ namespace DungeonCrawler
             }
             return output;
         }
+
+        public static int MeasureDistance(int[] pos1, int[] pos2)
+        {
+            int x1 = pos1[0];
+            int y1 = pos1[1];
+            int x2 = pos2[0];
+            int y2 = pos2[1];
+            int distance = Math.Abs(x2 - x1) + Math.Abs(y2 - y1);
+            return distance;
+        }
+
+        public static bool IsNear(char search, int[] pos, int distance)
+        {
+            for (int i = 0; i < Map.Length; i++)
+            {
+                for (int j = 0; j < Map[i].Length; j++)
+                {
+                    if (Map[i][j] == search)
+                    {
+                        int[] tilePos = new int[] { j, i };
+                        if (MeasureDistance(pos, tilePos) <= distance)
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false; // no tiles found near pos
+        }
+
     }
 }
