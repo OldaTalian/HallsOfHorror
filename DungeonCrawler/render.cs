@@ -11,8 +11,10 @@ namespace DungeonCrawler
     {
         public static void Render() //Vyrenderuje mapu
         {
-            //Console.Clear();
+            Console.Clear();
             if (Map == null) return;
+
+            Console.SetWindowSize(Map[0].Length + 3, Map.Length + 1);
 
             Console.WriteLine(ThisRoom + 1 + " " + AllRooms().Length + " |  x:" + FindPlayer()[0] + " y:" + FindPlayer()[1] +
                " Health: " + ((playerHealth > 0) ? playerHealth : 0)); // Vypisuje v jaké místnosti z kolika hráč je (pro debug)
@@ -22,10 +24,12 @@ namespace DungeonCrawler
             {
                 for (int j = 0; j < Map[i].Length; j++)//Zde se dají upravovat jednotlivé Tiles
                 {
-                    if (Map[0][0] == 'Đ')
+                    if (Map[Map.Length - 1][Map[0].Length - 2] == 'Đ')
                     {
+                        int maxDistance = Convert.ToInt32(new string(Map[Map.Length - 1][Map[0].Length - 1], 1)); 
                         int[] pos = { j, i };
-                        if (MeasureDistance(FindPlayer(), pos) > 5){
+                        if (MeasureDistance(FindPlayer(), pos) > maxDistance)
+                        {
                             Console.Write(' ');
                         }
                         else
@@ -42,7 +46,11 @@ namespace DungeonCrawler
             }
         }
 
+        public static bool skipNextOne = false;
+
         public static void convertToMap(char[][] Map,int x, int y) {
+            if (!skipNextOne)
+            {
             if (Map[y][x] == '░' || Map[y][x] == '▒')
             {
                 Console.ForegroundColor = ConsoleColor.DarkGray;
@@ -57,15 +65,25 @@ namespace DungeonCrawler
             }
             else if (Map[y][x] == '#')
             {
-                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.ForegroundColor = ConsoleColor.Black;
                 Console.BackgroundColor = ConsoleColor.Red;
                 Console.Write("#");
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.BackgroundColor = ConsoleColor.Black;
             }
+            else if (Map[y][x] == 'Đ')
+            {
+                skipNextOne = true;
+            }
             else
             {
                 Console.Write(Map[y][x]);
+            }
+            }
+            else
+            {
+                Console.Write("");
+                skipNextOne = false;
             }
         }
     }

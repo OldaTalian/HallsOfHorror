@@ -54,6 +54,10 @@ namespace DungeonCrawler
                 {
                     playerHealth -= 5;
                 }
+                if (lastStepOn == ' ')
+                {
+                    playerHealth = 0;
+                }
                 if (playerHealth <= 0)
                 {
                     break;
@@ -68,9 +72,8 @@ namespace DungeonCrawler
                 Render();
             } 
             Console.Clear();
-            Console.WriteLine("You ded ☺\nPress something to close the program...");
+            Console.WriteLine("You ded ¯\\_☺_/¯\nPress something to close the program...");
             Console.ReadKey();
         }
-    
     }
 }
