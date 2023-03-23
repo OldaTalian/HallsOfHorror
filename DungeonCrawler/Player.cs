@@ -7,76 +7,94 @@ namespace DungeonCrawler
     class Player
     {
 
-        public static void Move() // posunutí hráče
+        public static void Move() // Define a function to move the player
         {
-            int[] playerPos = FindPlayer(); // Zjistím  souřadnice hráče
-            moved = true;
-            int x = playerPos[0]; // z nich zjistím X
-            int y = playerPos[1]; // a Y
-            switch (Console.ReadKey(true).Key) // a zjistím klávesu, podle které potom posunu hráče
+            int[] playerPos = FindPlayer(); // Get the current position of the player
+            moved = true; // Set a flag indicating that the player has moved
+
+            // Extract the X and Y coordinates of the player
+            int x = playerPos[0];
+            int y = playerPos[1];
+
+            // Check which arrow key or WASD key was pressed
+            switch (Console.ReadKey(true).Key)
             {
-                case ConsoleKey.UpArrow: // NAHORU
+                // If the up arrow key or W key was pressed
+                case ConsoleKey.UpArrow:
                 case ConsoleKey.W:
+                    // Check if the player can move up to the next room
                     if (CheckForTiles(playerPos, 'u', '-'))
                     {
-                        NextRoom();
+                        NextRoom(); // Move to the next room
                         break;
                     }
+                    // If there are no obstacles, move the player up
                     else if (!CheckForTiles(playerPos, 'u', '█') && !CheckForTiles(playerPos, 'u', '☻'))
                     {
-                        MoveUp(x,y);
+                        MoveUp(x, y); // Move the player up
                     }
-                    else
+                    else // If there is an obstacle, do not move the player
                     {
-                        moved = false; // nepohnul se -> nic :D 
+                        moved = false; // Set the flag indicating that the player has not moved
                     }
                     break;
-                case ConsoleKey.DownArrow: // DOLŮ
+
+                // If the down arrow key or S key was pressed
+                case ConsoleKey.DownArrow:
                 case ConsoleKey.S:
+                    // Check if the player can move down to the previous room
                     if (CheckForTiles(playerPos, 'd', '/'))
                     {
-                        PrevRoom();
+                        PrevRoom(); // Move to the previous room
                         break;
                     }
+                    // If there are no obstacles, move the player down
                     else if (!CheckForTiles(playerPos, 'd', '█') && !CheckForTiles(playerPos, 'd', '☻'))
                     {
-                        MoveDown(x,y);
+                        MoveDown(x, y); // Move the player down
                     }
-                    else
+                    else // If there is an obstacle, do not move the player
                     {
-                        moved = false;
+                        moved = false; // Set the flag indicating that the player has not moved
                     }
                     break;
-                case ConsoleKey.LeftArrow: // DOLEVA
+
+                // If the left arrow key or A key was pressed
+                case ConsoleKey.LeftArrow:
                 case ConsoleKey.A:
+                    // Check if the player can move left to the previous room
                     if (CheckForTiles(playerPos, 'l', '\\'))
                     {
-                        PrevRoom();
+                        PrevRoom(); // Move to the previous room
                         break;
                     }
+                    // If there are no obstacles, move the player left
                     else if (!CheckForTiles(playerPos, 'l', '█') && !CheckForTiles(playerPos, 'l', '☻'))
                     {
-                       MoveLeft(x,y);
+                        MoveLeft(x, y); // Move the player left
                     }
-                    else
+                    else // If there is an obstacle, do not move the player
                     {
-                        moved = false;
+                        moved = false; // Set the flag indicating that the player has not moved
                     }
                     break;
-                case ConsoleKey.RightArrow: // DOPRAVA
+                // If the right arrow key or D key was pressed
+                case ConsoleKey.RightArrow:
                 case ConsoleKey.D:
+                    // Check if the player can move right to the next room
                     if (CheckForTiles(playerPos, 'r', '|'))
                     {
                         NextRoom();
                         break;
                     }
+                    // If there are no obstacles, move the player right
                     else if (!CheckForTiles(playerPos, 'r', '█') && !CheckForTiles(playerPos, 'r', '☻'))
                     {
-                        MoveRight(x,y);
+                        MoveRight(x,y);// Move the player right
                     }
                     else
                     {
-                        moved = false;
+                        moved = false; // Set the flag indicating that the player has not moved
                     }
                     break;
             }
@@ -84,27 +102,30 @@ namespace DungeonCrawler
 
         public static void MoveUp(int x, int y)
         {
-            Map[y][x] = lastStepOn;
-            lastStepOn = Map[y - 1][x];
-            Map[y - 1][x] = player;
+            Map[y][x] = lastStepOn; // Set the tile the player was on to the last tile stepped on
+            lastStepOn = Map[y - 1][x]; // Update the last tile stepped on to the one the player is moving to
+            Map[y - 1][x] = player; // Set the new tile to the player symbol
         }
+
         public static void MoveDown(int x, int y)
         {
-            Map[y][x] = lastStepOn;
-            lastStepOn = Map[y + 1][x];
-            Map[y + 1][x] = player;
+            Map[y][x] = lastStepOn; // Set the tile the player was on to the last tile stepped on
+            lastStepOn = Map[y + 1][x]; // Update the last tile stepped on to the one the player is moving to
+            Map[y + 1][x] = player; // Set the new tile to the player symbol
         }
+
         public static void MoveLeft(int x, int y)
         {
-            Map[y][x] = lastStepOn;
-            lastStepOn = Map[y][x - 1];
-            Map[y][x - 1] = player;
+            Map[y][x] = lastStepOn; // Set the tile the player was on to the last tile stepped on
+            lastStepOn = Map[y][x - 1]; // Update the last tile stepped on to the one the player is moving to
+            Map[y][x - 1] = player; // Set the new tile to the player symbol
         }
+
         public static void MoveRight(int x, int y)
         {
-            Map[y][x] = lastStepOn;
-            lastStepOn = Map[y][x + 1];
-            Map[y][x + 1] = player;
+            Map[y][x] = lastStepOn; // Set the tile the player was on to the last tile stepped on
+            lastStepOn = Map[y][x + 1]; // Update the last tile stepped on to the one the player is moving to
+            Map[y][x + 1] = player; // Set the new tile to the player symbol
         }
 
         public static void NextRoom(char tile = '░')//Další místnost wow

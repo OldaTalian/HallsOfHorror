@@ -1,8 +1,10 @@
 using static DungeonCrawler.maps;
+using static DungeonCrawler.menu;
 using static DungeonCrawler.Player;
 using static DungeonCrawler.variables;
 using static DungeonCrawler.Sounds;
 using static DungeonCrawler.Enemy;
+using static DungeonCrawler.render;
 using System.Configuration;
 using System.Collections.Specialized;
 using System.Text.Json;
@@ -12,58 +14,28 @@ namespace DungeonCrawler
     internal class Program
     {
 
-        public static int[] MeasureDistance(int[] pos1, int[] pos2)//Měří vzdálenost mezi dvěma body (pos2 je obráceně FIXNOUT)
+        public static int MeasureDistance(int[] pos1, int[] pos2)
         {
             int x1 = pos1[0];
             int y1 = pos1[1];
-            int x2 = pos2[1];
-            int y2 = pos2[0];
-            int[] distance = { (x2 - x1) , (y2 - y1) };
+            int x2 = pos2[0];
+            int y2 = pos2[1];
+            int distance = Math.Abs(x2 - x1) + Math.Abs(y2 - y1);
             return distance;
-        } 
-
-
-        public static void Render() //Vyrenderuje mapu
-        {
-            Console.Clear();
-            if (Map == null) return;
-
-            Console.WriteLine(ThisRoom+1 + " " + AllRooms().Length + " |  x:" + FindPlayer()[0] + " y:" + FindPlayer()[1] + 
-                " D: " + MeasureDistance(FindPlayer(), locate)[0] + " " + MeasureDistance(FindPlayer(), locate)[1]); // Vypisuje v jaké místnosti z kolika hráč je (pro debug)
-            
-            // Vytiskne Mapu do konzole
-            for (int i = 0; i < Map.Length; i++)
-            {
-                for (int j = 0; j < Map[i].Length; j++)//Zde se dají upravovat jednotlivé Tiles
-                { 
-                    if (Map[i][j] == '░' || Map[i][j] == '▒') { 
-                        Console.ForegroundColor= ConsoleColor.DarkGray;
-                        Console.Write(Map[i][j]);
-                        Console.ForegroundColor = ConsoleColor.White;
-                    }
-                    else if (Map[i][j] == '$')
-                    {
-                        Console.BackgroundColor = ConsoleColor.White;
-                        Console.Write(" ");
-                        Console.BackgroundColor = ConsoleColor.Black;
-                    }
-                    else
-                    {
-                        Console.Write(Map[i][j]);
-                    }
-                }
-                Console.WriteLine();
-            }
         }
+
+
         static void Main(string[] args)
         {
             // HUDBA:
             // potřebuje ffmpeg nainstalovaný
             // a potom se jenom použije ffplay a rozjede se ta hudba
             LoadMusic();
+
+            // menu here                                      < -------- MENU ------- < -------
+
+
             PlaySound("muzika10.wav");
-
-
 
             for (int i = 0; i < AllEnemies( Map,enemy); i++)
             {
@@ -78,16 +50,26 @@ namespace DungeonCrawler
             //Console.SetWindowSize(100, 20);
             while (true) // Hra: 
             {
-                Console.SetWindowSize(Map[0].Length + 1,Map.Length + 2); // Změní velikost okna aby nešly vidět předchozí pohyby
+                if(lastStepOn == '#')
+                {
+                    playerHealth -= 5;
+                }
+                if (playerHealth <= 0)
+                {
+                    break;
+                }
+
 
                 do
                 {
                     Move();
                 } while (!moved); //pokud se snaží jít do zdi tak to nic neudělá
-                MoveEnemy();
+                enemyTick();
                 Render();
-            }
-
+            } 
+            Console.Clear();
+            Console.WriteLine("You ded ☺\nPress something to close the program...");
+            Console.ReadKey();
         }
     
     }

@@ -45,7 +45,14 @@ namespace DungeonCrawler
         public static void PlaySound(string name = "Error.mp3")
         {
             string fileLocalition = $"{ AppDomain.CurrentDomain.BaseDirectory }{name}";
-            System.Diagnostics.Process.Start('"'+Get_ffPlay_location() + "\\ffplay.exe"+'"', $"{fileLocalition} -loglevel quiet -nodisp");
+            try
+            {
+                System.Diagnostics.Process.Start('"'+Get_ffPlay_location() + "\\ffplay"+'"', $"{fileLocalition} -loglevel quiet -nodisp");
+            }
+            catch (Exception e)
+            {
+                // LOL how to make no crashes
+            }
         }
     }
 }

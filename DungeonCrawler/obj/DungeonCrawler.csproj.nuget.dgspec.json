@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\oldat\\source\\repos\\DungeonCrawlerC-\\DungeonCrawler\\DungeonCrawler.csproj": {}
+    "D:\\MVS Projects\\DungeonCrawlerC-\\DungeonCrawler\\DungeonCrawler.csproj": {}
   },
   "projects": {
-    "C:\\Users\\oldat\\source\\repos\\DungeonCrawlerC-\\DungeonCrawler\\DungeonCrawler.csproj": {
+    "D:\\MVS Projects\\DungeonCrawlerC-\\DungeonCrawler\\DungeonCrawler.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\oldat\\source\\repos\\DungeonCrawlerC-\\DungeonCrawler\\DungeonCrawler.csproj",
+        "projectUniqueName": "D:\\MVS Projects\\DungeonCrawlerC-\\DungeonCrawler\\DungeonCrawler.csproj",
         "projectName": "DungeonCrawler",
-        "projectPath": "C:\\Users\\oldat\\source\\repos\\DungeonCrawlerC-\\DungeonCrawler\\DungeonCrawler.csproj",
-        "packagesPath": "C:\\Users\\oldat\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\oldat\\source\\repos\\DungeonCrawlerC-\\DungeonCrawler\\obj\\",
+        "projectPath": "D:\\MVS Projects\\DungeonCrawlerC-\\DungeonCrawler\\DungeonCrawler.csproj",
+        "packagesPath": "C:\\Users\\Patrik Rychtařík\\.nuget\\packages\\",
+        "outputPath": "D:\\MVS Projects\\DungeonCrawlerC-\\DungeonCrawler\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\oldat\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Patrik Rychtařík\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -55,7 +55,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -5,7 +5,7 @@ namespace DungeonCrawler
 {
     public class maps
     {
-        public static char[][][] AllRooms()
+        public static char[][][] AllRooms() 
         {
             char[][][] output = { StartRoom, Room2, Room3 };
             return output;
@@ -15,7 +15,7 @@ namespace DungeonCrawler
             "█████████████████████████████".ToCharArray(),
             "█░░░░░░░░░░░░░░░░░☻░░░░░░░░░█".ToCharArray(),
             "█░░░░░░░░░░░░░▒░░░░░░░░░▒░░░█".ToCharArray(),
-            "█░░░░░░░░░░░░░░░░░░░░░░░░░░░█".ToCharArray(),
+            "█░░░░░░████████████░░░░░░░░░█".ToCharArray(),
            $"█░*░░▒░░░░░░░░░░░░░░░░░░░░░░|".ToCharArray(),
             "█░░░░░░░░░░░░░░░░░░░░░░░░░░░█".ToCharArray(),
             "█░░░░░░░░░░░░░░░░▒░░░░░██████".ToCharArray(),
@@ -24,13 +24,13 @@ namespace DungeonCrawler
         };
         public static char[][] Room2 =
         {
-            "██████████████-██████████████".ToCharArray(),
+            "Đ██████████████-██████████████".ToCharArray(),
             "█░░░░░░░░░▒░░░░░░░░░░░░░░░░░█".ToCharArray(),
             "█░░░░░░░░░░░░░▒░░░░░░░░▒░░░░█".ToCharArray(),
             "█░░░░░░░░░░░░░░░░░░░░░░░░░░░█".ToCharArray(),
            "\\*░░░░░░░░░░░░░░░░░░░░░░░░░░█".ToCharArray(),
-            "█░░░░░░░░░░░░░░░░░░░░░░░░░░░█".ToCharArray(),
-            "█░░░░░░░░░░░░░░░░▒░░░░░░░░░░█".ToCharArray(),
+            "█░░░░░░░░░░░░░░░░░░░░░░░##░░█".ToCharArray(),
+            "█░░░░░░░░░░░░░░░░▒░░░░░###░░█".ToCharArray(),
             "█░░░▒░░░░░░░░░░░░░░░░░░░▒░░░█".ToCharArray(),
             "█████████████████████████████".ToCharArray(),
         };

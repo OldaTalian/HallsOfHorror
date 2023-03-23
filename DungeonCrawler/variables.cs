@@ -10,6 +10,9 @@ namespace DungeonCrawler
         public static int ThisRoom = 0;
         public static char[][] Map = StartRoom;
         public static bool moved = false;
+        public static long currentTick = 0;
+        public static byte playerHealth = 100;
+        public static byte enemyAttack = 5;
 
         public static int[] locate = { 2, 15 }; //delete
 
