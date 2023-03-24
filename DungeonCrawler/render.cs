@@ -10,73 +10,14 @@ namespace DungeonCrawler
         {
             Console.Clear();
             if (Map == null) return;
-
-            Console.WriteLine("Rooms: " + ThisRoom + 1 + "/" + AllRooms().Length + " |  x:" + FindPlayer()[0] + " y:" + FindPlayer()[1] +
+            Console.WriteLine("Rooms: " + (ThisRoom + 1) + "/" + AllRooms().Length + " |  x:" + FindPlayer()[0] + " y:" + FindPlayer()[1] +
                 " Health: " + ((playerHealth > 0) ? playerHealth : 0));
-
             // Check if there is a circle to be drawn
             int maxDistance;
             if (Map[Map.Length - 1][Map[Map.Length - 1].Length - 2] == 'Đ' &&
                 int.TryParse(Map[Map.Length - 1][Map[Map.Length - 1].Length - 1].ToString(), out maxDistance))
             {
-                // Renders map with circle
-                int[] playerPos = FindPlayer();
-
-                for (int i = 0; i < Map.Length; i++)
-                {
-                    for (int j = 0; j < Map[i].Length; j++)
-                    {
-                        int[] tilePos = { j, i };
-                        int distance = MeasureDistance(playerPos, tilePos);
-
-                        if (distance <= maxDistance)
-                        {
-                            // Calculate the radius of the circle that should be drawn around the player position
-                            int radius = maxDistance - distance + 3;
-
-                            // Check if the tile is within the circle
-                            if (radius * radius >= Math.Pow(playerPos[0] - tilePos[0], 2) + Math.Pow(playerPos[1] - tilePos[1], 2))
-                            {
-                                // Check if there is a wall between the player and the tile
-                                bool isWallInBetween = false;
-                                foreach (var wallPos in GetTilesOnLine(playerPos, tilePos))
-                                {
-                                    if (Map[wallPos[1]][wallPos[0]] == '█')
-                                    {
-                                        isWallInBetween = true;
-                                        break;
-                                    }
-                                }
-
-                                if (isWallInBetween)
-                                {
-                                    if (Map[i][j] == '█')
-                                    {
-                                        Console.Write('█'); // its the wall
-                                    }
-                                    else
-                                    {
-                                        Console.Write(' '); // tile is behind a wall
-                                    }
-                                }
-                                else
-                                {
-                                    convertToMap(Map, j, i); // render the tile normally
-                                }
-                            }
-
-                            else
-                            {
-                                Console.Write(' '); // render space instead
-                            }
-                        }
-                        else
-                        {
-                            Console.Write(' '); // render space instead
-                        }
-                    }
-                    Console.WriteLine();
-                }
+                RenderCircle(maxDistance);
             }
             else
             {
@@ -92,6 +33,7 @@ namespace DungeonCrawler
             }
         }
 
+
         // Returns an array of tiles between the start and end points, inclusive, on a line defined by those points.
         // using Bresenham's algorithm (https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm).
         public static int[][] GetTilesOnLine(int[] startPos, int[] endPos)
@@ -105,15 +47,17 @@ namespace DungeonCrawler
             int maxDistance = Math.Max(dx, dy) + 1;  // Calculate the maximum distance between the start and end points.
             int[][] tiles = new int[maxDistance][];  // Create a new array to store the tiles.
 
-            int i = 0;  // Initialize the index variable.
+            int i = 0;
             while (i < maxDistance)
             {
-                tiles[i] = new int[] { x, y };  // Store the current tile in the array.
-                i++;
+                if (x >= 0 && x < Map[0].Length && y >= 0 && y < Map.Length) // check if coordinates are valid
+                {
+                    tiles[i] = new int[] { x, y };
+                    i++;
+                }
 
-                int error = dx - dy;  // Calculate the error term.
+                int error = dx - dy;
 
-                // Take the appropriate step based on the error term.
                 if (error > 0 || (error == 0 && xStep > 0))
                 {
                     x += xStep;
@@ -173,5 +117,67 @@ namespace DungeonCrawler
             }
         }
 
+
+        public static void RenderCircle(int maxDistance)
+        {
+            // Renders map with circle
+            int[] playerPos = FindPlayer();
+            for (int i = 0; i < Map.Length; i++)
+            {
+                for (int j = 0; j < Map[i].Length; j++)
+                {
+                    int[] tilePos = { j, i };
+                    int distance = MeasureDistance(playerPos, tilePos);
+
+                    if (distance <= maxDistance)
+                    {
+                        // Calculate the radius of the circle that should be drawn around the player position
+                        int radius = maxDistance - distance + 3;
+
+                        // Check if the tile is within the circle
+                        if (radius * radius >= Math.Pow(playerPos[0] - tilePos[0], 2) + Math.Pow(playerPos[1] - tilePos[1], 2))
+                        {
+                            // Check if there is a wall between the player and the tile
+                            bool isWallInBetween = false;
+                            foreach (var wallPos in GetTilesOnLine(playerPos, tilePos))
+                            {
+                                if (wallPos[1] >= 0 && wallPos[1] < Map.Length && wallPos[0] >= 0 && wallPos[0] < Map[wallPos[1]].Length)
+                                {
+                                    if (Map[wallPos[1]][wallPos[0]] == '█')
+                                    {
+                                        isWallInBetween = true;
+                                        break;
+                                    }
+                                }
+                            }
+                            if (isWallInBetween)
+                            {
+                                if (Map[i][j] == '█')
+                                {
+                                    Console.Write('█'); // render wall normally
+                                }
+                                else
+                                {
+                                    Console.Write(' '); // tile is behind a wall
+                                }
+                            }
+                            else
+                            {
+                                convertToMap(Map, j, i); // render the tile normally
+                            }
+                        }
+                        else
+                        {
+                            Console.Write(' '); // render space instead
+                        }
+                    }
+                    else
+                    {
+                        Console.Write(' '); // render space instead
+                    }
+                }
+                Console.WriteLine();
+            }
+        }
     }
 }
