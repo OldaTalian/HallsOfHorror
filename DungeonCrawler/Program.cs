@@ -49,6 +49,7 @@ namespace DungeonCrawler
                 {
                     Move();
                 } while (!moved); //pokud se snaží jít do zdi tak to nic neudělá
+                mainPlayerPos = FindPlayerPos();
                 enemyTick();
                 Render();
             }

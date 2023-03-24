@@ -8,7 +8,7 @@ namespace DungeonCrawler
     {
         public static void Move() // Define a function to move the player
         {
-            int[] playerPos = FindPlayer(); // Get the current position of the player
+            int[] playerPos = mainPlayerPos; // Get the current position of the player
             moved = true; // Set a flag indicating that the player has moved
 
             // Extract the X and Y coordinates of the player
@@ -127,7 +127,7 @@ namespace DungeonCrawler
             lastStepOn = tile;
         }
 
-        public static int[] FindPlayer() //  Finds the player on the map and returns their coordinates
+        public static int[] FindPlayerPos() //  Finds the player on the map and returns their coordinates
         {
             int[] playerPos = { -1, -1 };
             for (int i = 0; i < Map.Length; i++)

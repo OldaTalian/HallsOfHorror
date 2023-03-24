@@ -6,14 +6,15 @@
         public static char enemy = '☻';
         public static char lastStepOn = '░';
 
-        public static int ThisRoom = 0;
-        public static char[][] Map = new char[0][];
         public static bool moved = false;
-        public static long currentTick = 0;
         public static byte playerHealth = 100;
+        public static int[] mainPlayerPos = new int[2];
         public static byte enemyAttack = 5;
 
+        public static char[][] Map = new char[0][];
 
+        public static int ThisRoom = 0;
+        public static long currentTick = 0;
         // Useful functions
 
         // Adds a new value to the end of an array and returns the new array
@@ -32,11 +33,11 @@
         }
 
         // Checks if there is a specific tile in a specific direction from the player's position
-        public static bool CheckForTiles(int[] playerPos, char direction, char tile)
+        public static bool CheckForTiles(int[] pos, char direction, char tile) // position (X,Y), direction u/d/l/r, tile [char]
         {
             bool output = false;
-            int x = playerPos[0];
-            int y = playerPos[1];
+            int x = pos[0];
+            int y = pos[1];
             if (direction == 'u') // UP
             {
                 if (y != 0 && Map[y - 1][x] == tile)
@@ -89,7 +90,7 @@
                     if (Map[i][j] == search)
                     {
                         int[] tilePos = new int[] { j, i };
-                        if (MeasureDistance(pos, tilePos) <= distance)
+                        if ((Math.Abs(tilePos[0] - pos[0]) + Math.Abs(tilePos[1] - pos[1])) <= distance)
                         {
                             return true;
                         }

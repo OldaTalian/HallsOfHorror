@@ -54,19 +54,19 @@ namespace DungeonCrawler
         }
         public static void EnemyAttack(char enemyType)
         {
-            if (CheckForTiles(FindPlayer(), 'u', enemyType))
+            if (CheckForTiles(mainPlayerPos, 'u', enemyType))
             {
                 playerHealth = (byte)(playerHealth - enemyAttack);
             }
-            if (CheckForTiles(FindPlayer(), 'd', enemyType))
+            if (CheckForTiles(mainPlayerPos, 'd', enemyType))
             {
                 playerHealth = (byte)(playerHealth - enemyAttack);
             }
-            if (CheckForTiles(FindPlayer(), 'l', enemyType))
+            if (CheckForTiles(mainPlayerPos, 'l', enemyType))
             {
                 playerHealth = (byte)(playerHealth - enemyAttack);
             }
-            if(CheckForTiles(FindPlayer(),'r', enemyType))
+            if(CheckForTiles(mainPlayerPos,'r', enemyType))
             {
                 playerHealth = (byte)(playerHealth - enemyAttack);
             }
@@ -75,7 +75,7 @@ namespace DungeonCrawler
         public static void MoveEnemy(char enemyType)
         {
             // Find the current position of the player character.
-            int[] playerPos = FindPlayer();
+            int[] playerPos = mainPlayerPos;
             int playerX = playerPos[0];
             int playerY = playerPos[1];
 
