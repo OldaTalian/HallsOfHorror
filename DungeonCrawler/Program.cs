@@ -1,5 +1,6 @@
 using static DungeonCrawler.Enemy;
 using static DungeonCrawler.maps;
+using static DungeonCrawler.menu;
 using static DungeonCrawler.Player;
 using static DungeonCrawler.render;
 using static DungeonCrawler.Sounds;
@@ -23,9 +24,9 @@ namespace DungeonCrawler
 
             // menu here                                      < -------- MENU ------- < -------
 
-            //PlaySound("muzika10.wav");
+            PlaySound("muzika10.wav");
 
-            
+            Menu();
 
             Render();
             //Console.SetWindowSize(100, 20);
@@ -56,6 +57,7 @@ namespace DungeonCrawler
             Console.Clear();
             Console.WriteLine("You ded ¯\\_☺_/¯\nPress something to close the program...");
             Console.ReadKey();
+            Environment.Exit(0);
         }
     }
 }

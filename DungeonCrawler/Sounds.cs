@@ -51,8 +51,10 @@ namespace DungeonCrawler
             }
             catch (Exception e)
             {
+                
                 // LOL how to make no crashes
             }
         }
+        
     }
 }

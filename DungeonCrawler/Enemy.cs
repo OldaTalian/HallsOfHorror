@@ -1,7 +1,4 @@
-﻿using static DungeonCrawler.Program;
-using static DungeonCrawler.variables;
-using static DungeonCrawler.Player;
-using System;
+﻿using static DungeonCrawler.variables;
 
 namespace DungeonCrawler
 {
@@ -22,9 +19,10 @@ namespace DungeonCrawler
             }
             return count;
         }
+
         public static int[][] FindEnemyPositions(char[][] array, char target)
         {
-            int[][] result = new int[AllEnemies(array,target)][];
+            int[][] result = new int[AllEnemies(array, target)][];
             int index = 0;
             for (int i = 0; i < array.Length; i++)
             {
@@ -42,7 +40,6 @@ namespace DungeonCrawler
 
         public static char[] enemyLastTile = new char[AllEnemies(Map, enemy)];
 
-
         public static void enemyTick()
         {
             if (currentTick % 2 == 0)
@@ -52,6 +49,7 @@ namespace DungeonCrawler
             }
             currentTick++;
         }
+
         public static void EnemyAttack(char enemyType)
         {
             if (CheckForTiles(mainPlayerPos, 'u', enemyType))
@@ -66,11 +64,12 @@ namespace DungeonCrawler
             {
                 playerHealth = (byte)(playerHealth - enemyAttack);
             }
-            if(CheckForTiles(mainPlayerPos,'r', enemyType))
+            if (CheckForTiles(mainPlayerPos, 'r', enemyType))
             {
                 playerHealth = (byte)(playerHealth - enemyAttack);
             }
         }
+
         // This method is used to move an enemy character towards the player character.
         public static void MoveEnemy(char enemyType)
         {
@@ -132,7 +131,7 @@ namespace DungeonCrawler
                     {
                         direction = 1;
                     }
-                    
+
                     // Check whether the tile to the left or right of the enemy character is available to move into.
                     if (Map[enemyY + direction][enemyX] != '█' && Map[enemyY + direction][enemyX] != player && Map[enemyY + direction][enemyX] != enemyType)
                     {
@@ -142,11 +141,10 @@ namespace DungeonCrawler
                     }
                 }
                 //Console.WriteLine($"Enemy{i}: X{enemyX} Y{enemyY}; Distance {(enemyX - playerX)} {(enemyY - playerY)} Direction:{Debug}{direction} {(Math.Abs(enemyX - playerX) < Math.Abs(enemyY - playerY))}");
-
             }
         }
 
-        public static void RegisterEnemies( char enemyType)
+        public static void RegisterEnemies(char enemyType)
         {
             for (int i = 0; i < AllEnemies(Map, enemyType); i++)
             {

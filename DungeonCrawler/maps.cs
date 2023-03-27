@@ -7,7 +7,7 @@ namespace DungeonCrawler
     {
         public static char[][][] AllRooms() 
         {
-            char[][][] output = { DebugRoom, StartRoom, Room2, Room3 , Room4 ,endRoom };
+            char[][][] output = { DebugRoom, StartRoom, Room2, Room3 , Room4, Room5, endRoom };
             return output;
         }
         public static char[][] DebugRoom =
@@ -85,6 +85,15 @@ namespace DungeonCrawler
             "█░░▒░░░░▒█████████████████████████████░░░░▒█".ToCharArray(),
             "█░░░*░░░░$$$$$$$$$$$$$$$$$$$$$$$$$$$$$▒░░░░█".ToCharArray(),
             "████/███████████████████████████████████████Đ9".ToCharArray(),
+        };
+        public static char[][] Room5 =
+        {
+            "██████████████████████████████".ToCharArray(),
+            "█████░░░░░░░░░░█░░░░░$░░░░░░░█".ToCharArray(),
+            "█    ░░░░░░░░░░█░░░░░█░░███░░█".ToCharArray(),
+            "█░░░░░   ###░##█░░░░░█░░███░░█".ToCharArray(),
+            "█░░*░░ ███░░░░░$░░░░░█░░░░░░░|".ToCharArray(),
+            "███/██████████████████████████".ToCharArray(),
         };
         public static char[][] endRoom =
 {

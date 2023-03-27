@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\DungeonCrawler"
   ],
-  "SelectedNode": "\\dungeon_crawler.sln",
+  "SelectedNode": "\\DungeonCrawler\\render.cs",
   "PreviewInSolutionExplorer": false
 }
