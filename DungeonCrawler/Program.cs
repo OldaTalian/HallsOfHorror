@@ -23,15 +23,14 @@ namespace DungeonCrawler
             LoadMusic();
 
             // menu here                                      < -------- MENU ------- < -------
-
             PlaySound("muzika10.wav");
 
             Menu();
-
+            
             Render();
             //Console.SetWindowSize(100, 20);
 
-            while (true) // Hra:
+            while (true) // Game:
             {
                 if (lastStepOn == '#')
                 {

@@ -10,11 +10,17 @@ namespace DungeonCrawler
     {
         public static char[][] logo =
         {
-            " ▄  ▄ ▄▄▄  ▄▄▌  ▄▄▌   ▄▄            ▄▄▄   ▄  ▄      ▄▄▄  ▄▄▄        ▄▄▄  ".ToCharArray(),
-            "██ ▐█▐█ ▀█ ██   ██   ▐█ ▀     ▄█▀▄ ▐▄▄   ██ ▐█ ▄█▀▄ ▀▄ █ ▀▄ █  ▄█▀▄ ▀▄ █·".ToCharArray(),
-            "██▀▀█▄█▀▀█ ██   ██    ▀▀▀█▄  ▐█▌ ▐▌█     ██▀▀█▐█▌ ▐▌▐▀▀▄ ▐▀▀▄ ▐█▌ ▐▌▐▀▀▄ ".ToCharArray(),
-            "██▌▐▀▐█  ▐▌▐█▌ ▄▐█▌ ▄▐█▄ ▐█  ▐█▌ ▐▌██    ██▌▐▀▐█▌ ▐▌▐█ █▌▐█ █▌▐█▌ ▐▌▐█ █▌".ToCharArray(),
-            "▀▀▀   ▀  ▀  ▀▀▀  ▀▀▀  ▀▀▀▀    ▀█▄▀ ▀▀▀   ▀▀▀   ▀█▄▀  ▀  ▀ ▀  ▀ ▀█▄▀  ▀  ▀".ToCharArray(),
+            "   ▄  ▄ ▄▄▄  ▄▄▌  ▄▄▌   ▄▄      ".ToCharArray(),
+            "  ██ ▐█▐█ ▀█ ██   ██   ▐█ ▀     ".ToCharArray(),
+            "  ██▀▀█▄█▀▀█ ██   ██    ▀▀▀█▄   ".ToCharArray(),
+            "  ██▌▐▀▐█  ▐▌▐█▌ ▄▐█▌ ▄▐█▄ ▐█   ".ToCharArray(),
+            "  ▀▀▀   ▀  ▀  ▀▀▀  ▀▀▀  ▀▀▀▀    ".ToCharArray(),
+            "               OF               ".ToCharArray(),
+            " ▄  ▄      ▄▄▄  ▄▄▄        ▄▄▄  ".ToCharArray(),
+            "██ ▐█ ▄█▀▄ ▀▄ █ ▀▄ █  ▄█▀▄ ▀▄ █ ".ToCharArray(),
+            "██▀▀█▐█▌ ▐▌▐▀▀▄ ▐▀▀▄ ▐█▌ ▐▌▐▀▀▄ ".ToCharArray(),
+            "██▌▐▀▐█▌ ▐▌▐█ █▌▐█ █▌▐█▌ ▐▌▐█ █▌".ToCharArray(),
+            "▀▀▀   ▀█▄▀  ▀  ▀ ▀  ▀ ▀█▄▀  ▀  ▀".ToCharArray()
         };
 
         public static void PrintLogo() {
