@@ -1,9 +1,15 @@
 ﻿using static DungeonCrawler.variables;
+using static DungeonCrawler.Fight;
 
 namespace DungeonCrawler
 {
     internal class Enemy
     {
+        public static char enemy = '☻';
+        public static byte enemyAttack = 5;
+        public static byte enemyHealth = 50;
+
+
         public static int AllEnemies(char[][] array, char target)
         {
             int count = 0;
@@ -54,19 +60,19 @@ namespace DungeonCrawler
         {
             if (CheckForTiles(mainPlayerPos, 'u', enemyType))
             {
-                playerHealth = (byte)(playerHealth - enemyAttack);
+                BeginFight();
             }
             if (CheckForTiles(mainPlayerPos, 'd', enemyType))
             {
-                playerHealth = (byte)(playerHealth - enemyAttack);
+                BeginFight();
             }
             if (CheckForTiles(mainPlayerPos, 'l', enemyType))
             {
-                playerHealth = (byte)(playerHealth - enemyAttack);
+                BeginFight();
             }
             if (CheckForTiles(mainPlayerPos, 'r', enemyType))
             {
-                playerHealth = (byte)(playerHealth - enemyAttack);
+                BeginFight();
             }
         }
 
@@ -146,6 +152,8 @@ namespace DungeonCrawler
 
         public static void RegisterEnemies(char enemyType)
         {
+            enemyLastTile = new char[AllEnemies(Map, enemyType)];
+            Console.WriteLine(enemyLastTile.Length);
             for (int i = 0; i < AllEnemies(Map, enemyType); i++)
             {
                 enemyLastTile[i] = '░';

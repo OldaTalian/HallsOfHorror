@@ -1,8 +1,9 @@
 using static DungeonCrawler.Enemy;
 using static DungeonCrawler.maps;
 using static DungeonCrawler.menu;
+using static DungeonCrawler.Fight;
 using static DungeonCrawler.Player;
-using static DungeonCrawler.render;
+using static DungeonCrawler.Render;
 using static DungeonCrawler.Sounds;
 using static DungeonCrawler.variables;
 
@@ -23,11 +24,13 @@ namespace DungeonCrawler
             LoadMusic();
 
             // menu here                                      < -------- MENU ------- < -------
-            PlaySound("muzika10.wav");
+
+            //PlaySound("muzika10.wav");
+
 
             Menu();
             
-            Render();
+            RenderScreen();
             //Console.SetWindowSize(100, 20);
 
             while (true) // Game:
@@ -44,14 +47,14 @@ namespace DungeonCrawler
                 {
                     break;
                 }
-
+           
                 do
                 {
                     Move();
                 } while (!moved); //pokud se snaží jít do zdi tak to nic neudělá
                 mainPlayerPos = FindPlayerPos();
                 enemyTick();
-                Render();
+                RenderScreen();
             }
             Console.Clear();
             Console.WriteLine("You ded ¯\\_☺_/¯\nPress something to close the program...");

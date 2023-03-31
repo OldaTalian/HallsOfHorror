@@ -21,13 +21,8 @@ namespace DungeonCrawler
                 // If the up arrow key or W key was pressed
                 case ConsoleKey.UpArrow:
                 case ConsoleKey.W:
-                    // Check if the player can move up to the next room
-                    if (CheckForTiles(playerPos, 'u', '-'))
-                    {
-                        NextRoom(); // Move to the next room
-                    }
                     // If there are no obstacles, move the player up
-                    else if (!CheckForTiles(playerPos, 'u', '█') && !CheckForTiles(playerPos, 'u', '☻'))
+                    if (!CheckForTiles(playerPos, 'u', '█') && !CheckForTiles(playerPos, 'u', '☻'))
                     {
                         MoveUp(x, y); // Move the player up
                     }
@@ -36,16 +31,12 @@ namespace DungeonCrawler
                 // If the down arrow key or S key was pressed
                 case ConsoleKey.DownArrow:
                 case ConsoleKey.S:
-                    // Check if the player can move down to the previous room
-                    if (CheckForTiles(playerPos, 'd', '/'))
-                    {
-                        PrevRoom(); // Move to the previous room
-                    }
                     // If there are no obstacles, move the player down
-                    else if (!CheckForTiles(playerPos, 'd', '█') && !CheckForTiles(playerPos, 'd', '☻'))
+                    if (!CheckForTiles(playerPos, 'd', '█') && !CheckForTiles(playerPos, 'd', '☻'))
                     {
                         MoveDown(x, y); // Move the player down
                     }
+                    
                     break;
 
                 // If the left arrow key or A key was pressed
@@ -61,6 +52,7 @@ namespace DungeonCrawler
                     {
                         MoveLeft(x, y); // Move the player left
                     }
+                    
                     break;
 
                 // If the right arrow key or D key was pressed
@@ -76,10 +68,7 @@ namespace DungeonCrawler
                     {
                         MoveRight(x, y);// Move the player right
                     }
-                    else
-                    {
-                        moved = false; // Set the flag indicating that the player has not moved
-                    }
+                    
                     break;
             }
         }

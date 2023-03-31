@@ -1,15 +1,14 @@
-﻿namespace DungeonCrawler
+namespace DungeonCrawler
 {
     internal class variables
     {
         public static char player = '☺';
-        public static char enemy = '☻';
         public static char lastStepOn = '░';
 
         public static bool moved = false;
-        public static byte playerHealth = 100;
+        public static int playerHealth = 100;
+        public static byte playerAttack = 3;
         public static int[] mainPlayerPos = new int[2];
-        public static byte enemyAttack = 5;
 
         public static char[][] Map = new char[0][];
 

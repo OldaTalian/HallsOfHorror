@@ -3,9 +3,9 @@ using static DungeonCrawler.variables;
 
 namespace DungeonCrawler
 {
-    internal class render
+    internal class Render
     {
-        public static void Render()
+        public static void RenderScreen()
         {
             Console.Clear();
             if (Map == null) return; // Don't render nothing
@@ -111,7 +111,7 @@ namespace DungeonCrawler
                 }
                 else if (Map[y][x] == '☻') // enemy tile
                 {
-                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
                     Console.Write("☻");
                     Console.ForegroundColor = ConsoleColor.White;
                 }

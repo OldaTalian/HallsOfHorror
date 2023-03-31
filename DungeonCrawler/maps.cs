@@ -52,11 +52,11 @@ namespace DungeonCrawler
         };
         public static char[][] Room2 =
         {
-            "██████████████-██████████████  ".ToCharArray(),
+            "█████████████████████████████  ".ToCharArray(),
             "█░░░░░░░░░▒░░░░░░░░░░░░░░░░░█".ToCharArray(),
             "█░░░░░░░░░░░░░▒░░░░░░░░▒░░░░█".ToCharArray(),
             "█░░░░░░░░░░░░░░░░░░░░░░░░░░░█".ToCharArray(),
-           "\\*░░░░░░░░░░░░░░░░░░░░░░░░░░█".ToCharArray(),
+           "\\*░░░░░░░░░░░░░░░░░░░░░░░░░░|".ToCharArray(),
             "█░░░░░░░░░░░░░░░░░░░░░░░##░░█".ToCharArray(),
             "█░░░░░░░░░░░░░░░░▒░░░░░###░░█".ToCharArray(),
             "█░░░▒░░░░░░░░░░░░░░░░░░░▒░░░█".ToCharArray(),
@@ -68,11 +68,11 @@ namespace DungeonCrawler
             "█▒░░░░░░░░░░░░░░░░░█".ToCharArray(),
             "█░░░░▒░░░░░░░░▒░░░░█".ToCharArray(),
             "█░░░░░░░░░░░░░░░░░░█".ToCharArray(),
-            "█░░░░░░░░░░░░░░░░░░|".ToCharArray(),
+           "\\*░░░░░░░░░░░░░░░░░|".ToCharArray(),
             "█░░░░░░░░░░░░░░░░░░█".ToCharArray(),
             "█░░░░░░░▒░░░░░░░░░░█".ToCharArray(),
-            "█░░░*░░░░░░░░░░▒░░░█".ToCharArray(),
-            "████/███████████████".ToCharArray(),
+            "█░░░░░░░░░░░░░░▒░░░█".ToCharArray(),
+            "████████████████████".ToCharArray(),
         };
         public static char[][] Room4 =
         {
