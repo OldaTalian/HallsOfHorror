@@ -1,5 +1,6 @@
 ﻿using static DungeonCrawler.maps;
 using static DungeonCrawler.Variables;
+using static DungeonCrawler.Player;
 
 namespace DungeonCrawler
 {
@@ -9,10 +10,8 @@ namespace DungeonCrawler
         {
             Console.Clear();
             if (Map == null) return; // Don't render nothing
-
             Console.WriteLine("Rooms: " + (ThisRoom + 1) + "/" + AllRooms().Length + " |  x:" + mainPlayerPos[0] + " y:" + mainPlayerPos[1] +
                 " Health: " + ((playerHealth > 0) ? playerHealth : 0)); //DEBUG message
-
             // Check if there is a circle to be drawn
             int maxDistance;
             if (Map[Map.Length - 1][Map[Map.Length - 1].Length - 2] == 'Đ' &&

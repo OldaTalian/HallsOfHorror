@@ -23,6 +23,7 @@ namespace DungeonCrawler
                 Map = AllRooms()[1];
             }
             RegisterSpawns(); // Spawn locations
+            mainPlayerPos = FindPlayerPos();
             RegisterEnemies(enemy); // Enemies
 
             // MUSIC:
@@ -53,6 +54,10 @@ namespace DungeonCrawler
                 if (playerHealth <= 0)
                 {
                     break;
+                }
+                if(playerHealth < 100)
+                {
+                    playerHealth++;
                 }
            
                 do

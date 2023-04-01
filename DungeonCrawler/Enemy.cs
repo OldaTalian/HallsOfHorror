@@ -58,23 +58,47 @@ namespace DungeonCrawler
 
         public static void EnemyAttack(char enemyType)
         {
+            string sidesWithEnemy = "";
+
             if (CheckForTiles(mainPlayerPos, 'u', enemyType))
             {
-                BeginFight();
+                sidesWithEnemy += ('u');
+            }
+            else
+            {
+                sidesWithEnemy += ('N');
             }
             if (CheckForTiles(mainPlayerPos, 'd', enemyType))
             {
-                BeginFight();
+                sidesWithEnemy += ('d');
+            }
+            else
+            {
+                sidesWithEnemy += ('N');
             }
             if (CheckForTiles(mainPlayerPos, 'l', enemyType))
             {
-                BeginFight();
+                sidesWithEnemy += ('l');
+            }
+            else
+            {
+                sidesWithEnemy += ('N');
             }
             if (CheckForTiles(mainPlayerPos, 'r', enemyType))
             {
-                BeginFight();
+                sidesWithEnemy += ('r');
+            }
+            else
+            {
+                sidesWithEnemy += ('N');
+            }
+
+            if (sidesWithEnemy != "NNNN")
+            {
+                BeginFight(sidesWithEnemy);
             }
         }
+
 
         // This method is used to move an enemy character towards the player character.
         public static void MoveEnemy(char enemyType)
@@ -156,7 +180,6 @@ namespace DungeonCrawler
         public static void RegisterEnemies(char enemyType)
         {
             enemyLastTile = new char[AllEnemies(Map, enemyType)];
-            Console.WriteLine(enemyLastTile.Length);
             for (int i = 0; i < AllEnemies(Map, enemyType); i++)
             {
                 enemyLastTile[i] = '░';

@@ -11,7 +11,7 @@ namespace DungeonCrawler
             {
                 changeFFplay();
             }
-            PlaySound("loaded.wav");
+            PlaySound("loaded.wav",30);
         }
         public static void changeFFplay()
         {
@@ -42,12 +42,12 @@ namespace DungeonCrawler
                 throw;
             }
         }
-        public static void PlaySound(string name = "Error.mp3")
+        public static void PlaySound(string name = "Error.mp3", int volume = 100)
         {
             string fileLocalition = $"{ AppDomain.CurrentDomain.BaseDirectory }{name}";
             try
             {
-                System.Diagnostics.Process.Start('"'+Get_ffPlay_location() + "\\ffplay"+'"', $"{fileLocalition} -loglevel quiet -nodisp");
+                System.Diagnostics.Process.Start('"'+Get_ffPlay_location() + "\\ffplay"+'"', $"{fileLocalition} -volume {volume} -loglevel quiet -nodisp");
             }
             catch (Exception e)
             {

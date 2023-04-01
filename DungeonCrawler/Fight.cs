@@ -7,6 +7,7 @@ namespace DungeonCrawler
     internal class Fight
     {
         public static int enemyFightHealth = enemyHealth;
+        public static int enemyFightHealthFull = enemyHealth;
         public static char[][] FightScene =
         {
             "################################################".ToCharArray(),
@@ -25,24 +26,36 @@ namespace DungeonCrawler
         };
 
         public static byte option = 1;
-        public static void BeginFight()
+        public static void BeginFight( string sides)
         {
-            FightRender(enemy);
-            FightMenu();
+            int enemyCount = 0;
+            for (int i = 0; i < sides.Length; i++)
+            {
+                if (sides[i] != 'N')
+                    enemyCount++;
+            }
+            enemyFightHealthFull = enemyHealth;
+            enemyFightHealth = enemyHealth;
+            enemyFightHealth *= enemyCount;
+            enemyFightHealthFull *= enemyCount;
+            FightRender(enemy, enemyCount);
+            FightMenu(enemyCount, sides);
+
         }
 
-        public static void FightRender(char enemyType) 
+        public static void FightRender(char enemyType, int enemyCount) 
         {
+            
             Console.Clear();
             for (int i = 0; i < FightScene.Length; i++)
             {
                 for (int j = 0; j < FightScene[i].Length; j++)
                 {
-                    if (FightScene[i][j] == '÷')
+                    if (FightScene[i][j] == '×')
                     {
-                        Console.Write(enemyHealth);
+                        Console.Write(enemyFightHealthFull);
                     }
-                    else if(FightScene[i][j] == '×')
+                    else if(FightScene[i][j] == '÷')
                     {
                         Console.Write(enemyFightHealth);
                     }
@@ -83,14 +96,14 @@ namespace DungeonCrawler
                 Console.Write(" ");
             }
         }
-        public static void FightMenu()
+        public static void FightMenu(int enemyCount , string sides)
         {
             bool whileLoopGoBrrr = true;
             bool whileLoopGoBrrr2 = true;
             while (whileLoopGoBrrr) { 
                 while (whileLoopGoBrrr2)
                 {
-                    FightRender(enemy);
+                    FightRender(enemy, enemyCount);
                     SelectionMenu(option);
                     ConsoleKey keyPressed = Console.ReadKey(true).Key;
 
@@ -118,40 +131,52 @@ namespace DungeonCrawler
                         case ConsoleKey.Enter:
                         case ConsoleKey.Spacebar:
                             whileLoopGoBrrr2 = false;
-                            SelectOption(option);
+                            SelectOption(option , enemyCount);
                             break;
                     }
                 }
                 if (enemyFightHealth <= 0)
                 {
                     whileLoopGoBrrr = false;
-                    Console.WriteLine("\nYou won the match");
+                    Console.Clear();
+                    Console.WriteLine("\n\n\nYou WON the match");
+                    Console.WriteLine("Press something to continue...");
+                    Console.ReadKey();
                 }
-                else
-                {
-                    whileLoopGoBrrr2 = true;
-                }
-                if ( playerHealth <= 0)
+                else if ( playerHealth <= 0)
                 {
                     whileLoopGoBrrr = false;
-                    Console.WriteLine("\nYou lost the match");
+                    Console.Clear();
+                    Console.WriteLine("\n\n\nYou LOST the match");
+                    Console.ReadKey();
                 }
                 else
                 {
                     whileLoopGoBrrr2 = true;
                 }
             }
+            if (sides[0] == 'u')
+                Map[mainPlayerPos[1] - 1][mainPlayerPos[0]] = enemyLastTile[0]; //PESKY REPLACE BACKGROUND
+            if (sides[1] == 'd')
+                Map[mainPlayerPos[1] + 1][mainPlayerPos[0]] = enemyLastTile[0]; //PESKY REPLACE BACKGROUND
+            if (sides[2] == 'l')
+                Map[mainPlayerPos[1]][mainPlayerPos[0] - 1] = enemyLastTile[0]; //PESKY REPLACE BACKGROUND
+            if (sides[3] == 'r')
+                Map[mainPlayerPos[1]][mainPlayerPos[0] + 1] = enemyLastTile[0]; //PESKY REPLACE BACKGROUND 
         }
-        public static void SelectOption(byte option)
+        public static void SelectOption(byte option, int enemyCount)
         {
-            if(option==1)
+            Random random = new Random();
+            int damageMultiplier = random.Next(1,3);
+            Console.WriteLine(damageMultiplier);
+            if (option==1)
             {
-                playerHealth -= ((enemyAttack / 4) * 3);
-                enemyFightHealth -= playerAttack;
+                playerHealth -= ((((enemyAttack * enemyCount) / 4) * damageMultiplier));
+                enemyFightHealth -= playerAttack * damageMultiplier;
             }
             else if (option == 2)
             {
-                playerHealth -= (enemyAttack / 2);
+                playerHealth -= ((enemyAttack * enemyCount) / 3) * damageMultiplier;
             }
             else
             {
