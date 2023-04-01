@@ -1,6 +1,6 @@
 namespace DungeonCrawler
 {
-    internal class variables
+    internal class Variables
     {
         public static char player = '☺';
         public static char lastStepOn = '░';
@@ -14,6 +14,8 @@ namespace DungeonCrawler
 
         public static int ThisRoom = 0;
         public static long currentTick = 0;
+
+        public static bool DO_DEBUG = false;
         // Useful functions
 
         // Adds a new value to the end of an array and returns the new array
@@ -89,7 +91,7 @@ namespace DungeonCrawler
                     if (Map[i][j] == search)
                     {
                         int[] tilePos = new int[] { j, i };
-                        if ((Math.Abs(tilePos[0] - pos[0]) + Math.Abs(tilePos[1] - pos[1])) <= distance)
+                        if (MeasureDistance(tilePos,pos) < distance)
                         {
                             return true;
                         }

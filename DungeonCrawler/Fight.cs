@@ -1,6 +1,6 @@
 ﻿using System.Security.Cryptography.X509Certificates;
 using static DungeonCrawler.Enemy;
-using static DungeonCrawler.variables;
+using static DungeonCrawler.Variables;
 
 namespace DungeonCrawler
 {

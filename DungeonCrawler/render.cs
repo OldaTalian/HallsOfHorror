@@ -1,5 +1,5 @@
 ﻿using static DungeonCrawler.maps;
-using static DungeonCrawler.variables;
+using static DungeonCrawler.Variables;
 
 namespace DungeonCrawler
 {

@@ -5,7 +5,7 @@ using static DungeonCrawler.Fight;
 using static DungeonCrawler.Player;
 using static DungeonCrawler.Render;
 using static DungeonCrawler.Sounds;
-using static DungeonCrawler.variables;
+using static DungeonCrawler.Variables;
 
 namespace DungeonCrawler
 {
@@ -14,7 +14,14 @@ namespace DungeonCrawler
         private static void Main(string[] args)
         {
             //Load map
-            Map = AllRooms()[0];
+            if (DO_DEBUG)
+            {
+                Map = AllRooms()[0];
+            }
+            else
+            {
+                Map = AllRooms()[1];
+            }
             RegisterSpawns(); // Spawn locations
             RegisterEnemies(enemy); // Enemies
 
