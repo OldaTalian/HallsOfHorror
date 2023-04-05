@@ -102,4 +102,62 @@ namespace DungeonCrawler
         }
 
     }
+    public class Dialog
+    {
+        // Properties
+        public string Text { get; set; }
+        public string StartingText { get; set; }
+        public string CurrentEmotion { get; set; }
+
+
+        public Dictionary<string, char[][]> EnemyData { get; set; }
+
+        public Dialog(string startingText, Dictionary<string, char[][]> enemyData, string emotion = "Happy")
+        {
+            StartingText = startingText; EnemyData = enemyData; CurrentEmotion = emotion;
+            Clear(emotion);
+        }
+        public void Write(string text, int writeTime, int afterTime = 3, string emotion = "")
+        {
+            if (emotion != "")
+            {
+                CurrentEmotion = emotion;
+                Clear(emotion: emotion);
+            }
+            char[] charMap = text.ToCharArray();
+            double threadTime = Convert.ToDouble(writeTime) / Convert.ToDouble(charMap.Length);
+            for (int i = 0; i < charMap.Length; i++)
+            {
+                Console.Write(charMap[i]);
+                Thread.Sleep(Convert.ToInt32(threadTime * 1000));
+            }
+            Text = Text + text;
+            Thread.Sleep(afterTime * 1000);
+        }
+        public void Clear(string emotion = "", int afterTime = 3)
+        {
+            Text = "";
+            if (emotion == "")
+            {
+                emotion = CurrentEmotion;
+            }
+            Console.Clear();
+            char[] charMap = StartingText.ToCharArray();
+            for (int i = 0; i < charMap.Length; i++)
+            {
+                Console.Write(charMap[i]);
+            }
+            Console.WriteLine();
+            for (int i = 0; i < EnemyData[emotion].Length; i++)
+            {
+                for (int j = 0; j < EnemyData[emotion][i].Length; j++)
+                {
+
+                    Console.Write(EnemyData[emotion][i][j]);
+                }
+                Console.WriteLine();
+            }
+            Thread.Sleep(afterTime * 1000);
+        }
+    }
 }

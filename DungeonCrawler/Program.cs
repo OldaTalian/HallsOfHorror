@@ -33,7 +33,7 @@ namespace DungeonCrawler
 
             // menu here                                      < -------- MENU ------- < -------
 
-            //PlaySound("muzika10.wav");
+            PlayMusic("main_menu.mp3");
 
 
             Menu();
@@ -57,7 +57,7 @@ namespace DungeonCrawler
                 }
                 if(playerHealth < 100)
                 {
-                    playerHealth++;
+                    playerHealth++; 
                 }
            
                 do

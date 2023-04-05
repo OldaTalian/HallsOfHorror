@@ -10,7 +10,10 @@
 
   <ItemGroup>
     <None Remove="error.mp3" />
+    <None Remove="fightScene.wav" />
+    <None Remove="fightStart.wav" />
     <None Remove="loaded.wav" />
+    <None Remove="main_menu.mp3" />
     <None Remove="muzika10.wav" />
   </ItemGroup>
 
@@ -18,7 +21,16 @@
     <Content Include="error.mp3">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="fightScene.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fightStart.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="loaded.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="main_menu.mp3">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="muzika10.wav">

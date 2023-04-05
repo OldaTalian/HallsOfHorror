@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Diagnostics;
+using System.Text.Json;
 using static DungeonCrawler.Program;
 
 namespace DungeonCrawler
@@ -11,7 +12,7 @@ namespace DungeonCrawler
             {
                 changeFFplay();
             }
-            PlaySound("loaded.wav",30);
+            PlaySound("loaded.wav",15);
         }
         public static void changeFFplay()
         {
@@ -38,23 +39,55 @@ namespace DungeonCrawler
             }
             catch (Exception)
             {
-                Console.WriteLine("Error occured when opening config");
+                Console.WriteLine("Error occured when opening music.yaml");
                 throw;
+            }
+        }
+        private static Process musicProcess; // Declare a private static variable to hold the ffplay process
+
+        public static void PlayMusic(string name = "Error.mp3", int volume = 100)
+        {
+            string fileLocation = $"{AppDomain.CurrentDomain.BaseDirectory}{name}";
+            try
+            {
+                musicProcess = new Process();
+                musicProcess.StartInfo.FileName = Get_ffPlay_location() + "\\ffplay"; // Set the ffplay executable file path
+                musicProcess.StartInfo.Arguments = $" {fileLocation} -volume {volume} -loop 9999 -loglevel quiet -nodisp";
+                musicProcess.Start();
+            }
+            catch (Exception e)
+            {
+                // Handle exception
             }
         }
         public static void PlaySound(string name = "Error.mp3", int volume = 100)
         {
-            string fileLocalition = $"{ AppDomain.CurrentDomain.BaseDirectory }{name}";
+            string fileLocalition = $"{AppDomain.CurrentDomain.BaseDirectory}{name}";
             try
             {
-                System.Diagnostics.Process.Start('"'+Get_ffPlay_location() + "\\ffplay"+'"', $"{fileLocalition} -volume {volume} -loglevel quiet -nodisp");
+                System.Diagnostics.Process.Start('"' + Get_ffPlay_location() + "\\ffplay" + '"', $"{fileLocalition} -volume {volume} -loglevel quiet -nodisp");
             }
             catch (Exception e)
             {
-                
                 // LOL how to make no crashes
             }
         }
-        
+
+        public static void StopMusic()
+        {
+            try
+            {
+                if (musicProcess != null && !musicProcess.HasExited)
+                {
+                     musicProcess.Kill(); // Kill the ffplay process if it's running
+                }
+            }
+            catch (Exception e)
+            {
+                // Handle exception
+            }
+        }
+
+
     }
 }
