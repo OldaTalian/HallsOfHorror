@@ -16,6 +16,7 @@ namespace DungeonCrawler
         public static long currentTick = 0;
 
         public static bool DO_DEBUG = false;
+        public static bool DISABLE_AUDIO = true;
         // Useful functions
 
         // Adds a new value to the end of an array and returns the new array
@@ -112,10 +113,10 @@ namespace DungeonCrawler
 
         public Dictionary<string, char[][]> EnemyData { get; set; }
 
-        public Dialog(string startingText, Dictionary<string, char[][]> enemyData, string emotion = "Happy")
+        public Dialog(string startingText, Dictionary<string, char[][]> enemyData, string emotion = "Happy", int aftertime = 3)
         {
             StartingText = startingText; EnemyData = enemyData; CurrentEmotion = emotion;
-            Clear(emotion);
+            Clear(emotion, afterTime:aftertime);
         }
         public void Write(string text, int writeTime, int afterTime = 3, string emotion = "")
         {
@@ -134,7 +135,7 @@ namespace DungeonCrawler
             Text = Text + text;
             Thread.Sleep(afterTime * 1000);
         }
-        public void Clear(string emotion = "", int afterTime = 3)
+        public void Clear(string emotion = "", int afterTime = 0)
         {
             Text = "";
             if (emotion == "")

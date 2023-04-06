@@ -1,6 +1,5 @@
 ﻿using System.Diagnostics;
-using System.Text.Json;
-using static DungeonCrawler.Program;
+using static DungeonCrawler.Variables;
 
 namespace DungeonCrawler
 {
@@ -47,20 +46,25 @@ namespace DungeonCrawler
 
         public static void PlayMusic(string name = "Error.mp3", int volume = 100)
         {
-            string fileLocation = $"{AppDomain.CurrentDomain.BaseDirectory}{name}";
-            try
+            if (!DISABLE_AUDIO)
             {
-                musicProcess = new Process();
-                musicProcess.StartInfo.FileName = Get_ffPlay_location() + "\\ffplay"; // Set the ffplay executable file path
-                musicProcess.StartInfo.Arguments = $" {fileLocation} -volume {volume} -loop 9999 -loglevel quiet -nodisp";
-                musicProcess.Start();
-            }
-            catch (Exception e)
-            {
-                // Handle exception
+                string fileLocation = $"{AppDomain.CurrentDomain.BaseDirectory}{name}";
+                try
+                {
+                    musicProcess = new Process();
+                    musicProcess.StartInfo.FileName = Get_ffPlay_location() + "\\ffplay"; // Set the ffplay executable file path
+                    musicProcess.StartInfo.Arguments = $" {fileLocation} -volume {volume} -loop 9999 -loglevel quiet -nodisp";
+                    musicProcess.Start();
+                }
+                catch (Exception e)
+                {
+                    // Handle exception
+                }
             }
         }
         public static void PlaySound(string name = "Error.mp3", int volume = 100)
+        {
+        if (!DISABLE_AUDIO)
         {
             string fileLocalition = $"{AppDomain.CurrentDomain.BaseDirectory}{name}";
             try
@@ -70,6 +74,7 @@ namespace DungeonCrawler
             catch (Exception e)
             {
                 // LOL how to make no crashes
+            }
             }
         }
 
