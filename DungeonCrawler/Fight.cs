@@ -248,7 +248,7 @@ namespace DungeonCrawler
             }
 
             // Stop enemy turn
-            if (time > 3000)
+            if (time > 900)
             {
                 enemyAttacks = false;
                 fightMove = false;
@@ -270,7 +270,10 @@ namespace DungeonCrawler
                     {
                         fightMap[i][j] = '#';
                         fightMap[i - 1][j] = ' ';
-                        i++;
+                        if(j == fightMap[i].Length - 2)
+                        {
+                            i++;
+                        }
                     }
                     else if (fightMap[i - 1][j] == '#' && fightMap[i][j] == '#')
                     {

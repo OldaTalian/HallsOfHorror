@@ -8,7 +8,7 @@ namespace DungeonCrawler
     {
         public static void Move() // Define a function to move the player
         {
-
+            if (Console.KeyAvailable) { 
             int[] playerPos = mainPlayerPos; // Get the current position of the player
             moved = true; // Set a flag indicating that the player has moved
 
@@ -71,6 +71,7 @@ namespace DungeonCrawler
                     }
                     
                     break;
+            }
             }
         }
 

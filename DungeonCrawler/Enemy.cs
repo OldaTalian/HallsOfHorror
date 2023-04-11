@@ -48,7 +48,7 @@ namespace DungeonCrawler
 
         public static void enemyTick()
         {
-            if (currentTick % 2 == 0)
+            if (currentTick % 20 == 0)
             {
                 EnemyAttack(enemy);
                 MoveEnemy(enemy);
