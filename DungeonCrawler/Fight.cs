@@ -26,8 +26,6 @@ namespace DungeonCrawler
             "█           █".ToCharArray(),
             "█           █".ToCharArray(),
             "█           █".ToCharArray(),
-            "█           █".ToCharArray(),
-            "█           █".ToCharArray(),
             "█████████████".ToCharArray(),
         };
 
@@ -94,6 +92,12 @@ namespace DungeonCrawler
                 {
                     fightInProgress = false;
                     FightEnd(sides, false);
+                    Console.ReadKey();
+                }
+                if (enemyFightHealth <= 0)
+                {
+                    fightInProgress = false;
+                    FightEnd(sides, true);
                     Console.ReadKey();
                 }
             }
@@ -211,9 +215,9 @@ namespace DungeonCrawler
                 }
                 renderThread.Start();
                 moveThread.Start();
-                Thread.Sleep(100);
-                time += 100;
-                timeAttack += 100;
+                Thread.Sleep(50);
+                time += 50;
+                timeAttack += 50;
             }
         }
 
@@ -225,7 +229,7 @@ namespace DungeonCrawler
 
 
             // SPAWN ATTACK 
-            if (time < 100)
+            if (time < 50)
             {
                 // FALLING #
                 if (attackType == 1)

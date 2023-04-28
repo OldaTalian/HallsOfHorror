@@ -94,6 +94,18 @@ namespace DungeonCrawler
                     Console.Write(" ");
                     Console.BackgroundColor = ConsoleColor.Black;
                 }
+                else if (Map[y][x] == '{') // walk through wall
+                {
+                    Console.Write("O");
+                }
+                else if (Map[y][x] == '}') // walk through wall
+                {
+                    Console.Write("X");
+                }
+                else if (Map[y][x] == 'ł') // walk through wall
+                {
+                    Console.Write("#");
+                }
                 else if (Map[y][x] == '#') // magma tile
                 {
                     Console.ForegroundColor = ConsoleColor.Black;

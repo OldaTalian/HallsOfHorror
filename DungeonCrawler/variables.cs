@@ -102,6 +102,22 @@ namespace DungeonCrawler
             return false;
         }
 
+        public static int[] FindOnMap(char character, char[][] TheMap)
+        {
+            int[] output = { -1,-1};
+            for (int i = 0; i < TheMap.Length; i++)
+            {
+                for (int j = 0; j < TheMap[i].Length; j++)
+                {
+                    if (TheMap[i][j] == character)
+                    {
+                        output = new int[] { i , j };
+                        return output;
+                    }
+                }
+            }
+            return output;
+        }
     }
     public class Dialog
     {

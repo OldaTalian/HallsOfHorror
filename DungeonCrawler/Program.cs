@@ -47,7 +47,15 @@ namespace DungeonCrawler
                 {
                     playerHealth -= 5;
                 }
-                if (lastStepOn == ' ')
+                if (lastStepOn == '{')
+                {
+                    lastStepOn = '}';
+                }
+                else if (lastStepOn == '}')
+                {
+                    lastStepOn = '{';
+                }
+                else if (lastStepOn == ' ')
                 {
                     playerHealth = 0;
                 }
@@ -55,11 +63,13 @@ namespace DungeonCrawler
                 {
                     break;
                 }
-                if(playerHealth < 100)
+                if (playerHealth < 100)
                 {
-                    playerHealth++; 
+                    playerHealth++;
                 }
-           
+                if (FindOnMap('{', Map)[0] == -1)
+                    if (FindOnMap('ł', Map)[0] != -1)
+                        Map[FindOnMap('ł', Map)[0]][FindOnMap('ł', Map)[1]] = '░';
                 do
                 {
                     Move();
@@ -67,10 +77,22 @@ namespace DungeonCrawler
                 mainPlayerPos = FindPlayerPos();
                 enemyTick();
                 RenderScreen();
+                while (Console.KeyAvailable)
+                {
+                    Console.ReadKey(true);
+                }
             }
             Console.Clear();
-            Console.WriteLine("You ded ¯\\_☺_/¯\nPress something to close the program...");
-            Console.ReadKey();
+            Console.WriteLine("You ded ¯\\_☺_/¯\nPress ESC to close the program...");
+            bool ending = true;
+            while (ending)
+            {
+                switch (Console.ReadKey(true).Key)
+                {
+                    case ConsoleKey.Escape:
+                        ending = false; break;
+                }
+            }
             Environment.Exit(0);
         }
     }

@@ -8,7 +8,7 @@ namespace DungeonCrawler
     {
         public static void Move() // Define a function to move the player
         {
-            if (Console.KeyAvailable) { 
+            //if (Console.KeyAvailable) { 
             int[] playerPos = mainPlayerPos; // Get the current position of the player
             moved = true; // Set a flag indicating that the player has moved
 
@@ -23,7 +23,7 @@ namespace DungeonCrawler
                 case ConsoleKey.UpArrow:
                 case ConsoleKey.W:
                     // If there are no obstacles, move the player up
-                    if (!CheckForTiles(playerPos, 'u', '█') && !CheckForTiles(playerPos, 'u', '☻'))
+                    if (!CheckForTiles(playerPos, 'u', '█') && !CheckForTiles(playerPos, 'u', '☻') && !CheckForTiles(playerPos, 'u', 'ł'))
                     {
                         MoveUp(x, y); // Move the player up
                     }
@@ -33,7 +33,7 @@ namespace DungeonCrawler
                 case ConsoleKey.DownArrow:
                 case ConsoleKey.S:
                     // If there are no obstacles, move the player down
-                    if (!CheckForTiles(playerPos, 'd', '█') && !CheckForTiles(playerPos, 'd', '☻'))
+                    if (!CheckForTiles(playerPos, 'd', '█') && !CheckForTiles(playerPos, 'd', '☻') && !CheckForTiles(playerPos, 'd', 'ł'))
                     {
                         MoveDown(x, y); // Move the player down
                     }
@@ -49,7 +49,7 @@ namespace DungeonCrawler
                         PrevRoom(); // Move to the previous room
                     }
                     // If there are no obstacles, move the player left
-                    else if (!CheckForTiles(playerPos, 'l', '█') && !CheckForTiles(playerPos, 'l', '☻'))
+                    else if (!CheckForTiles(playerPos, 'l', '█') && !CheckForTiles(playerPos, 'l', '☻') && !CheckForTiles(playerPos, 'l', 'ł'))
                     {
                         MoveLeft(x, y); // Move the player left
                     }
@@ -65,14 +65,14 @@ namespace DungeonCrawler
                         NextRoom(); // Move to the next room
                     }
                     // If there are no obstacles, move the player right
-                    else if (!CheckForTiles(playerPos, 'r', '█') && !CheckForTiles(playerPos, 'r', '☻'))
+                    else if (!CheckForTiles(playerPos, 'r', '█') && !CheckForTiles(playerPos, 'r', '☻') && !CheckForTiles(playerPos, 'r', 'ł'))
                     {
                         MoveRight(x, y);// Move the player right
                     }
                     
                     break;
             }
-            }
+           // }
         }
 
         public static void MoveUp(int x, int y)
