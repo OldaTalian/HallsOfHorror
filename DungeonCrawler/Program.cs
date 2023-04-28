@@ -14,9 +14,40 @@ namespace DungeonCrawler
     {
         private static void Main(string[] args)
         {
-            StartIntro();
-            Console.ReadKey();
+            
+            // You need to have installed ffmpeg to use it
 
+            LoadMusic();
+
+            // menu here                                      < -------- MENU ------- < -------
+
+            PlayMusic("main_menu.mp3");
+
+            Menu();
+
+            StartNewGame();
+            
+
+            Console.Clear();
+            Console.WriteLine("You ded ¯\\_☺_/¯\nPress ESC to close the program...");
+            bool ending = true;
+            while (ending)
+            {
+                switch (Console.ReadKey(true).Key)
+                {
+                    case ConsoleKey.Escape:
+                        ending = false; break;
+                }
+            }
+            Environment.Exit(0);
+        }
+
+
+        public static void StartNewGame()
+        {
+            getCursorToCenter(17);
+            Console.WriteLine("Creating new game");
+            RevertOriginalMaps();
             //Load map
             if (DO_DEBUG)
             {
@@ -29,22 +60,9 @@ namespace DungeonCrawler
             RegisterSpawns(); // Spawn locations
             mainPlayerPos = FindPlayerPos();
             RegisterEnemies(enemy); // Enemies
+            StartIntro();
 
-            // MUSIC:
-            // You need to have installed ffmpeg to use it
-
-            LoadMusic();
-
-            // menu here                                      < -------- MENU ------- < -------
-
-            PlayMusic("main_menu.mp3");
-
-
-            Menu();
-            
             RenderScreen();
-            //Console.SetWindowSize(100, 20);
-
             while (true) // Game:
             {
                 if (lastStepOn == '#')
@@ -86,18 +104,6 @@ namespace DungeonCrawler
                     Console.ReadKey(true);
                 }
             }
-            Console.Clear();
-            Console.WriteLine("You ded ¯\\_☺_/¯\nPress ESC to close the program...");
-            bool ending = true;
-            while (ending)
-            {
-                switch (Console.ReadKey(true).Key)
-                {
-                    case ConsoleKey.Escape:
-                        ending = false; break;
-                }
-            }
-            Environment.Exit(0);
         }
     }
 }

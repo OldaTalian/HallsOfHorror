@@ -1,113 +1,31 @@
-﻿
+﻿using System.Configuration;
 
 
 namespace DungeonCrawler
 {
     public class maps
     {
-        public static char[][][] AllRooms() 
+        public static char[][][] AllRooms()
         {
-            char[][][] output = { DebugRoom, StartRoom, Room2, Room3 , Room4, Room5, endRoom };
+            char[][][] output = { DebugRoom, StartRoom, Room2, Room3, Room4, endRoom };
             return output;
         }
-        public static char[][] DebugRoom =
-        {
-            "██████████████████████████████████████████████████████████".ToCharArray(),
-            "█░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒DEBUG░ROOM█".ToCharArray(),
-            "█░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒█".ToCharArray(),
-            "█░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█".ToCharArray(),
-            "█░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█".ToCharArray(),
-            "█░░░░░░░░░░░░░░░░░░░░░░█░░░░░░░░░░░░░░░░░░░░░░{░░░░░░░░░░█".ToCharArray(),
-            "█░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█".ToCharArray(),
-            "█░░░░░░░░░░░░░░░░░░░░░░░░░░░░*░░░█░░░░░░░░░░░░░░░░░░░░░░░█".ToCharArray(),
-            "█░░░░░░░░░░░░░░█░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█".ToCharArray(),
-            "█░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█".ToCharArray(),
-            "█░░░░░░░░░░░░░░░░░░░░░░░░░░█░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█".ToCharArray(),
-            "█░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█".ToCharArray(),
-            "█░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░{░░░░░░░░░░░░░░░░░░█".ToCharArray(),
-            "█░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█".ToCharArray(),
-            "█░░░░░░░░░░░░░░░░███████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ł|".ToCharArray(),
-            "█░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░łłłłł░░░░░░░█".ToCharArray(),
-            "██████████████████████████████████████████████████████████".ToCharArray(),
-        };
-        public static char[][] StartRoom =
-        {
-            "██████████████████████████████████████████████████████████".ToCharArray(),
-            "█░░W░░░█░░░░░░░░░░☻░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░$░░░░░░█".ToCharArray(),
-            "█░A*D░░█░░░░░░▒░░░░░░░░░▒░░░░░░░░░░░░░░░░░░░░░▒▒▒░█░THEN░█".ToCharArray(),
-            "█░░S░░░█░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒░█░░░░░░█".ToCharArray(),
-            "█░░░░▒░█░░░░░░░░░░░░░░░░░░░░░░░░░░░ ░░░░░░░░░░▒░▒░█░░░░░░█".ToCharArray(),
-            "█░░░░░░█░░░░You░are░not░alone░here░ ░░░░░░░░░▒░░░░█░░░░░░█".ToCharArray(),
-            "█░░░░░░█░░░░░░░░░░░░░░░░░░░░░░░░░░░ ░░░░░░░░░░░░░░█░░░░░░█".ToCharArray(),
-            "█░░░░░░█░░░░░░░░░░░░░░░░░░░░░░░░░░░ ░░░░░░░░░░░░░░█░░IT░░█".ToCharArray(),
-            "█░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░☻░░░░░░░█░░░░░░█".ToCharArray(),
-            "█░░░░░░░░░░░░░░░░░░░░░░░░☻░░░░░░░░░ ░░░░░░░░░░░░░░█░░░░░░█".ToCharArray(),
-            "█░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ ░░░░░░░░░░░░░░█░░░░░░█".ToCharArray(),
-            "█░░░░░░░░░░░░░░░░☻▒░░░░░░░░░░░░░░▒░ ░░░░░░░░░▒░░░░█░░░░░░█".ToCharArray(),
-            "█░░░░░░█░░░░░░░░░░░░░░░░░░░░☻░░░░░░ ░░░░░░░░░░▒░▒░█░SEEMS█".ToCharArray(),
-            "█░░░░░░█░▒░░░░░░░░░░░░░░░░░░░░░░░░░ ░░░░░░░░░░░▒▒░█░░░░░░█".ToCharArray(),
-            "█░░░░░░█░░░░░░░░░░░░☻░░░░░░░░░░Everything░is░░▒▒▒░█░░░░░░|".ToCharArray(),
-            "█░░░░░░█░░░░░░░░░░░░░░░░░░░░░can░be░different░░☻░░$░░░░░░█".ToCharArray(),
-            "██████████████████████████████████████████████████████████Đ9".ToCharArray(),
-        };
-        public static char[][] Room2 =
-        {
-            "█████████████████████████████  ".ToCharArray(),
-            "█░░░░░░░░░▒░░░░░░░░░░░░░░░░░█".ToCharArray(),
-            "█░░░░░░░░░░░░░▒░░░░░░░░▒░░░░█".ToCharArray(),
-            "█░░░░░░░░░░░░░░░░░░░░░░░░░░░█".ToCharArray(),
-           "\\*░░░░░░░░░░░░░░░░░░░░░░░░░░|".ToCharArray(),
-            "█░░░░░░░░░░░░░░░░░░░░░░░##░░█".ToCharArray(),
-            "█░░░░░░░░░░░░░░░░▒░░░░░###░░█".ToCharArray(),
-            "█░░░▒░░░░░░░░░░░░░░░░░░░▒░░░█".ToCharArray(),
-            "█████████████████████████████Đ3".ToCharArray(),
-        };
-        public static char[][] Room3 =
-        {
-            "████████████████████".ToCharArray(),
-            "█▒░░░░░░░░░░░░░░░░░█".ToCharArray(),
-            "█░░░░▒░░░░░░░░▒░░░░█".ToCharArray(),
-            "█░░░░░░░░░░░░░░░░░░█".ToCharArray(),
-           "\\*░░░░░░░░░░░░░░░░░|".ToCharArray(),
-            "█░░░░░░░░░░░░░░░░░░█".ToCharArray(),
-            "█░░░░░░░▒░░░░░░░░░░█".ToCharArray(),
-            "█░░░░░░░░░░░░░░▒░░░█".ToCharArray(),
-            "████████████████████".ToCharArray(),
-        };
-        public static char[][] Room4 =
-        {
-            "████████████████████████████████████████████  ".ToCharArray(),
-            "█░░░░░░▒░$$$$$$$$$$$$$$$$$$$$$$$$$$$$$░░░▒░█".ToCharArray(),
-            "█░░▒░░░░░█████████████████████████████░▒░░░█".ToCharArray(),
-            "█░░░░░░░░#░░░#░░░#░░░#░░░#░░░#░░░#░░░#░░░░░█".ToCharArray(),
-            "█░▒░░░▒░░#░#░#░#░#░#░#░#░#░#░#░#░#░#░#░░▒░░|".ToCharArray(),
-            "█░░░░░░░░░░#░░░#░░░#░░░#░░░#░░░#░░░#░░░░░░░█".ToCharArray(),
-            "█░░▒░░░░▒█████████████████████████████░░░░▒█".ToCharArray(),
-            "█░░░*░░░░$$$$$$$$$$$$$$$$$$$$$$$$$$$$$▒░░░░█".ToCharArray(),
-            "████/███████████████████████████████████████Đ9".ToCharArray(),
-        };
-        public static char[][] Room5 =
-        {
-            "██████████████████████████████".ToCharArray(),
-            "█████░░░░░░░░░░█░░░░░$░░░░░░░█".ToCharArray(),
-            "█    ░░░░░░░░░░█░░░░░█░░███░░█".ToCharArray(),
-            "█░░░░░   ###░##█░░░░░█░░███░░█".ToCharArray(),
-            "█░░*░░ ███░░░░░$░░░░░█░░░░░░░|".ToCharArray(),
-            "███/██████████████████████████".ToCharArray(),
-        };
-        public static char[][] endRoom =
-{
-            "████████████████████████████████████████████████████████████████████████████████████████████".ToCharArray(),
-            "█░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ ░░░░░░░░░░░░░░░░░░░░░░░░█".ToCharArray(),
-            "█░░░░░░█░░░░█░░░░█░░░░█░░░░█░░░░█░░░░█░░░░█░░░░█░░░░░░░##░░░░░░░░░ ░░░░░░░░░░░░░#####░░░░░░█".ToCharArray(),
-            "█░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░####░░░░░░░░ ░░░░░░░░░░░░#░░░░░#░░░░░█".ToCharArray(),
-           "\\*░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░######░░░░░░░░░░░░░░░░░░░#░░#░#░░#░░Ł░█".ToCharArray(),
-            "█░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░####░░░░░░░░ ░░░░░░░░░░░░#░░░░░#░░░░░█".ToCharArray(),
-            "█░░░░░░█░░░░█░░░░█░░░░█░░░░█░░░░█░░░░█░░░░█░░░░█░░░░░░░##░░░░░░░░░ ░░░░░░░░░░░░#######░░░░░█".ToCharArray(),
-            "█░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ ░░░░░░░░░░░░#░#░#░#░░░░░█".ToCharArray(),
-            "████████████████████████████████████████████████████████████████████████████████████████████Đ8".ToCharArray(),
-        };
 
+        public static void RevertOriginalMaps()
+        {
+            DebugRoom = ConfigurationManager.AppSettings["DebugRoom"].Split('\n', StringSplitOptions.RemoveEmptyEntries).Select(row => row.Trim().ToCharArray()).ToArray();
+            StartRoom = ConfigurationManager.AppSettings["StartRoom"].Split('\n', StringSplitOptions.RemoveEmptyEntries).Select(row => row.Trim().ToCharArray()).ToArray();
+            Room2 = ConfigurationManager.AppSettings["Room2"].Split('\n', StringSplitOptions.RemoveEmptyEntries).Select(row => row.Trim().ToCharArray()).ToArray();
+            Room3 = ConfigurationManager.AppSettings["Room3"].Split('\n', StringSplitOptions.RemoveEmptyEntries).Select(row => row.Trim().ToCharArray()).ToArray();
+            Room4 = ConfigurationManager.AppSettings["Room4"].Split('\n', StringSplitOptions.RemoveEmptyEntries).Select(row => row.Trim().ToCharArray()).ToArray();
+            endRoom = ConfigurationManager.AppSettings["endRoom"].Split('\n', StringSplitOptions.RemoveEmptyEntries).Select(row => row.Trim().ToCharArray()).ToArray();
+        }
+        public static char[][] DebugRoom = ConfigurationManager.AppSettings["DebugRoom"].Split('\n', StringSplitOptions.RemoveEmptyEntries).Select(row => row.Trim().ToCharArray()).ToArray();
+        public static char[][] StartRoom = ConfigurationManager.AppSettings["StartRoom"].Split('\n', StringSplitOptions.RemoveEmptyEntries).Select(row => row.Trim().ToCharArray()).ToArray();
+        public static char[][] Room2 = ConfigurationManager.AppSettings["Room2"].Split('\n', StringSplitOptions.RemoveEmptyEntries).Select(row => row.Trim().ToCharArray()).ToArray();
+        public static char[][] Room3 = ConfigurationManager.AppSettings["Room3"].Split('\n', StringSplitOptions.RemoveEmptyEntries).Select(row => row.Trim().ToCharArray()).ToArray();
+        public static char[][] Room4 = ConfigurationManager.AppSettings["Room4"].Split('\n', StringSplitOptions.RemoveEmptyEntries).Select(row => row.Trim().ToCharArray()).ToArray();
+        public static char[][] endRoom = ConfigurationManager.AppSettings["endRoom"].Split('\n', StringSplitOptions.RemoveEmptyEntries).Select(row => row.Trim().ToCharArray()).ToArray();
 
         public static void RegisterSpawns()
         {

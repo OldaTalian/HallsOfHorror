@@ -1,8 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "hgp4fo8+qj+FK5LCi755+2XWXv/7R20sPeSXmlUWsrZXUxzhnPeeXfWf9xMnf6Sau7ckY/jE+NgpZwe+h+EumQ==",
+  "dgSpecHash": "xfK43xQmgTBHUpzU/yRV4sX1NTgW1PkwTKJVUg/JjmOei9BLlWvz76m+i2fKaS8Pv09rcI7uNaj7t6dzOtA2FA==",
   "success": true,
   "projectFilePath": "C:\\Users\\oldat\\source\\repos\\DungeonCrawlerC-\\DungeonCrawler\\DungeonCrawler.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\oldat\\.nuget\\packages\\microsoft.win32.systemevents\\7.0.0\\microsoft.win32.systemevents.7.0.0.nupkg.sha512",
+    "C:\\Users\\oldat\\.nuget\\packages\\system.configuration.configurationmanager\\7.0.0\\system.configuration.configurationmanager.7.0.0.nupkg.sha512",
+    "C:\\Users\\oldat\\.nuget\\packages\\system.drawing.common\\7.0.0\\system.drawing.common.7.0.0.nupkg.sha512",
+    "C:\\Users\\oldat\\.nuget\\packages\\system.security.cryptography.protecteddata\\7.0.0\\system.security.cryptography.protecteddata.7.0.0.nupkg.sha512",
+    "C:\\Users\\oldat\\.nuget\\packages\\system.security.permissions\\7.0.0\\system.security.permissions.7.0.0.nupkg.sha512",
+    "C:\\Users\\oldat\\.nuget\\packages\\system.windows.extensions\\7.0.0\\system.windows.extensions.7.0.0.nupkg.sha512"
+  ],
   "logs": []
 }
