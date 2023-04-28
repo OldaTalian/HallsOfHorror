@@ -12,6 +12,10 @@ namespace DungeonCrawler
                 Console.Clear();
                 Console.WriteLine(i);
                 RenderFrame(i, 90);
+                if (Console.KeyAvailable &&( Console.ReadKey().Key == ConsoleKey.Enter))
+                {
+                    return;
+                }
             }
             Console.Clear();
             DefaultColor = ConsoleColor.Gray;
@@ -108,8 +112,13 @@ namespace DungeonCrawler
 
         private static void RenderFrame(int frameIndex, int delay = 200)
         {
+            for (int i = 0; i < Console.BufferHeight / 2 - (Frames()[frameIndex].Length / 2); i++)
+            {
+                Console.WriteLine();
+            }
             for (int i = 0; i < Frames()[frameIndex].Length; i++) 
             {
+                getCursorToCenter(Frames()[frameIndex][0].Length, false);
                 for (int j = 0; j < Frames()[frameIndex][i].Length; j++)
                 {
                     RenderPixel(Frames()[frameIndex][i][j]);
@@ -139,6 +148,8 @@ namespace DungeonCrawler
             Console.Clear();
             getCursorToCenter(15);
             Console.WriteLine("  L    P     O ");
+            Thread.Sleep(150);
+            Console.Clear();
             Thread.Sleep(1000);
             Console.Clear();
             getCursorToCenter(10);

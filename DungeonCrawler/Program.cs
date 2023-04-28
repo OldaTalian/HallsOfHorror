@@ -16,30 +16,25 @@ namespace DungeonCrawler
         {
             
             // You need to have installed ffmpeg to use it
-
             LoadMusic();
 
-            // menu here                                      < -------- MENU ------- < -------
 
             PlayMusic("main_menu.mp3");
-
-            Menu();
-
-            StartNewGame();
-            
-
-            Console.Clear();
-            Console.WriteLine("You ded ¯\\_☺_/¯\nPress ESC to close the program...");
-            bool ending = true;
-            while (ending)
+            while (true)
             {
-                switch (Console.ReadKey(true).Key)
+                int option = Menu();
+
+                if (option == 1) {
+                    StartNewGame();
+                }
+                else if(option == 2) {
+                    //          < --- SETINGS
+                }
+                else if (option == 3)
                 {
-                    case ConsoleKey.Escape:
-                        ending = false; break;
+                    Environment.Exit(0);
                 }
             }
-            Environment.Exit(0);
         }
 
 
@@ -61,9 +56,12 @@ namespace DungeonCrawler
             mainPlayerPos = FindPlayerPos();
             RegisterEnemies(enemy); // Enemies
             StartIntro();
+            lastStepOn = '░';
 
             RenderScreen();
-            while (true) // Game:
+            playerHealth = defaultPlayerHealth;
+            bool gameIsPlaying = true;
+            while (gameIsPlaying) // Game:
             {
                 if (lastStepOn == '#')
                 {
@@ -83,9 +81,10 @@ namespace DungeonCrawler
                 }
                 if (playerHealth <= 0)
                 {
+                    gameIsPlaying = false;
                     break;
                 }
-                if (playerHealth < 100)
+                if (playerHealth < defaultPlayerHealth)
                 {
                     playerHealth++;
                 }
@@ -102,6 +101,17 @@ namespace DungeonCrawler
                 while (Console.KeyAvailable)
                 {
                     Console.ReadKey(true);
+                }
+            }
+            Console.WriteLine("You ded ¯\\_☺_/¯\nPress ESC to continue...");
+            bool ending = true;
+            while (ending)
+            {
+                switch (Console.ReadKey(true).Key)
+                {
+                    case ConsoleKey.Escape:
+                    case ConsoleKey.Enter:
+                        ending = false; break;
                 }
             }
         }

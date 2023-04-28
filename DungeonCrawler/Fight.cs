@@ -49,7 +49,7 @@ namespace DungeonCrawler
             enemycount = enemyCount;
             Dialog enemyAngry = new Dialog("You've encountered an enemy", EnemyEmotions, emotion, 1);
             PlayMusic("fightScene.wav" , 30);
-            enemyAngry.Write("I dont like you",1,1);
+            enemyAngry.Write("I dont like you",1,0);
 
 
             Fighting(sides);

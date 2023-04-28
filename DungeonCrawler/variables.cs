@@ -6,7 +6,8 @@ namespace DungeonCrawler
         public static char lastStepOn = '░';
 
         public static bool moved = false;
-        public static int playerHealth = 100;
+        public static int defaultPlayerHealth = 100;
+        public static int playerHealth = defaultPlayerHealth;
         public static byte playerAttack = 3;
         public static int[] mainPlayerPos = new int[2];
 
@@ -119,11 +120,14 @@ namespace DungeonCrawler
             return output;
         }
     
-        public static void getCursorToCenter(int TextLenght)
+        public static void getCursorToCenter(int TextLenght, bool Vertical = true)
         {
-            for (int i = 0; i < Console.BufferHeight / 2 - 1; i++)
+            if (Vertical)
             {
-                Console.WriteLine();
+                for (int i = 0; i < Console.BufferHeight / 2 - 1; i++)
+                {
+                    Console.WriteLine();
+                }
             }
             for (int i = 0; i < Console.BufferWidth / 2 - (TextLenght / 2); i++)
             {
