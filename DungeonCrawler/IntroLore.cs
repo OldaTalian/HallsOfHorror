@@ -277,7 +277,6 @@ namespace DungeonCrawler
         private static char[][] Frame7 =
         {
             "                                            ".ToCharArray(),
-            "                                            ".ToCharArray(),
             "    ▄▄▄                                ▄▄   ".ToCharArray(),
             "  ▄█████▄        222                ▄█████▀ ".ToCharArray(),
             " ▐███████▌      999992              ▀█████▄ ".ToCharArray(),
@@ -292,7 +291,6 @@ namespace DungeonCrawler
         private static char[][] Frame8 =
         {
             "                                                 ".ToCharArray(),
-            "                                                 ".ToCharArray(),
             "    ▄▄▄                                ▄▄    __##".ToCharArray(),
             "  ▄█████▄        222                ▄█████▀ |####".ToCharArray(),
             " ▐███████▌      999992              ▀█████▄ #####".ToCharArray(),
@@ -303,11 +301,9 @@ namespace DungeonCrawler
             "###############################ĐĐĐĐĐĐ############".ToCharArray(),
             "#############################Đ##ĐĐĐ##Đ###########".ToCharArray(),
             "################################Đ################".ToCharArray(),
-            "#################################################".ToCharArray(),
         };
         private static char[][] Frame9 =
         {
-            "                                               ".ToCharArray(),
             "                                               ".ToCharArray(),
             "  ▄▄▄                                ▄▄    __##".ToCharArray(),
             "▄█████▄         222               ▄█████▀ |####".ToCharArray(),
@@ -319,11 +315,9 @@ namespace DungeonCrawler
             "#############################ĐĐĐĐĐĐ############".ToCharArray(),
             "###########################Đ##ĐĐĐ##Đ###########".ToCharArray(),
             "##############################Đ################".ToCharArray(),
-            "###############################################".ToCharArray(),
         };
         private static char[][] Frame10 =
         {
-            "                                                   ".ToCharArray(),
             "                                                ___".ToCharArray(),
             "  ▄▄▄                                ▄▄    __######".ToCharArray(),
             "▄█████▄         222               ▄█████▀ |########".ToCharArray(),
@@ -335,11 +329,9 @@ namespace DungeonCrawler
             "#############################ĐĐĐĐĐĐ################".ToCharArray(),
             "###########################Đ##ĐĐĐ##Đ###############".ToCharArray(),
             "##############################Đ####################".ToCharArray(),
-            "###################################################".ToCharArray(),
         };
         private static char[][] Frame11 =
         {
-            "                                                    ".ToCharArray(),
             "                                               _____".ToCharArray(),
             " ▄▄▄                                ▄▄    __########".ToCharArray(),
             "█████▄          222              ▄█████▀ |##########".ToCharArray(),
@@ -351,11 +343,9 @@ namespace DungeonCrawler
             "############################ĐĐĐĐĐĐ##################".ToCharArray(),
             "##########################Đ##ĐĐĐ##Đ#################".ToCharArray(),
             "#############################Đ######################".ToCharArray(),
-            "####################################################".ToCharArray(),
         };
         private static char[][] Frame12 =
         {
-            "                                                    ".ToCharArray(),
             "                                               _____".ToCharArray(),
             " ▄▄▄                                ▄▄    __########".ToCharArray(),
             "█████▄          222              ▄█████▀ |##########".ToCharArray(),
@@ -367,11 +357,9 @@ namespace DungeonCrawler
             "############################ĐĐĐĐĐĐ##################".ToCharArray(),
             "##########################Đ##ĐĐĐ##Đ#################".ToCharArray(),
             "#############################Đ######################".ToCharArray(),
-            "####################################################".ToCharArray(),
         };
         private static char[][] Frame13 =
         {
-            "                                                    ".ToCharArray(),
             "                                               _____".ToCharArray(),
             " ▄▄▄                                ▄▄    __########".ToCharArray(),
             "█████▄          222              ▄█████▀ |##########".ToCharArray(),
@@ -383,11 +371,9 @@ namespace DungeonCrawler
             "############################ĐĐĐĐĐĐ##################".ToCharArray(),
             "##########################Đ##ĐĐĐ##Đ#################".ToCharArray(),
             "#############################Đ######################".ToCharArray(),
-            "####################################################".ToCharArray(),
         };
         private static char[][] Frame14 =
         {
-            "                                                    ".ToCharArray(),
             "                                               _____".ToCharArray(),
             " ▄▄▄                                ▄▄    __########".ToCharArray(),
             "█████▄          222              ▄█████▀ |##########".ToCharArray(),
@@ -399,11 +385,9 @@ namespace DungeonCrawler
             "############################ĐĐĐĐĐĐ##################".ToCharArray(),
             "##########################Đ##ĐĐĐ##Đ#################".ToCharArray(),
             "#############################Đ######################".ToCharArray(),
-            "####################################################".ToCharArray(),
         };
         private static char[][] Frame15 =
         {
-            "                                                    ".ToCharArray(),
             "                                               _____".ToCharArray(),
             " ▄▄▄                                ▄▄    __########".ToCharArray(),
             "█████▄          222              ▄█████▀ |##########".ToCharArray(),
@@ -415,11 +399,9 @@ namespace DungeonCrawler
             "############################ĐĐĐĐĐĐ##################".ToCharArray(),
             "##########################Đ##ĐĐĐ##Đ#################".ToCharArray(),
             "#############################Đ######################".ToCharArray(),
-            "####################################################".ToCharArray(),
         };
         private static char[][] Frame16 =
         {
-            "                                                    ".ToCharArray(),
             "                                               _____".ToCharArray(),
             " ▄▄▄                                ▄▄    __########".ToCharArray(),
             "█████▄          222              ▄█████▀ |##########".ToCharArray(),
@@ -431,11 +413,9 @@ namespace DungeonCrawler
             "############################ĐĐĐĐĐĐ##################".ToCharArray(),
             "##########################Đ##ĐĐĐ##Đ#################".ToCharArray(),
             "#############################Đ######################".ToCharArray(),
-            "####################################################".ToCharArray(),
         };
         private static char[][] Frame17 =
         {
-            "                                                    ".ToCharArray(),
             "                                               _____".ToCharArray(),
             " ▄▄▄                                ▄▄    __########".ToCharArray(),
             "█████▄          222              ▄█████▀ |##########".ToCharArray(),
@@ -447,11 +427,9 @@ namespace DungeonCrawler
             "############################ĐĐĐĐĐĐ##################".ToCharArray(),
             "##########################Đ##ĐĐĐ##Đ#################".ToCharArray(),
             "#############################Đ######################".ToCharArray(),
-            "####################################################".ToCharArray(),
         };
         private static char[][] Frame18 =
         {
-            "                                                    ".ToCharArray(),
             "                                               _____".ToCharArray(),
             " ▄▄▄                                ▄▄    __########".ToCharArray(),
             "█████▄          222              ▄█████▀ |##########".ToCharArray(),
@@ -463,11 +441,9 @@ namespace DungeonCrawler
             "############################ĐĐĐĐĐĐ##################".ToCharArray(),
             "##########################Đ##ĐĐĐ##Đ#################".ToCharArray(),
             "#############################Đ######################".ToCharArray(),
-            "####################################################".ToCharArray(),
         };
         private static char[][] Frame19 =
         {
-            "                                                    ".ToCharArray(),
             "                                               _____".ToCharArray(),
             " ▄▄▄                                ▄▄    __########".ToCharArray(),
             "█████▄          222              ▄█████▀ |##########".ToCharArray(),
@@ -479,11 +455,9 @@ namespace DungeonCrawler
             "############################ĐĐĐĐĐĐ##################".ToCharArray(),
             "##########################Đ##ĐĐĐ##Đ#################".ToCharArray(),
             "#############################Đ######################".ToCharArray(),
-            "####################################################".ToCharArray(),
         };
         private static char[][] Frame20 =
         {
-            "                                                    ".ToCharArray(),
             "                                               _____".ToCharArray(),
             " ▄▄▄                                ▄▄    __########".ToCharArray(),
             "█████▄          222              ▄█████▀ |##########".ToCharArray(),
@@ -495,11 +469,9 @@ namespace DungeonCrawler
             "############################ĐĐĐĐĐĐ##################".ToCharArray(),
             "##########################Đ##ĐĐĐ##Đ#################".ToCharArray(),
             "#############################Đ######################".ToCharArray(),
-            "####################################################".ToCharArray(),
         };
         private static char[][] Frame21 =
         {
-            "                                                    ".ToCharArray(),
             "                                               _____".ToCharArray(),
             " ▄▄▄                                ▄▄    __########".ToCharArray(),
             "█████▄          222              ▄█████▀ |##########".ToCharArray(),
@@ -511,11 +483,9 @@ namespace DungeonCrawler
             "############################ĐĐĐĐĐĐ##################".ToCharArray(),
             "##########################Đ##ĐĐĐ##Đ#################".ToCharArray(),
             "#############################Đ######################".ToCharArray(),
-            "####################################################".ToCharArray(),
         };
         private static char[][] Frame22 =
         {
-            "                                                    ".ToCharArray(),
             "                                               _____".ToCharArray(),
             " ▄▄▄                                ▄▄    __########".ToCharArray(),
             "█████▄          222              ▄█████▀ |##########".ToCharArray(),
@@ -527,11 +497,9 @@ namespace DungeonCrawler
             "############################ĐĐĐĐĐĐ##################".ToCharArray(),
             "##########################Đ##ĐĐĐ##Đ#################".ToCharArray(),
             "#############################Đ######################".ToCharArray(),
-            "####################################################".ToCharArray(),
         };
         private static char[][] Frame23 =
         {
-            "                                                    ".ToCharArray(),
             "                                               _____".ToCharArray(),
             " ▄▄▄                                ▄▄    __########".ToCharArray(),
             "█████▄          222              ▄█████▀ |##########".ToCharArray(),
@@ -543,11 +511,9 @@ namespace DungeonCrawler
             "############################ĐĐĐĐĐĐ##################".ToCharArray(),
             "##########################Đ##ĐĐĐ##Đ#################".ToCharArray(),
             "#############################Đ######################".ToCharArray(),
-            "####################################################".ToCharArray(),
         };
         private static char[][] Frame24 =
         {
-            "                                                    ".ToCharArray(),
             "                                               _____".ToCharArray(),
             " ▄▄▄                                ▄▄    __########".ToCharArray(),
             "█████▄          222              ▄█████▀ |##########".ToCharArray(),
@@ -559,11 +525,9 @@ namespace DungeonCrawler
             "############################ĐĐĐĐĐĐ##################".ToCharArray(),
             "##########################Đ##ĐĐĐ##Đ#################".ToCharArray(),
             "#############################Đ######################".ToCharArray(),
-            "####################################################".ToCharArray(),
         };
         private static char[][] Frame25 =
         {
-            "                                                   ".ToCharArray(),
             "                                               ____".ToCharArray(),
             " ▄▄▄                                ▄▄    __#######".ToCharArray(),
             "█████▄          222              ▄█████▀ |#########".ToCharArray(),
@@ -575,11 +539,9 @@ namespace DungeonCrawler
             "############################ĐĐĐĐĐĐ#################".ToCharArray(),
             "##########################Đ##ĐĐĐ##Đ################".ToCharArray(),
             "#############################Đ#####################".ToCharArray(),
-            "###################################################".ToCharArray(),
         };   
         private static char[][] Frame26 =
         {
-            "                                                   ".ToCharArray(),
             "                                               ____".ToCharArray(),
             " ▄▄▄                                ▄▄    __#######".ToCharArray(),
             "█████▄          222              ▄█████▀ |#########".ToCharArray(),
@@ -591,11 +553,9 @@ namespace DungeonCrawler
             "############################ĐĐĐĐĐĐ#################".ToCharArray(),
             "##########################Đ##ĐĐĐ##Đ################".ToCharArray(),
             "#############################Đ#####################".ToCharArray(),
-            "###################################################".ToCharArray(),
         };
         private static char[][] Frame27 =
         {
-            "                                                   ".ToCharArray(),
             "                                               ____".ToCharArray(),
             " ▄▄▄                                ▄▄    __#######".ToCharArray(),
             "█████▄          222              ▄█████▀ |#########".ToCharArray(),
@@ -607,7 +567,6 @@ namespace DungeonCrawler
             "############################ĐĐĐĐĐĐ#################".ToCharArray(),
             "##########################Đ##ĐĐĐ##Đ################".ToCharArray(),
             "#############################Đ#####################".ToCharArray(),
-            "###################################################".ToCharArray(),
         };
         private static char[][] Frame28 =
         {
@@ -622,11 +581,10 @@ namespace DungeonCrawler
             "########################ĐĐĐĐĐĐ###############".ToCharArray(),
             "######################Đ##ĐĐĐ##Đ##############".ToCharArray(),
             "#########################Đ###################".ToCharArray(),
-            "#############################################".ToCharArray(),
         };
         private static char[][] Frame29 =
         {
-            "                          ▄▄     __#####".ToCharArray(),
+            "                           ▄▄     __#####".ToCharArray(),
             "       2222              ▄████▄  |#######".ToCharArray(),
             "      9999992            ██████  ########".ToCharArray(),
             "     699999995           ▀██████ ########".ToCharArray(),
@@ -644,6 +602,7 @@ namespace DungeonCrawler
             "       69999995           ▀██████ #######".ToCharArray(),
             "       69999995                 █########".ToCharArray(),
             "         7997                   #########".ToCharArray(),
+            "          99                   ##########".ToCharArray(),
             "          992                  ##########".ToCharArray(),
             "         9999  ☺              ###########".ToCharArray(),
             "####################ĐĐĐĐĐĐĐĐ#############".ToCharArray(),
@@ -654,83 +613,89 @@ namespace DungeonCrawler
         private static char[][] Frame31 =
         {
             "       69999995                 █########".ToCharArray(),
-            "         7997                   #########".ToCharArray(),
+            "        799997                  #########".ToCharArray(),
             "          99                   ##########".ToCharArray(),
-            "          992                  ##########".ToCharArray(),
+            "          99                   ##########".ToCharArray(),
+            "          999                  ##########".ToCharArray(),
             "         9999   ☺             ###########".ToCharArray(),
             "####################ĐĐĐĐĐĐĐĐ#############".ToCharArray(),
             "#####################ĐĐĐĐĐĐĐ#############".ToCharArray(),
             "#####################ĐĐĐĐĐĐ##############".ToCharArray(),
             "###################Đ##ĐĐĐ##Đ#############".ToCharArray(),
+            "#########################################".ToCharArray(),
         };
         private static char[][] Frame32 =
         {
             "       69999995                 █########".ToCharArray(),
-            "         7997                   #########".ToCharArray(),
+            "        799997                  #########".ToCharArray(),
             "          99                   ##########".ToCharArray(),
-            "          992                  ##########".ToCharArray(),
+            "          99                   ##########".ToCharArray(),
+            "          999                  ##########".ToCharArray(),
             "         9999    ☺            ###########".ToCharArray(),
             "####################ĐĐĐĐĐĐĐĐ#############".ToCharArray(),
             "#####################ĐĐĐĐĐĐĐ#############".ToCharArray(),
             "#####################ĐĐĐĐĐĐ##############".ToCharArray(),
             "###################Đ##ĐĐĐ##Đ#############".ToCharArray(),
+            "#########################################".ToCharArray(),
         };
         private static char[][] Frame33 =
         {
             "       69999995                 █########".ToCharArray(),
-            "         7997                   #########".ToCharArray(),
+            "        799997                  #########".ToCharArray(),
             "          99                   ##########".ToCharArray(),
             "          99                   ##########".ToCharArray(),
-            "         2999     ☺           ###########".ToCharArray(),
+            "          999                  ##########".ToCharArray(),
+            "         9999     ☺           ###########".ToCharArray(),
             "####################ĐĐĐĐĐĐĐĐ#############".ToCharArray(),
             "#####################ĐĐĐĐĐĐĐ#############".ToCharArray(),
             "#####################ĐĐĐĐĐĐ##############".ToCharArray(),
             "###################Đ##ĐĐĐ##Đ#############".ToCharArray(),
+            "#########################################".ToCharArray(),
         };
         private static char[][] Frame34 =
         {
             "       69999995                 █########".ToCharArray(),
-            "         7997                   #########".ToCharArray(),
+            "        799997                  #########".ToCharArray(),
             "          99                   ##########".ToCharArray(),
-            "          99       ☺           ##########".ToCharArray(),
-            "         2999                 ###########".ToCharArray(),
+            "          99                   ##########".ToCharArray(),
+            "          999      ☺           ##########".ToCharArray(),
+            "         9999                 ###########".ToCharArray(),
             "####################ĐĐĐĐĐĐĐĐ#############".ToCharArray(),
             "#####################ĐĐĐĐĐĐĐ#############".ToCharArray(),
             "#####################ĐĐĐĐĐĐ##############".ToCharArray(),
             "###################Đ##ĐĐĐ##Đ#############".ToCharArray(),
+            "#########################################".ToCharArray(),
         };
         private static char[][] Frame35 =
         {
-            "     7997                      ######".ToCharArray(),
+            "     9999                      ######".ToCharArray(),
             "      99                     ########".ToCharArray(),
             "      99                     ########".ToCharArray(),
-            "      992         ☺          ########".ToCharArray(),
-            "     9999                   #########".ToCharArray(),
+            "      992                    ########".ToCharArray(),
+            "     2999         ☺          ########".ToCharArray(),
+            "    299992                  #########".ToCharArray(),
             "##################ĐĐĐĐĐĐĐĐ###########".ToCharArray(),
             "###################ĐĐĐĐĐĐĐ###########".ToCharArray(),
             "###################ĐĐĐĐĐĐ############".ToCharArray(),
             "#################Đ##ĐĐĐ##Đ###########".ToCharArray(),
+            "#####################################".ToCharArray(),
         };
         private static char[][] Frame36 =
         {
+            "      9999                   ########".ToCharArray(),
             "       99                    ########".ToCharArray(),
             "       99                    ########".ToCharArray(),
-            "       99                    ########".ToCharArray(),
+            "       992                   ########".ToCharArray(),
             "      2999                   ########".ToCharArray(),
-            "      9999         ☺        #########".ToCharArray(),
+            "     299992        ☺        #########".ToCharArray(),
             "################ĐĐĐĐĐĐĐĐĐĐ###########".ToCharArray(),
             "#################ĐĐĐĐĐĐĐĐĐ###########".ToCharArray(),
             "##################ĐĐĐĐĐĐĐ############".ToCharArray(),
             "#################Đ##ĐĐĐ##Đ###########".ToCharArray(),
+            "#####################################".ToCharArray(),
         };
         private static char[][] Frame37 =
         {
-            " ".ToCharArray(),
-            " ".ToCharArray(),
-            " ".ToCharArray(),
-            " ".ToCharArray(),
-            " ".ToCharArray(),
-            " ".ToCharArray(),
             " ".ToCharArray(),
             " ".ToCharArray(),
             " ".ToCharArray(),

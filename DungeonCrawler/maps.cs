@@ -1,5 +1,5 @@
 ﻿using System.Configuration;
-
+using System.Text;
 
 namespace DungeonCrawler
 {
@@ -13,19 +13,55 @@ namespace DungeonCrawler
 
         public static void RevertOriginalMaps()
         {
-            DebugRoom = ConfigurationManager.AppSettings["DebugRoom"].Split('\n', StringSplitOptions.RemoveEmptyEntries).Select(row => row.Trim().ToCharArray()).ToArray();
-            StartRoom = ConfigurationManager.AppSettings["StartRoom"].Split('\n', StringSplitOptions.RemoveEmptyEntries).Select(row => row.Trim().ToCharArray()).ToArray();
-            Room2 = ConfigurationManager.AppSettings["Room2"].Split('\n', StringSplitOptions.RemoveEmptyEntries).Select(row => row.Trim().ToCharArray()).ToArray();
-            Room3 = ConfigurationManager.AppSettings["Room3"].Split('\n', StringSplitOptions.RemoveEmptyEntries).Select(row => row.Trim().ToCharArray()).ToArray();
-            Room4 = ConfigurationManager.AppSettings["Room4"].Split('\n', StringSplitOptions.RemoveEmptyEntries).Select(row => row.Trim().ToCharArray()).ToArray();
-            endRoom = ConfigurationManager.AppSettings["endRoom"].Split('\n', StringSplitOptions.RemoveEmptyEntries).Select(row => row.Trim().ToCharArray()).ToArray();
-        }
-        public static char[][] DebugRoom = ConfigurationManager.AppSettings["DebugRoom"].Split('\n', StringSplitOptions.RemoveEmptyEntries).Select(row => row.Trim().ToCharArray()).ToArray();
-        public static char[][] StartRoom = ConfigurationManager.AppSettings["StartRoom"].Split('\n', StringSplitOptions.RemoveEmptyEntries).Select(row => row.Trim().ToCharArray()).ToArray();
-        public static char[][] Room2 = ConfigurationManager.AppSettings["Room2"].Split('\n', StringSplitOptions.RemoveEmptyEntries).Select(row => row.Trim().ToCharArray()).ToArray();
-        public static char[][] Room3 = ConfigurationManager.AppSettings["Room3"].Split('\n', StringSplitOptions.RemoveEmptyEntries).Select(row => row.Trim().ToCharArray()).ToArray();
-        public static char[][] Room4 = ConfigurationManager.AppSettings["Room4"].Split('\n', StringSplitOptions.RemoveEmptyEntries).Select(row => row.Trim().ToCharArray()).ToArray();
-        public static char[][] endRoom = ConfigurationManager.AppSettings["endRoom"].Split('\n', StringSplitOptions.RemoveEmptyEntries).Select(row => row.Trim().ToCharArray()).ToArray();
+            DebugRoom = ConfigurationManager.AppSettings["DebugRoom"]
+              .Split('\n', StringSplitOptions.RemoveEmptyEntries)
+              .Select(row => row.Trim().ToArray())
+              .ToArray();
+            StartRoom = ConfigurationManager.AppSettings["StartRoom"]
+              .Split('\n', StringSplitOptions.RemoveEmptyEntries)
+              .Select(row => row.Trim().ToArray())
+              .ToArray();
+            Room2 = ConfigurationManager.AppSettings["Room2"]
+              .Split('\n', StringSplitOptions.RemoveEmptyEntries)
+              .Select(row => row.Trim().ToArray())
+              .ToArray();
+            Room3 = ConfigurationManager.AppSettings["Room3"]
+              .Split('\n', StringSplitOptions.RemoveEmptyEntries)
+              .Select(row => row.Trim().ToArray())
+              .ToArray();
+            Room4 = ConfigurationManager.AppSettings["Room4"]
+              .Split('\n', StringSplitOptions.RemoveEmptyEntries)
+              .Select(row => row.Trim().ToArray())
+              .ToArray();
+            endRoom = ConfigurationManager.AppSettings["endRoom"]
+              .Split('\n', StringSplitOptions.RemoveEmptyEntries)
+              .Select(row => row.Trim().ToArray())
+              .ToArray();
+    }
+        public static char[][] DebugRoom = ConfigurationManager.AppSettings["DebugRoom"]
+            .Split('\n', StringSplitOptions.RemoveEmptyEntries)
+            .Select(row => row.Trim().ToArray())
+            .ToArray();
+        public static char[][] StartRoom = ConfigurationManager.AppSettings["StartRoom"]
+            .Split('\n', StringSplitOptions.RemoveEmptyEntries)
+            .Select(row => row.Trim().ToArray())
+            .ToArray();
+        public static char[][] Room2 =     ConfigurationManager.AppSettings["Room2"    ]
+            .Split('\n', StringSplitOptions.RemoveEmptyEntries)
+            .Select(row => row.Trim().ToArray())
+            .ToArray();
+        public static char[][] Room3 =     ConfigurationManager.AppSettings["Room3"    ]
+            .Split('\n', StringSplitOptions.RemoveEmptyEntries)
+            .Select(row => row.Trim().ToArray())
+            .ToArray();
+        public static char[][] Room4 =     ConfigurationManager.AppSettings["Room4"    ]
+            .Split('\n', StringSplitOptions.RemoveEmptyEntries)
+            .Select(row => row.Trim().ToArray())
+            .ToArray();
+        public static char[][] endRoom =   ConfigurationManager.AppSettings["endRoom"  ]
+            .Split('\n', StringSplitOptions.RemoveEmptyEntries)
+            .Select(row => row.Trim().ToArray())
+            .ToArray();
 
         public static void RegisterSpawns()
         {
