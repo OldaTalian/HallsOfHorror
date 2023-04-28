@@ -1,0 +1,26 @@
+name: Delete Artifacts
+on: 
+  workflow_dispatch:
+
+jobs:
+  delete_artifacts:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Delete Artifacts
+      run: |
+        # Authenticate with the GitHub API using a personal access token
+        GITHUB_TOKEN=$PERSONAL_ACCESS_TOKEN
+        OWNER=$GITHUB_REPOSITORY_OWNER
+        REPO=$GITHUB_REPOSITORY
+        RUN_ID=$GITHUB_RUN_ID
+        
+        # Get a list of artifacts for the current run
+        ARTIFACTS=$(curl -sSL -H "Authorization: token $GITHUB_TOKEN" "https://api.github.com/repos/$OWNER/$REPO/actions/runs/$RUN_ID/artifacts" | jq -r '.artifacts[] | .id')
+        
+        # Loop through the artifacts and delete each one
+        for ARTIFACT in $ARTIFACTS; do
+          echo "Deleting artifact $ARTIFACT..."
+          curl -sSL -X DELETE -H "Authorization: token $GITHUB_TOKEN" "https://api.github.com/repos/$OWNER/$REPO/actions/artifacts/$ARTIFACT"
+        done
