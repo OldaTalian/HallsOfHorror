@@ -118,6 +118,18 @@ namespace DungeonCrawler
             }
             return output;
         }
+    
+        public static void getCursorToCenter(int TextLenght)
+        {
+            for (int i = 0; i < Console.BufferHeight / 2 - 1; i++)
+            {
+                Console.WriteLine();
+            }
+            for (int i = 0; i < Console.BufferWidth / 2 - (TextLenght / 2); i++)
+            {
+                Console.Write(' ');
+            }
+        }
     }
     public class Dialog
     {

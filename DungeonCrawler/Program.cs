@@ -6,6 +6,7 @@ using static DungeonCrawler.Player;
 using static DungeonCrawler.Render;
 using static DungeonCrawler.Sounds;
 using static DungeonCrawler.Variables;
+using static DungeonCrawler.IntroLore;
 
 namespace DungeonCrawler
 {
@@ -13,6 +14,9 @@ namespace DungeonCrawler
     {
         private static void Main(string[] args)
         {
+            StartIntro();
+            Console.ReadKey();
+
             //Load map
             if (DO_DEBUG)
             {
