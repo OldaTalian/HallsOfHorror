@@ -10,9 +10,15 @@ namespace DungeonCrawler
         {
             Console.Clear();
             if (Map == null) return; // Don't render nothing
+            getCursorToCenter(34, false);
             Console.WriteLine("Rooms: " + (ThisRoom + 1) + "/" + AllRooms().Length + " |  x:" + mainPlayerPos[0] + " y:" + mainPlayerPos[1] +
                 " Health: " + ((playerHealth > 0) ? playerHealth : 0)); //DEBUG message
             // Check if there is a circle to be drawn
+
+            for (int i = 0; i < Console.BufferHeight / 2 - (Map.Length / 2 + 1); i++)
+            {
+                Console.WriteLine();
+            }
             int maxDistance;
             if (Map[Map.Length - 1][Map[Map.Length - 1].Length - 2] == 'Đ' &&
                 int.TryParse(Map[Map.Length - 1][Map[Map.Length - 1].Length - 1].ToString(), out maxDistance))
@@ -24,6 +30,7 @@ namespace DungeonCrawler
                 // Renders map without circle
                 for (int i = 0; i < Map.Length; i++)
                 {
+                    getCursorToCenter(Map[0].Length, false);
                     for (int j = 0; j < Map[i].Length; j++)
                     {
                         convertToMap(Map, j, i);
@@ -148,6 +155,7 @@ namespace DungeonCrawler
             int[] playerPos = mainPlayerPos;
             for (int i = 0; i < Map.Length; i++)
             {
+                getCursorToCenter(Map[0].Length , false);
                 for (int j = 0; j < Map[i].Length; j++)
                 {
                     int[] tilePos = { j, i };

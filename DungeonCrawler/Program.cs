@@ -40,8 +40,15 @@ namespace DungeonCrawler
 
         public static void StartNewGame()
         {
+            Console.Clear();
             getCursorToCenter(17);
             Console.WriteLine("Creating new game");
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Thread.Sleep(300);
+            Console.Clear();
+            getCursorToCenter(17);
+            Console.WriteLine("Creating new game");
+            Console.ForegroundColor = ConsoleColor.White;
             RevertOriginalMaps();
             //Load map
             if (DO_DEBUG)
