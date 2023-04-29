@@ -1,3 +1,4 @@
+using static DungeonCrawler.Settings;
 namespace DungeonCrawler
 {
     internal class Variables
@@ -16,8 +17,11 @@ namespace DungeonCrawler
         public static int ThisRoom = 0;
         public static long currentTick = 0;
 
-        public static bool DO_DEBUG = false;
-        public static bool DISABLE_AUDIO = true;
+        public static bool DO_DEBUG = bool.Parse(GetConfigValue("roomDebugEnabled"));
+        public static bool MusicEnabled = bool.Parse(GetConfigValue("musicEnabled"));
+        public static int MusicVolume = int.Parse(GetConfigValue("musicVolume"));
+        public static bool SoundsEnabled = bool.Parse(GetConfigValue("soundEnabled"));
+        public static int SoundVolume = int.Parse(GetConfigValue("soundVolume"));
         // Useful functions
 
         // Adds a new value to the end of an array and returns the new array

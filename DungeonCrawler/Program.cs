@@ -3,6 +3,7 @@ using static DungeonCrawler.maps;
 using static DungeonCrawler.menu;
 using static DungeonCrawler.Fight;
 using static DungeonCrawler.Player;
+using static DungeonCrawler.Settings;
 using static DungeonCrawler.Render;
 using static DungeonCrawler.Sounds;
 using static DungeonCrawler.Variables;
@@ -17,8 +18,6 @@ namespace DungeonCrawler
             
             // You need to have installed ffmpeg to use it
             LoadMusic();
-
-
             PlayMusic("main_menu.mp3");
             while (true)
             {
@@ -28,7 +27,7 @@ namespace DungeonCrawler
                     StartNewGame();
                 }
                 else if(option == 2) {
-                    //          < --- SETINGS
+                    SettingsMenu();
                 }
                 else if (option == 3)
                 {

@@ -46,14 +46,14 @@ namespace DungeonCrawler
 
         public static void PlayMusic(string name = "Error.mp3", int volume = 100)
         {
-            if (!DISABLE_AUDIO)
+            if (MusicEnabled)
             {
                 string fileLocation = $"{AppDomain.CurrentDomain.BaseDirectory}{name}";
                 try
                 {
                     musicProcess = new Process();
                     musicProcess.StartInfo.FileName = Get_ffPlay_location() + "\\ffplay"; // Set the ffplay executable file path
-                    musicProcess.StartInfo.Arguments = $" {fileLocation} -volume {volume} -loop 9999 -loglevel quiet -nodisp";
+                    musicProcess.StartInfo.Arguments = $" {fileLocation} -volume {MusicVolume} -loop 9999 -loglevel quiet -nodisp";
                     musicProcess.Start();
                 }
                 catch (Exception e)
@@ -64,12 +64,12 @@ namespace DungeonCrawler
         }
         public static void PlaySound(string name = "Error.mp3", int volume = 100)
         {
-        if (!DISABLE_AUDIO)
+        if (SoundsEnabled)
         {
             string fileLocalition = $"{AppDomain.CurrentDomain.BaseDirectory}{name}";
             try
             {
-                System.Diagnostics.Process.Start('"' + Get_ffPlay_location() + "\\ffplay" + '"', $"{fileLocalition} -volume {volume} -loglevel quiet -nodisp");
+                System.Diagnostics.Process.Start('"' + Get_ffPlay_location() + "\\ffplay" + '"', $"{fileLocalition} -volume {SoundVolume} -loglevel quiet -nodisp");
             }
             catch (Exception e)
             {

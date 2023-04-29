@@ -86,7 +86,11 @@ namespace DungeonCrawler
                         {
                             didSelect = true;
                         }
-                        if (option == 3)
+                        else if (option == 2)
+                        {
+                            didSelect = true;
+                        }
+                        else if (option == 3)
                         {
                             didSelect = true;
                         }
