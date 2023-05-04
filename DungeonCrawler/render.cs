@@ -11,7 +11,7 @@ namespace DungeonCrawler
             Console.Clear();
             if (Map == null) return; // Don't render nothing
             getCursorToCenter(34, false);
-            Console.WriteLine("Rooms: " + (ThisRoom + 1) + "/" + AllRooms().Length + " |  x:" + mainPlayerPos[0] + " y:" + mainPlayerPos[1] +
+            Console.WriteLine("Rooms: " + (ThisRoom) + "/" + (AllRooms().Length - 1) + " |  x:" + mainPlayerPos[0] + " y:" + mainPlayerPos[1] +
                 " Health: " + ((playerHealth > 0) ? playerHealth : 0)); //DEBUG message
             // Check if there is a circle to be drawn
 
@@ -101,17 +101,23 @@ namespace DungeonCrawler
                     Console.Write(" ");
                     Console.BackgroundColor = ConsoleColor.Black;
                 }
-                else if (Map[y][x] == '{') // walk through wall
+                else if (Map[y][x] == '{') 
                 {
                     Console.Write("O");
                 }
-                else if (Map[y][x] == '}') // walk through wall
+                else if (Map[y][x] == '}')
                 {
                     Console.Write("X");
                 }
-                else if (Map[y][x] == 'ł') // walk through wall
+                else if (Map[y][x] == 'ł') 
                 {
                     Console.Write("#");
+                }
+                else if (Map[y][x] == 'Ł')
+                {
+                    Console.BackgroundColor = ConsoleColor.DarkGray;
+                    Console.Write(" ");
+                    Console.BackgroundColor = ConsoleColor.Black;
                 }
                 else if (Map[y][x] == '#') // magma tile
                 {
@@ -121,7 +127,7 @@ namespace DungeonCrawler
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.BackgroundColor = ConsoleColor.Black;
                 }
-                else if (Map[y][x] == ' ') // magma tile
+                else if (Map[y][x] == ' ') // void tile
                 {
                     Console.BackgroundColor = ConsoleColor.DarkBlue;
                     Console.Write(" ");

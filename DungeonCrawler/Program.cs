@@ -49,6 +49,7 @@ namespace DungeonCrawler
             Console.WriteLine("Creating new game");
             Console.ForegroundColor = ConsoleColor.White;
             RevertOriginalMaps();
+            RandomMaps(true);
             //Load map
             if (DO_DEBUG)
             {
@@ -57,12 +58,13 @@ namespace DungeonCrawler
             else
             {
                 Map = AllRooms()[1];
+                ThisRoom = 1;
             }
             RegisterSpawns(); // Spawn locations
             mainPlayerPos = FindPlayerPos();
             RegisterEnemies(enemy); // Enemies
             StartIntro();
-            lastStepOn = '░';
+            lastStepOn = '▓';
 
             RenderScreen();
             playerHealth = defaultPlayerHealth;
@@ -96,7 +98,10 @@ namespace DungeonCrawler
                 }
                 if (FindOnMap('{', Map)[0] == -1)
                     if (FindOnMap('ł', Map)[0] != -1)
-                        Map[FindOnMap('ł', Map)[0]][FindOnMap('ł', Map)[1]] = '░';
+                        Map[FindOnMap('ł', Map)[0]][FindOnMap('ł', Map)[1]] = 'Ł';
+                if (FindOnMap('}', Map)[0] == -1)
+                    if (FindOnMap('Ł', Map)[0] != -1)
+                        Map[FindOnMap('Ł', Map)[0]][FindOnMap('Ł', Map)[1]] = 'ł';
                 do
                 {
                     Move();

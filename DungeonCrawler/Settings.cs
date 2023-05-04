@@ -16,7 +16,15 @@ namespace DungeonCrawler
             {
                 Console.Clear();
                 getCursorToCenter(50, false);
-                Console.WriteLine("< ESCAPE            SETTINGS                      ");
+                if (OPTION == 0)
+                {
+                    Console.ForegroundColor = ConsoleColor.Black;
+                    Console.BackgroundColor = ConsoleColor.White;
+                }
+                Console.Write("< ESCAPE");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.WriteLine("            SETTINGS                      ");
                 getCursorToCenter(50, false);
                 Console.WriteLine("==================================================");
                 OptionMenu(OPTION);
@@ -36,16 +44,22 @@ namespace DungeonCrawler
                         }
                         break;
                     case ConsoleKey.UpArrow:
-                        if (OPTION > 1)
+                        if (OPTION > 0)
                         {
                             OPTION--;
                         }
                         break;
                     case ConsoleKey.Enter:
+                        if (OPTION == 0)
+                        {
+                            escape = false;
+                            return;
+                        }
                         changeConfig();
                         break;
                     case ConsoleKey.Escape:
-                        escape = false; break;
+                        escape = false; 
+                        break;
                 }
             }
         }
@@ -91,6 +105,9 @@ namespace DungeonCrawler
                     {
                         case ConsoleKey.LeftArrow:
                             boolOption = 1;
+                            break;
+                        case ConsoleKey.Escape:
+                            hasTyped = true;
                             break;
                         case ConsoleKey.RightArrow:
                             boolOption = 2;

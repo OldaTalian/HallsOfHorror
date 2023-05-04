@@ -37,7 +37,7 @@ namespace DungeonCrawler
                     {
                         MoveDown(x, y); // Move the player down
                     }
-                    
+
                     break;
 
                 // If the left arrow key or A key was pressed
@@ -53,7 +53,7 @@ namespace DungeonCrawler
                     {
                         MoveLeft(x, y); // Move the player left
                     }
-                    
+
                     break;
 
                 // If the right arrow key or D key was pressed
@@ -69,10 +69,10 @@ namespace DungeonCrawler
                     {
                         MoveRight(x, y);// Move the player right
                     }
-                    
+
                     break;
             }
-           // }
+            // }
         }
 
         public static void MoveUp(int x, int y)
@@ -106,7 +106,7 @@ namespace DungeonCrawler
         public static void NextRoom(char tile = '░') // Go to the next room
         {
             ThisRoom++;
-            Map = AllRooms()[ThisRoom];
+            Map = RandomMaps()[ThisRoom];
             RegisterEnemies(enemy); // !!! ---- !!! This will have to be changed
             lastStepOn = tile;
         }
@@ -114,7 +114,7 @@ namespace DungeonCrawler
         public static void PrevRoom(char tile = '░') // Go to the previous room
         {
             ThisRoom--;
-            Map = AllRooms()[ThisRoom];
+            Map = RandomMaps()[ThisRoom];
             lastStepOn = tile;
         }
 

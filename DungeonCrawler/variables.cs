@@ -4,7 +4,7 @@ namespace DungeonCrawler
     internal class Variables
     {
         public static char player = '☺';
-        public static char lastStepOn = '░';
+        public static char lastStepOn = '▒';
 
         public static bool moved = false;
         public static int defaultPlayerHealth = 100;
