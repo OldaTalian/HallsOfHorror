@@ -35,7 +35,7 @@ namespace DungeonCrawler
         public static void BeginFight( string sides)
         {
             StopMusic();
-            PlaySound("fightStart.wav", 80 ); //////////////////// VOLUME
+            PlaySound("fightStart.wav"); //////////////////// VOLUME
             int enemyCount = 0;
             for (int i = 0; i < sides.Length; i++)
             {
@@ -48,7 +48,7 @@ namespace DungeonCrawler
             enemyFightHealthFull *= enemyCount;
             enemycount = enemyCount;
             Dialog enemyAngry = new Dialog("You've encountered an enemy", EnemyEmotions, emotion, 1);
-            PlayMusic("fightScene.wav" , 30);
+            PlayMusic("fightScene.wav");
             enemyAngry.Write("I dont like you",1,0);
 
 
