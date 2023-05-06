@@ -9,15 +9,22 @@ namespace DungeonCrawler
         public static byte enemyAttack = 5;
         public static byte enemyHealth = 50;
 
-
-        public static int AllEnemies(char[][] array, char target)
+        /// <summary>
+        /// Counts all enemies
+        /// CZ:
+        /// Získá počet všech nepřátelů.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="target"></param>
+        /// <returns></returns>
+        public static int AllEnemies(char[][] map, char target)
         {
             int count = 0;
-            for (int i = 0; i < array.Length; i++)
+            for (int i = 0; i < map.Length; i++)
             {
-                for (int j = 0; j < array[i].Length; j++)
+                for (int j = 0; j < map[i].Length; j++)
                 {
-                    if (array[i][j] == target)
+                    if (map[i][j] == target)
                     {
                         count++;
                     }
@@ -26,6 +33,14 @@ namespace DungeonCrawler
             return count;
         }
 
+        /// <summary>
+        /// Finds all enemy positons
+        /// CZ?
+        /// Získá pozice všech nepřátel.
+        /// </summary>
+        /// <param name="array"></param>
+        /// <param name="target">enemyType</param>
+        /// <returns>int[][] {{X,Y};{X,Y}}</returns>
         public static int[][] FindEnemyPositions(char[][] array, char target)
         {
             int[][] result = new int[AllEnemies(array, target)][];
@@ -46,6 +61,11 @@ namespace DungeonCrawler
 
         public static char[] enemyLastTile = new char[AllEnemies(Map, enemy)];
 
+        /// <summary>
+        /// Ticks of enemies
+        /// CZ:
+        /// Updatuje od nepřátelů tiky, každých 5 tiků se posune nepřítel.
+        /// </summary>
         public static void enemyTick()
         {
             EnemyAttack(enemy);
@@ -56,6 +76,12 @@ namespace DungeonCrawler
             currentTick++;
         }
 
+        /// <summary>
+        /// Enemy tries to attack the player
+        /// CZ:
+        /// Útok na hlavního hráče, podle typu nepřítele.
+        /// </summary>
+        /// <param name="enemyType"></param>
         public static void EnemyAttack(char enemyType)
         {
             string sidesWithEnemy = "";
@@ -100,7 +126,12 @@ namespace DungeonCrawler
         }
 
 
-        // This method is used to move an enemy character towards the player character.
+        /// <summary>
+        /// Moves the enemy closer to the player (dumn way)
+        /// CZ:
+        /// Posune nepřítele směrem k hlavnímu hráči.
+        /// </summary>
+        /// <param name="enemyType"></param>
         public static void MoveEnemy(char enemyType)
         {
             // Find the current position of the player character.
@@ -177,6 +208,12 @@ namespace DungeonCrawler
             }
         }
 
+        /// <summary>
+        /// Registers all enemies on map
+        /// CZ:
+        /// Registruje nepřítele.
+        /// </summary>
+        /// <param name="enemyType"></param>
         public static void RegisterEnemies(char enemyType)
         {
             enemyLastTile = new char[AllEnemies(Map, enemyType)];

@@ -5,22 +5,44 @@ namespace DungeonCrawler
 {
     internal class Sounds
     {
+        /// <summary>
+        /// Loads ffmpeg so the music works
+        /// CZ:
+        /// Načte ffmpeg pro hudbu
+        /// </summary>
         public static void LoadMusic()
         {
             if (Get_ffPlay_location() == "") // MUSIC
             {
                 changeFFplay();
             }
-            PlaySound("loaded.wav",15);
+            PlaySound("loaded.wav");
         }
+
+        /// <summary>
+        /// Changes the ffmpeg location
+        /// CZ:
+        /// Mění cestu k ffmpeg
+        /// </summary>
         public static void changeFFplay()
         {
-            Console.SetWindowSize(100, 20);
-            Console.WriteLine("If you want to have music, then install ffmpeg\n and write here the path to the /bin folder\n example: C:\\Program Files (x86)\\ffmpeg\\bin");
+            getCursorToCenter(35, true);
+            Console.WriteLine("If you want to have music, then install ffmpeg");
+            getCursorToCenter(35, false);
+            Console.WriteLine("and write here the path to the /bin folder");
+            getCursorToCenter(35, false);
+            Console.WriteLine("example: C:\\Program Files (x86)\\ffmpeg\\bin");
+            getCursorToCenter(35, false);
             File.WriteAllText("music.yaml", (Console.ReadLine()));
             Console.Clear();
         }
 
+        /// <summary>
+        /// Gets the location (path) of ffmpeg
+        /// CZ:
+        /// Najde cestu k ffmpeg
+        /// </summary>
+        /// <returns></returns>
         public static string Get_ffPlay_location()
         {
             try
@@ -42,9 +64,17 @@ namespace DungeonCrawler
                 throw;
             }
         }
-        private static Process musicProcess; // Declare a private static variable to hold the ffplay process
+        private static Process musicProcess;
 
-        public static void PlayMusic(string name = "Error.mp3", int volume = 100)
+
+        /// <summary>
+        /// Plays a music file using ffmpeg
+        /// CZ:
+        /// Přehrává hudbu ze souboru
+        /// </summary>
+        /// <param name="name">Name of the file</param>
+        /// <param name="volume"></param>
+        public static void PlayMusic(string name = "Error.mp3")
         {
             if (MusicEnabled)
             {
@@ -58,26 +88,42 @@ namespace DungeonCrawler
                 }
                 catch (Exception e)
                 {
-                    // Handle exception
+                    e.ToString();
+                    // Handle exception e
                 }
             }
         }
-        public static void PlaySound(string name = "Error.mp3", int volume = 100)
+
+        /// <summary>
+        /// Plays sound effect from file
+        /// CZ:
+        /// Přehraje sound effekt ze souboru
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="volume"></param>
+        public static void PlaySound(string name = "Error.mp3")
         {
-        if (SoundsEnabled)
-        {
-            string fileLocalition = $"{AppDomain.CurrentDomain.BaseDirectory}{name}";
-            try
+            if (SoundsEnabled)
             {
-                System.Diagnostics.Process.Start('"' + Get_ffPlay_location() + "\\ffplay" + '"', $"{fileLocalition} -volume {SoundVolume} -loglevel quiet -nodisp");
-            }
-            catch (Exception e)
-            {
-                // LOL how to make no crashes
-            }
+                string fileLocalition = $"{AppDomain.CurrentDomain.BaseDirectory}{name}";
+                try
+                {
+                    System.Diagnostics.Process.Start('"' + Get_ffPlay_location() + "\\ffplay" + '"', $"{fileLocalition} -volume {SoundVolume} -loglevel quiet -nodisp");
+                }
+                catch (Exception e)
+                {
+                    e.ToString();
+                    // LOL how to make no crashes
+                }
             }
         }
 
+
+        /// <summary>
+        /// Stops every music that is playing
+        /// CZ:
+        /// Zastaví všechnu hudbu
+        /// </summary>
         public static void StopMusic()
         {
             try
@@ -89,7 +135,7 @@ namespace DungeonCrawler
             }
             catch (Exception e)
             {
-                // Handle exception
+                e.ToString(); // Handle exception e
             }
         }
 

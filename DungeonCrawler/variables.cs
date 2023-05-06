@@ -3,8 +3,9 @@ namespace DungeonCrawler
 {
     internal class Variables
     {
+        // Main variables; CZ: Základní proměnné
         public static char player = '☺';
-        public static char lastStepOn = '▒';
+        public static char lastStepOn = '▒'; // Tile that is the player on; CZ: Dlaždice na které hráč stojí
 
         public static bool moved = false;
         public static int defaultPlayerHealth = 100;
@@ -22,9 +23,17 @@ namespace DungeonCrawler
         public static int MusicVolume = int.Parse(GetConfigValue("musicVolume"));
         public static bool SoundsEnabled = bool.Parse(GetConfigValue("soundEnabled"));
         public static int SoundVolume = int.Parse(GetConfigValue("soundVolume"));
-        // Useful functions
 
-        // Adds a new value to the end of an array and returns the new array
+        // Functions; CZ: Funkce
+
+        /// <summary>
+        /// Adds char to char array
+        /// CZ:
+        /// Přidá novou hodnotu na konec pole a vrátí nově vytvořené pole.
+        /// </summary>
+        /// <param name="array"></param>
+        /// <param name="newValue"></param>
+        /// <returns></returns>
         private static char[] AddToArray(char[] array, char newValue)
         {
             char[] newArray = new char[array.Length + 1];
@@ -39,7 +48,15 @@ namespace DungeonCrawler
             return newArray;
         }
 
-        // Checks if there is a specific tile in a specific direction from the player's position
+        /// <summary>
+        /// Checks if there is char in direction from some position
+        /// CZ:
+        /// Zjistí jestli je konkrétní charakter v specifickém směru od hráčovy pozice.
+        /// </summary>
+        /// <param name="pos">int[]{X,Y}</param>
+        /// <param name="direction">char up=u; down=d; left=l; right=r</param>
+        /// <param name="tile"></param>
+        /// <returns></returns>
         public static bool CheckForTiles(int[] pos, char direction, char tile) // position (X,Y), direction u/d/l/r, tile [char]
         {
             bool output = false;
@@ -76,7 +93,14 @@ namespace DungeonCrawler
             return output;
         }
 
-        // Calculates the Manhattan distance between two positions
+        /// <summary>
+        /// Calculates distance between two points.
+        /// CZ:
+        /// Zpočítá Manhattonovu zdálenost mezi dvěmi body.
+        /// </summary>
+        /// <param name="pos1"></param>
+        /// <param name="pos2"></param>
+        /// <returns>Distance</returns>
         public static int MeasureDistance(int[] pos1, int[] pos2)
         {
             int x1 = pos1[0];
@@ -87,7 +111,15 @@ namespace DungeonCrawler
             return distance;
         }
 
-        // Checks if a specific tile is within a certain distance of a position
+        /// <summary>
+        /// Tries to find char in radius from the position.
+        /// CZ:
+        /// Zjistí jestli je charakter v určitém radiusu.
+        /// </summary>
+        /// <param name="search"></param>
+        /// <param name="pos"></param>
+        /// <param name="distance"></param>
+        /// <returns></returns>
         public static bool IsNear(char search, int[] pos, int distance)
         {
             for (int i = 0; i < Map.Length; i++)
@@ -107,6 +139,14 @@ namespace DungeonCrawler
             return false;
         }
 
+        /// <summary>
+        /// Finds Tile on map
+        /// CZ:
+        /// Najde konkrétní charakter na určité mapě.
+        /// </summary>
+        /// <param name="character"></param>
+        /// <param name="TheMap"></param>
+        /// <returns>Pozice int[]{X,Y}</returns>
         public static int[] FindOnMap(char character, char[][] TheMap)
         {
             int[] output = { -1,-1};
@@ -124,6 +164,13 @@ namespace DungeonCrawler
             return output;
         }
     
+        /// <summary>
+        /// Moves the cursor to the center of the wíndow.
+        /// CZ: 
+        /// Vycentrování rendrované hry na střed.
+        /// </summary>
+        /// <param name="TextLenght"></param>
+        /// <param name="Vertical"></param>
         public static void getCursorToCenter(int TextLenght, bool Vertical = true)
         {
             if (Vertical)

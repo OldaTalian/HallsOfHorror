@@ -1,14 +1,20 @@
 ﻿using static DungeonCrawler.Variables;
+using static DungeonCrawler.Sounds;
 using System.Configuration;
 using System.Web;
 using Microsoft.Win32.SafeHandles;
 
 namespace DungeonCrawler
 {
-
     internal class Settings
     {
         public static byte OPTION = 1;
+
+        /// <summary>
+        /// Opens the settings menu
+        /// CZ:
+        /// Otevře nastavení
+        /// </summary>
         public static void SettingsMenu()
         {
             bool escape = true;
@@ -35,7 +41,7 @@ namespace DungeonCrawler
                 getCursorToCenter(50, false);
                 Console.WriteLine("it may be necessary to restart the application.");
                 Console.ForegroundColor = ConsoleColor.White;
-                switch (Console.ReadKey(true).Key)
+                switch (Console.ReadKey(true).Key) // Controlls; CZ: ovládání
                 {
                     case ConsoleKey.DownArrow:
                         if (OPTION != ListConfigValues().Length)
@@ -64,11 +70,23 @@ namespace DungeonCrawler
             }
         }
 
+        /// <summary>
+        /// Changes a variable in the App.config file
+        /// CZ:
+        /// Změní nastavení v App.config souboru
+        /// </summary>
         private static void changeConfig()
         {
             getCursorToCenter(20, false);
             var key = ListConfigValues()[OPTION - 1];
-            if (key.Split(" = ")[1].ToLower() == "true" || key.Split(" = ")[1].ToLower() == "false")
+            if (key.Split(" = ")[0]== "ffmpegLocation") // DungeonCrawler.Sounds;;
+            {
+                Console.Clear();
+                changeFFplay();
+                return;
+            }
+            // If the variable is bool; CZ: Pokud je hodnota true/false
+            if (key.Split(" = ")[1].ToLower() == "true" || key.Split(" = ")[1].ToLower() == "false") 
             {
                 Console.WriteLine("Select one:");
                 Console.WriteLine();
@@ -119,6 +137,7 @@ namespace DungeonCrawler
                     }
                 }
             }
+            // If the value is number; CZ: pokud je hodnota číslo
             else if (int.TryParse(key.Split('=')[1].Trim(), out int value))
             {
                 Console.WriteLine("Write <INT(number)>");
@@ -129,6 +148,7 @@ namespace DungeonCrawler
                 }
                 SetConfigValue(key.Split(" = ")[0], newValueInt.ToString());
             }
+            // If the value is string; CZ: pokud je hodnota text
             else
             {
                 Console.WriteLine("Write [STRING(text)]");
@@ -136,6 +156,12 @@ namespace DungeonCrawler
             }
         }
 
+        /// <summary>
+        /// Renders the GUI of the settings menu
+        /// CZ:
+        /// Grafické rozhraní nastavení
+        /// </summary>
+        /// <param name="option"></param>
         private static void OptionMenu(byte option)
         {
             for (int i = 0; i < ListConfigValues().Length; i++)
@@ -158,12 +184,25 @@ namespace DungeonCrawler
             }
         }
 
-
+        /// <summary>
+        /// Finds ConfigValue in App.config
+        /// CZ:
+        /// Najde hodnotu v App.config
+        /// </summary>
+        /// <param name="settingName">key</param>
+        /// <returns>value or "" if nothing have been found</returns>
         public static string GetConfigValue(string settingName)
         {
             var appSettings = ConfigurationManager.AppSettings;
             return appSettings[settingName] ?? string.Empty;
         }
+        /// <summary>
+        /// Sets the value in App.config to some key. If not found it will make a new variable in App.config
+        /// CZ:
+        /// Nastaví hodnotu v App.config k nějakému klíči pokud existuje, jinak ho vytvoří
+        /// </summary>
+        /// <param name="settingName">key</param>
+        /// <param name="settingValue">value</param>
         public static void SetConfigValue(string settingName, string settingValue)
         {
             var configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
@@ -182,12 +221,16 @@ namespace DungeonCrawler
             ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name);
         }
 
-
+        /// <summary>
+        /// Finds all posible configuration thats not Room
+        /// CZ:
+        /// Nalezne všechno nastavení které není místnost
+        /// </summary>
+        /// <returns>{key} = {value}</returns>
         public static string[] ListConfigValues()
         {
             var settings = ConfigurationManager.AppSettings;
-            var roomConfigs = new List<string>();
-
+            var roomConfigs = new List<string>(); // No posible duplicates; CZ: Žádné duplicity
             foreach (string key in settings.Keys)
             {
                 if (!key.Contains("Room"))
@@ -196,7 +239,7 @@ namespace DungeonCrawler
                     roomConfigs.Add($"{key} = {value}");
                 }
             }
-
+            roomConfigs.Add("ffmpegLocation = " + Get_ffPlay_location()); // DungeonCrawler.Sound;;
             return roomConfigs.ToArray();
         }
 

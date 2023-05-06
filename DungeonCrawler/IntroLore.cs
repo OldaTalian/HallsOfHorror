@@ -5,6 +5,12 @@ namespace DungeonCrawler
     internal class IntroLore
     {
         private static ConsoleColor DefaultColor = ConsoleColor.White;
+
+        /// <summary>
+        /// Plays the whole Intro sequence
+        /// CZ:
+        /// Přehraje intro
+        /// </summary>
         public static void StartIntro()
         {
             for (int i = 0; i <= 33; i++)
@@ -31,7 +37,12 @@ namespace DungeonCrawler
             RenderIntroText();
         }
 
-
+        /// <summary>
+        /// Converts individual pixels represented by characters into their corresponding color and shape.
+        /// CZ: 
+        /// Převede jednotlivé obrazové body reprezentované znaky na jejich odpovídající barvu a tvar.
+        /// </summary>
+        /// <param name="input">The character to be rendered as a pixel.</param>
         private static void RenderPixel(char input)
         {
             if (input == '█'|| input == '▄' || input == '▀' || input == '▌' || input == '▐')
@@ -110,6 +121,13 @@ namespace DungeonCrawler
             }
         }
 
+        /// <summary>
+        /// Renders invidiual frame
+        /// CZ:
+        /// Vykreslí invidiuální snímek
+        /// </summary>
+        /// <param name="frameIndex">Index of frame</param>
+        /// <param name="delay"></param>
         private static void RenderFrame(int frameIndex, int delay = 200)
         {
             for (int i = 0; i < Console.BufferHeight / 2 - (Frames()[frameIndex].Length / 2); i++)
@@ -128,6 +146,11 @@ namespace DungeonCrawler
             Thread.Sleep(delay);
         }
         
+        /// <summary>
+        /// Renders the Intro Text
+        /// CZ:
+        /// Vypíše Intro text
+        /// </summary>
         public static void RenderIntroText() 
         {
             Console.Clear();

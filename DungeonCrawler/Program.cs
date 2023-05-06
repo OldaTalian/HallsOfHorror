@@ -15,8 +15,7 @@ namespace DungeonCrawler
     {
         private static void Main(string[] args)
         {
-            
-            // You need to have installed ffmpeg to use it
+            Console.Title = "Halls of Horror";
             LoadMusic();
             PlayMusic("main_menu.mp3");
             while (true)
@@ -36,7 +35,11 @@ namespace DungeonCrawler
             }
         }
 
-
+        /// <summary>
+        /// Starts a new game
+        /// CZ:
+        /// Vytvoří novou hru
+        /// </summary>
         public static void StartNewGame()
         {
             Console.Clear();
@@ -50,7 +53,7 @@ namespace DungeonCrawler
             Console.ForegroundColor = ConsoleColor.White;
             RevertOriginalMaps();
             RandomMaps(true);
-            //Load map
+            // Load map; CZ: Načte mapu
             if (DO_DEBUG)
             {
                 Map = AllRooms()[0];
@@ -60,16 +63,18 @@ namespace DungeonCrawler
                 Map = AllRooms()[1];
                 ThisRoom = 1;
             }
-            RegisterSpawns(); // Spawn locations
-            mainPlayerPos = FindPlayerPos();
-            RegisterEnemies(enemy); // Enemies
-            StartIntro();
+            RegisterSpawns();
             lastStepOn = '▓';
+            mainPlayerPos = FindPlayerPos();
+            RegisterEnemies(enemy);
+            StartIntro(); // Plays the intro; CZ: Přehraje intro
+
+            // The actual game ↓
 
             RenderScreen();
             playerHealth = defaultPlayerHealth;
             bool gameIsPlaying = true;
-            while (gameIsPlaying) // Game:
+            while (gameIsPlaying) // Game tick: 
             {
                 if (lastStepOn == '#')
                 {
@@ -105,15 +110,18 @@ namespace DungeonCrawler
                 do
                 {
                     Move();
-                } while (!moved); //pokud se snaží jít do zdi tak to nic neudělá
+                } while (!moved);
+
                 mainPlayerPos = FindPlayerPos();
                 enemyTick();
                 RenderScreen();
-                while (Console.KeyAvailable)
+
+                while (Console.KeyAvailable) // Removes any holding key; CZ: vymaže klávesy které hráč drží
                 {
                     Console.ReadKey(true);
                 }
             }
+            getCursorToCenter(42);
             Console.WriteLine("You ded ¯\\_☺_/¯\nPress ESC to continue...");
             bool ending = true;
             while (ending)

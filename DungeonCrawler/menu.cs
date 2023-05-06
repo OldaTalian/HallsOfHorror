@@ -5,6 +5,11 @@ namespace DungeonCrawler
 {
     internal class menu
     {
+        /// <summary>
+        /// Main game logo
+        /// CZ:
+        /// Logo hry
+        /// </summary>
         public static char[][] logo =
         {
             "   ▄  ▄ ▄▄▄  ▄▄▌  ▄▄▌   ▄▄      ".ToCharArray(),
@@ -20,6 +25,11 @@ namespace DungeonCrawler
             "▀▀▀   ▀█▄▀  ▀  ▀ ▀  ▀ ▀█▄▀  ▀  ▀".ToCharArray()
         };
 
+        /// <summary>
+        /// Writes the logo to the console center
+        /// CZ:
+        /// Vypíše logo hry do středu konzole
+        /// </summary>
         public static void PrintLogo() {
             for (int i = 0; i < logo.Length; i++)
             {
@@ -38,6 +48,13 @@ namespace DungeonCrawler
             "Quit app",
         };
         private static byte option = 1;
+
+        /// <summary>
+        /// GUI of main menu
+        /// CZ:
+        /// Grafické rozhraní meny
+        /// </summary>
+        /// <param name="option"></param>
         private static void OptionMenu(byte option)
         {
             for (int i = 0; i < menuOptions.Length; i++)
@@ -58,6 +75,12 @@ namespace DungeonCrawler
                 }
             }
         }
+        /// <summary>
+        /// Main menu controlls
+        /// CZ:
+        /// Ovládání hlavního meny
+        /// </summary>
+        /// <returns></returns>
         public static int Menu()
         {
             bool didSelect = false;
@@ -82,15 +105,7 @@ namespace DungeonCrawler
                         }
                         break;
                     case ConsoleKey.Enter:
-                        if (option == 1)
-                        {
-                            didSelect = true;
-                        }
-                        else if (option == 2)
-                        {
-                            didSelect = true;
-                        }
-                        else if (option == 3)
+                        if (option >= 1 && option <= 3)
                         {
                             didSelect = true;
                         }
@@ -101,7 +116,3 @@ namespace DungeonCrawler
         }
     }
 }
-
-
-
-

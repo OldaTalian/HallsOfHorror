@@ -6,19 +6,24 @@ namespace DungeonCrawler
 {
     internal class Render
     {
+        /// <summary>
+        /// Main rendering function
+        /// CZ:
+        /// Rendrování hlavní hry
+        /// </summary>
         public static void RenderScreen()
         {
             Console.Clear();
-            if (Map == null) return; // Don't render nothing
+            if (Map == null) return; // Dont try to render when there is no map; CZ: Nerendrovat, když není mapa
             getCursorToCenter(34, false);
             Console.WriteLine("Rooms: " + (ThisRoom) + "/" + (AllRooms().Length - 1) + " |  x:" + mainPlayerPos[0] + " y:" + mainPlayerPos[1] +
-                " Health: " + ((playerHealth > 0) ? playerHealth : 0)); //DEBUG message
-            // Check if there is a circle to be drawn
+                " Health: " + ((playerHealth > 0) ? playerHealth : 0)); //DEBUG zpráva
 
             for (int i = 0; i < Console.BufferHeight / 2 - (Map.Length / 2 + 1); i++)
             {
                 Console.WriteLine();
             }
+            // Tryies to find mark of Fog rendering; CZ: Zjistí jestli se má rendrovat fog of war
             int maxDistance;
             if (Map[Map.Length - 1][Map[Map.Length - 1].Length - 2] == 'Đ' &&
                 int.TryParse(Map[Map.Length - 1][Map[Map.Length - 1].Length - 1].ToString(), out maxDistance))
@@ -27,7 +32,7 @@ namespace DungeonCrawler
             }
             else
             {
-                // Renders map without circle
+                // Default rendering; CZ: Normální rendrování
                 for (int i = 0; i < Map.Length; i++)
                 {
                     getCursorToCenter(Map[0].Length, false);
@@ -40,8 +45,17 @@ namespace DungeonCrawler
             }
         }
 
-        // Returns an array of tiles between the start and end points, inclusive, on a line defined by those points.
-        // using Bresenham's algorithm (https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm).
+        /// <summary>
+        /// Returns an array of tiles between the start and end points, inclusive, on a line defined by those points.
+        /// using Bresenham's algorithm.
+        /// CZ:
+        /// Pomocí Bresenhamova algoritmu vrátí pole dlaždic mezi počátečním a koncovým bodem včetně na řádku definovaném těmito body.
+        /// </summary>
+        /// <source>https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm</source>
+        /// <param name="startPos">Starting position {X,Y}</param>
+        /// <param name="endPos">Ending position {X,Y}</param>
+        /// <param name="maxTiles">Max lenght</param>
+        /// <returns></returns>
         public static HashSet<int[]> GetTilesOnLine(int[] startPos, int[] endPos, int maxTiles)
         {
             HashSet<int[]> tiles = new HashSet<int[]>(); // An array of INT that removes duplicates
@@ -85,41 +99,49 @@ namespace DungeonCrawler
 
         public static bool skipNextOne = false;
 
+        /// <summary>
+        /// Converts map to chars that the player can see
+        /// CZ:
+        /// Konvertuje charakter z mapy na charaktery z které vidí hráč.
+        /// </summary>
+        /// <param name="Map"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         public static void convertToMap(char[][] Map, int x, int y)
         {
             if (!skipNextOne)
             {
-                if (Map[y][x] == '░' || Map[y][x] == '▒') // gray tiles
+                if (Map[y][x] == '░' || Map[y][x] == '▒') // floor; CZ: podlaha
                 {
                     Console.ForegroundColor = ConsoleColor.DarkGray;
                     Console.Write(Map[y][x]);
                     Console.ForegroundColor = ConsoleColor.White;
                 }
-                else if (Map[y][x] == '$') // walk through wall
+                else if (Map[y][x] == '$') // walk through wall; CZ: průchodná zed
                 {
                     Console.BackgroundColor = ConsoleColor.White;
                     Console.Write(" ");
                     Console.BackgroundColor = ConsoleColor.Black;
                 }
-                else if (Map[y][x] == '{') 
+                else if (Map[y][x] == '{') // open lever; CZ: otevřená páčka 
                 {
-                    Console.Write("O");
+                    Console.Write("O"); 
                 }
-                else if (Map[y][x] == '}')
+                else if (Map[y][x] == '}') // closed lever; CZ: zavřená páčka
                 {
                     Console.Write("X");
                 }
-                else if (Map[y][x] == 'ł') 
+                else if (Map[y][x] == 'ł') // closed lever door; CZ: zavřené dveře na páčku
                 {
                     Console.Write("#");
                 }
-                else if (Map[y][x] == 'Ł')
+                else if (Map[y][x] == 'Ł') // open lever door; CZ: otevřené dveře na páčku
                 {
                     Console.BackgroundColor = ConsoleColor.DarkGray;
                     Console.Write(" ");
                     Console.BackgroundColor = ConsoleColor.Black;
                 }
-                else if (Map[y][x] == '#') // magma tile
+                else if (Map[y][x] == '#') // magma; CZ: láva
                 {
                     Console.ForegroundColor = ConsoleColor.Black;
                     Console.BackgroundColor = ConsoleColor.Red;
@@ -127,37 +149,42 @@ namespace DungeonCrawler
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.BackgroundColor = ConsoleColor.Black;
                 }
-                else if (Map[y][x] == ' ') // void tile
+                else if (Map[y][x] == ' ') // void; CZ: díra
                 {
                     Console.BackgroundColor = ConsoleColor.DarkBlue;
                     Console.Write(" ");
                     Console.BackgroundColor = ConsoleColor.Black;
                 }
-                else if (Map[y][x] == '☻') // enemy tile
+                else if (Map[y][x] == '☻') // enemy; CZ: zloduch
                 {
                     Console.ForegroundColor = ConsoleColor.DarkRed;
                     Console.Write("☻");
                     Console.ForegroundColor = ConsoleColor.White;
                 }
-                else if (Map[y][x] == 'Đ') // Đ blind mark
+                else if (Map[y][x] == 'Đ') // Mark for fog; CZ: Jestli se nachází v uložené mapě, mapa je značena jako fog of war.
                 {
-                    skipNextOne = true; // set flag to skip rendering next tile
+                    skipNextOne = true; // skips the next char (number of distance); CZ: Přeskočí následující char (číslo vzdálenosti mlhy)
                 }
-                else // normal tiles
+                else // everything else; CZ: ostatní dlaždice
                 {
                     Console.Write(Map[y][x]);
                 }
             }
             else
             {
-                Console.Write("");
-                skipNextOne = false; // reset flag after skipping one tile
+                Console.Write(""); // if skip NOT RENDER ANYTHING; CZ: pokud skipNextOne nerenderuj
+                skipNextOne = false;
             }
         }
-
+        /// <summary>
+        /// Renders the fog around the player
+        /// CZ:
+        /// Rendruje mapu v určitém radiusu okolo hráče.
+        /// Pracuje jako 2D fog of war.
+        /// </summary>
+        /// <param name="maxDistance">radius</param>
         public static void RenderCircle(int maxDistance)
-        {
-            // Renders map with circle
+        { 
             int[] playerPos = mainPlayerPos;
             for (int i = 0; i < Map.Length; i++)
             {
@@ -167,14 +194,14 @@ namespace DungeonCrawler
                     int[] tilePos = { j, i };
                     int distance = MeasureDistance(playerPos, tilePos);
 
-                    // Calculate the radius of the circle that should be drawn around the player position
+                    // Calculates the radius of the circle; CZ:  Vypočítá poloměr kruhu, který by měl být nakreslen kolem pozice hráče
                     int radius = maxDistance - distance + 3;
                     if (maxDistance > distance)
                     {
-                        // Check if the tile is within the circle
+                        // Checks if the tile is in the circle; CZ: Zkontrolujte, zda je dlaždice v kruhu
                         if (radius * radius >= Math.Pow(playerPos[0] - tilePos[0], 2) + Math.Pow(playerPos[1] - tilePos[1], 2))
                         {
-                            // Check if there is a wall between the player and the tile
+                            // Checks if there is wall between the player and the tile; CZ: Zkontrolujte, zda je mezi hráčem a dlaždicí zeď
                             bool isWallInBetween = false;
                             foreach (var wallPos in GetTilesOnLine(playerPos, tilePos, maxDistance))
                             {
@@ -189,21 +216,21 @@ namespace DungeonCrawler
                             }
                             if (isWallInBetween)
                             {
-                                Console.Write(' '); // tile is behind a wall
+                                Console.Write(' '); // Tile is behind a wall; CZ: dlaždice je za zdí
                             }
                             else
                             {
-                                convertToMap(Map, j, i); // render the tile normally
+                                convertToMap(Map, j, i); // Tile is not behind a wall -> renders it; CZ: vyrenderuje dlaždici normálně
                             }
                         }
                         else
                         {
-                            Console.Write(' '); // render space instead
+                            Console.Write(' '); // IF outside of the circle render air; CZ: místo toho vyrenderuje prostor
                         }
                     }
                     else
                     {
-                        Console.Write(' '); // render space instead
+                        Console.Write(' '); // outside of the MaxDistance; CZ: místo toho vyrenderuje prostor
                     }
                 }
                 Console.WriteLine();
