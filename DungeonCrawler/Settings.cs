@@ -84,6 +84,12 @@ namespace DungeonCrawler
                 Console.Clear();
                 changeFFplay();
                 return;
+            } 
+            else if (key.Split(" = ")[0] == "OS")
+            {
+                Console.Clear();
+                changeOS();
+                return;
             }
             // If the variable is bool; CZ: Pokud je hodnota true/false
             if (key.Split(" = ")[1].ToLower() == "true" || key.Split(" = ")[1].ToLower() == "false") 
@@ -241,6 +247,38 @@ namespace DungeonCrawler
             }
             roomConfigs.Add("ffmpegLocation = " + Get_ffPlay_location()); // DungeonCrawler.Sound;;
             return roomConfigs.ToArray();
+        }
+
+        /// <summary>
+        /// Displays the Change OS GUI that will ask the user for kind of operating system they are running
+        /// CZ:
+        /// Ukáže meny pro změnu OS
+        /// </summary>
+        public static void changeOS()
+        {
+            Console.WriteLine();
+            Console.WriteLine();
+            getCursorToCenter(35, false);
+            Console.WriteLine("To run the app without any problems, ");
+            getCursorToCenter(60, false);
+            Console.WriteLine("we need to know what type of operating system you're using.");
+            getCursorToCenter(11, false);
+            Console.WriteLine("Select one:");
+            Console.WriteLine();
+            int selectedOption = 1;
+            string[] options =
+            {
+                    "Windows 11",
+                    "Windows 10, Linux, other...",
+            };
+            string[] optionsWrites =
+            {
+                    "win11",
+                    "other",
+            };
+            int result = MenuWithOptions(options, 0);
+            SetConfigValue("OS", optionsWrites[result]);
+            Variables.OperatingSystem = GetConfigValue("OS");
         }
 
     }

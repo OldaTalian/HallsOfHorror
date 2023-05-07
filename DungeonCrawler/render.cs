@@ -19,9 +19,12 @@ namespace DungeonCrawler
             Console.WriteLine("Rooms: " + (ThisRoom) + "/" + (AllRooms().Length - 1) + " |  x:" + mainPlayerPos[0] + " y:" + mainPlayerPos[1] +
                 " Health: " + ((playerHealth > 0) ? playerHealth : 0)); //DEBUG zpráva
 
-            for (int i = 0; i < Console.BufferHeight / 2 - (Map.Length / 2 + 1); i++)
+            if(Variables.OperatingSystem == "win11")
             {
-                Console.WriteLine();
+                for (int i = 0; i < Console.BufferHeight / 2 - (Map.Length / 2 + 1); i++)
+                {
+                    Console.WriteLine();
+                }
             }
             // Tryies to find mark of Fog rendering; CZ: Zjistí jestli se má rendrovat fog of war
             int maxDistance;

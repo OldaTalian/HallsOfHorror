@@ -15,6 +15,10 @@ namespace DungeonCrawler
     {
         private static void Main(string[] args)
         {
+            if (GetConfigValue("OS")!= "other"&&GetConfigValue("OS") != "win11")
+            {
+                changeOS();
+            }
             Console.Title = "Halls of Horror";
             LoadMusic();
             PlayMusic("main_menu.mp3");

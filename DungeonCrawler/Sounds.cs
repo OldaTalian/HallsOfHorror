@@ -26,7 +26,7 @@ namespace DungeonCrawler
         /// </summary>
         public static void changeFFplay()
         {
-            getCursorToCenter(35, true);
+            getCursorToCenter(35, false);
             Console.WriteLine("If you want to have music, then install ffmpeg");
             getCursorToCenter(35, false);
             Console.WriteLine("and write here the path to the /bin folder");

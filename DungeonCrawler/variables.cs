@@ -23,6 +23,7 @@ namespace DungeonCrawler
         public static int MusicVolume = int.Parse(GetConfigValue("musicVolume"));
         public static bool SoundsEnabled = bool.Parse(GetConfigValue("soundEnabled"));
         public static int SoundVolume = int.Parse(GetConfigValue("soundVolume"));
+        public static string OperatingSystem = GetConfigValue("OS");
 
         // Functions; CZ: Funkce
 
@@ -173,7 +174,7 @@ namespace DungeonCrawler
         /// <param name="Vertical"></param>
         public static void getCursorToCenter(int TextLenght, bool Vertical = true)
         {
-            if (Vertical)
+            if (Vertical && OperatingSystem=="win11")
             {
                 for (int i = 0; i < Console.BufferHeight / 2 - 1; i++)
                 {
@@ -185,7 +186,71 @@ namespace DungeonCrawler
                 Console.Write(' ');
             }
         }
+        /// <summary>
+        /// Menu with some options
+        /// CZ:
+        /// Meny s možnostmy
+        /// </summary>
+        /// <param name="options">Options in string[]</param>
+        /// <param name="defaultOption"></param>
+        /// <param name="centerMenu"></param>
+        /// <returns>the option index</returns>
+        public static int MenuWithOptions(string[] options,int defaultOption = 0, bool centerMenu = true)
+        {
+            int option = defaultOption;
+            bool hasTyped = false;
+            while (!hasTyped)
+            {
+                Console.SetCursorPosition(0, Console.CursorTop - 1);
+                if (centerMenu)
+                {
+                    getCursorToCenter(37, false);   
+                }
+                for (int i = 0; i < options.Length; i++)
+                {
+                    if (i == option)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Black;
+                        Console.BackgroundColor = ConsoleColor.White;
+                        Console.Write(options[i]);
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.BackgroundColor = ConsoleColor.Black;
+                    }
+                    else
+                    {
+                        Console.Write(options[i]);
+                    }
+                    Console.Write(" ");
+                }
+                Console.WriteLine();
+                switch (Console.ReadKey(true).Key)
+                {
+                    case ConsoleKey.LeftArrow:
+                        if (option > 0)
+                        {
+                            option--;
+                        }
+                        break;
+                    case ConsoleKey.Escape:
+                        hasTyped = true;
+                        break;
+                    case ConsoleKey.RightArrow:
+                        if (option < options.Length - 1)
+                        {
+                            option++;   
+                        }
+                        break;
+                    case ConsoleKey.Enter:
+                        return option;
+                        hasTyped = true;
+                        break;
+                }
+            }
+            return option;
+        }
     }
+
+
     public class Dialog
     {
         // Properties

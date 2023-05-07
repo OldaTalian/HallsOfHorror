@@ -8,6 +8,18 @@ bin-release/
 .settings/
 .github/
 
+presentation/.idea/
+presentation/*.iml
+presentation/*.iws
+presentation/*.eml
+presentation/out/
+presentation/.DS_Store
+presentation/.svn
+presentation/log/*.log
+presentation/tmp/**
+presentation/node_modules/
+presentation/.sass-cache
+
 # Executables
 *.swf
 *.air
