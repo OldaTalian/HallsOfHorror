@@ -174,7 +174,7 @@ namespace DungeonCrawler
         /// <param name="Vertical"></param>
         public static void getCursorToCenter(int TextLenght, bool Vertical = true)
         {
-            if (Vertical && OperatingSystem=="win11")
+            if (Vertical && OperatingSystem == "win11")
             {
                 for (int i = 0; i < Console.BufferHeight / 2 - 1; i++)
                 {

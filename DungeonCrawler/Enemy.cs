@@ -6,7 +6,7 @@ namespace DungeonCrawler
     internal class Enemy
     {
         public static char enemy = '☻';
-        public static byte enemyAttack = 5;
+        public static byte enemyAttack = 10;
         public static byte enemyHealth = 50;
 
         /// <summary>

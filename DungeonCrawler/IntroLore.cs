@@ -130,7 +130,7 @@ namespace DungeonCrawler
         /// <param name="delay"></param>
         private static void RenderFrame(int frameIndex, int delay = 200)
         {
-            if (Variables.OperatingSystem == "win10")
+            if (Variables.OperatingSystem == "win11")
             {
                 for (int i = 0; i < Console.BufferHeight / 2 - (Frames()[frameIndex].Length / 2); i++)
                 {

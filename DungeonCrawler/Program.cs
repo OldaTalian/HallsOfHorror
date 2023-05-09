@@ -101,10 +101,6 @@ namespace DungeonCrawler
                     gameIsPlaying = false;
                     break;
                 }
-                if (playerHealth < defaultPlayerHealth)
-                {
-                    playerHealth++;
-                }
                 if (FindOnMap('{', Map)[0] == -1)
                     if (FindOnMap('ł', Map)[0] != -1)
                         Map[FindOnMap('ł', Map)[0]][FindOnMap('ł', Map)[1]] = 'Ł';

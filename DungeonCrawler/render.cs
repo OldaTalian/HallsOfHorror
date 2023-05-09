@@ -38,7 +38,7 @@ namespace DungeonCrawler
                 // Default rendering; CZ: Normální rendrování
                 for (int i = 0; i < Map.Length; i++)
                 {
-                    getCursorToCenter(Map[0].Length, false);
+                    getCursorToCenter(Map[1].Length, false);
                     for (int j = 0; j < Map[i].Length; j++)
                     {
                         convertToMap(Map, j, i);
@@ -191,7 +191,7 @@ namespace DungeonCrawler
             int[] playerPos = mainPlayerPos;
             for (int i = 0; i < Map.Length; i++)
             {
-                getCursorToCenter(Map[0].Length , false);
+                getCursorToCenter(Map[1].Length , false);
                 for (int j = 0; j < Map[i].Length; j++)
                 {
                     int[] tilePos = { j, i };
