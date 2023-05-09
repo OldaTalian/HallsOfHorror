@@ -329,11 +329,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\oldat\\source\\repos\\DungeonCrawlerC-\\DungeonCrawler\\DungeonCrawler.csproj",
+      "projectUniqueName": "C:\\Users\\oldat\\source\\repos\\HallsOfHorror\\DungeonCrawler\\DungeonCrawler.csproj",
       "projectName": "Halls of Horror",
-      "projectPath": "C:\\Users\\oldat\\source\\repos\\DungeonCrawlerC-\\DungeonCrawler\\DungeonCrawler.csproj",
+      "projectPath": "C:\\Users\\oldat\\source\\repos\\HallsOfHorror\\DungeonCrawler\\DungeonCrawler.csproj",
       "packagesPath": "C:\\Users\\oldat\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\oldat\\source\\repos\\DungeonCrawlerC-\\DungeonCrawler\\obj\\",
+      "outputPath": "C:\\Users\\oldat\\source\\repos\\HallsOfHorror\\DungeonCrawler\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\oldat\\AppData\\Roaming\\NuGet\\NuGet.Config",

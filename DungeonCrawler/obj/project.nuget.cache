@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "QpGGKeh7uQ8XbH0ShMQuoLtbjJdmUD+9t3/Wfq+iwKq2fo0oR8uX3squIHIxY8FjpD9Pv1f/1K3B33s3hZTvzQ==",
+  "dgSpecHash": "nzs0ZELg9ACzYRbO3A4w6uWVNapMlfEoKh/te+Zdkc3MmUEsAWQPP/YH5zjOK+2gRl3K0MGVFFQ7jC457hmZfw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\oldat\\source\\repos\\DungeonCrawlerC-\\DungeonCrawler\\DungeonCrawler.csproj",
+  "projectFilePath": "C:\\Users\\oldat\\source\\repos\\HallsOfHorror\\DungeonCrawler\\DungeonCrawler.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\oldat\\.nuget\\packages\\microsoft.win32.systemevents\\7.0.0\\microsoft.win32.systemevents.7.0.0.nupkg.sha512",
     "C:\\Users\\oldat\\.nuget\\packages\\system.configuration.configurationmanager\\7.0.0\\system.configuration.configurationmanager.7.0.0.nupkg.sha512",
