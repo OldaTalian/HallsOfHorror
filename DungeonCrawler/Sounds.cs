@@ -16,7 +16,7 @@ namespace DungeonCrawler
             {
                 changeFFplay();
             }
-            PlaySound("loaded.wav");
+            PlaySound("assets/loaded.wav");
         }
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace DungeonCrawler
         /// </summary>
         /// <param name="name">Name of the file</param>
         /// <param name="volume"></param>
-        public static void PlayMusic(string name = "Error.mp3")
+        public static void PlayMusic(string name = "assets/Error.mp3")
         {
             if (MusicEnabled)
             {
@@ -101,23 +101,24 @@ namespace DungeonCrawler
         /// </summary>
         /// <param name="name"></param>
         /// <param name="volume"></param>
-        public static void PlaySound(string name = "Error.mp3")
+        public static void PlaySound(string name = "Error.mp3", double pitchVariation = 0)
         {
             if (SoundsEnabled)
             {
-                string fileLocalition = $"{AppDomain.CurrentDomain.BaseDirectory}{name}";
+                string fileLocation = $"{AppDomain.CurrentDomain.BaseDirectory}{name}";
                 try
                 {
-                    System.Diagnostics.Process.Start('"' + Get_ffPlay_location() + "\\ffplay" + '"', $"{fileLocalition} -volume {SoundVolume} -loglevel quiet -nodisp");
+                    double pitch = Math.Pow(2, pitchVariation / 12.0);
+                    string ffplayArgs = $"{fileLocation} -volume {SoundVolume} -loglevel quiet -nodisp -af \"atempo={pitch}\"";
+                    System.Diagnostics.Process.Start('"' + Get_ffPlay_location() + "\\ffplay" + '"', ffplayArgs);
                 }
                 catch (Exception e)
                 {
                     e.ToString();
-                    // LOL how to make no crashes
+                    // LOL it makes no crashes
                 }
             }
         }
-
 
         /// <summary>
         /// Stops every music that is playing

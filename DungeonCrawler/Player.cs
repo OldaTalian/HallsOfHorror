@@ -157,6 +157,7 @@ namespace DungeonCrawler
         public static void NextRoom(char tile = '░') 
         {
             ThisRoom++;
+            playerHealth = defaultPlayerHealth; //heal player
             Map = RandomMaps()[ThisRoom];
             RegisterEnemies(enemy); // bad
             lastStepOn = tile;

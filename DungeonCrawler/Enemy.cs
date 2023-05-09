@@ -1,5 +1,6 @@
 ﻿using static DungeonCrawler.Variables;
 using static DungeonCrawler.Fight;
+using static DungeonCrawler.Sounds;
 
 namespace DungeonCrawler
 {
@@ -221,6 +222,46 @@ namespace DungeonCrawler
             {
                 enemyLastTile[i] = '░';
             }
+        }
+    
+        public static void EnterBossFight()
+        {
+            Console.Clear();
+            StopMusic();
+            Thread.Sleep(300);
+
+            // display player's health; CZ: životy hráče
+            getCursorToCenter(15, false);
+            Console.WriteLine($"Your Health: {playerHealth}");
+            Thread.Sleep(2000);
+
+            // Display boss introduction
+            Console.WriteLine("\n\n\n\n");
+            getCursorToCenter(41, false);
+            TypeWriterEffect("Boss: You think you can escape from here?", 50);
+            Console.WriteLine();
+            Thread.Sleep(1000);
+            getCursorToCenter(14, false);
+            TypeWriterEffect("Think again...", 50);
+            Thread.Sleep(2000);
+
+            // Begin fight with boss
+            Console.ReadKey();
+            PlaySound("assets/fightStart.wav");
+            FightInProgress = true;
+            enemyFightHealthFull = 250;
+            enemyFightHealth = enemyFightHealthFull;
+            Thread.Sleep(1000);
+            PlayMusic("assets/bossfightloop.wav");
+            PlayerAttack(15);
+            if (playerHealth > 0)
+            {
+                GameWon();
+            }
+
+            StopMusic();
+            PlayMusic("assets/main_menu.mp3");
+
         }
     }
 }

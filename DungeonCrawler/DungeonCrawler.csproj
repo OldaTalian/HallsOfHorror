@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -12,31 +12,51 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="error.mp3" />
-    <None Remove="fightScene.wav" />
-    <None Remove="fightStart.wav" />
-    <None Remove="loaded.wav" />
-    <None Remove="main_menu.mp3" />
-    <None Remove="muzika10.wav" />
+    <None Remove="assets\bossfightloop.wav" />
+    <None Remove="assets\doorOpenClose.wav" />
+    <None Remove="assets\error.mp3" />
+    <None Remove="assets\fightScene.wav" />
+    <None Remove="assets\fightStart.wav" />
+    <None Remove="assets\hitHurt.wav" />
+    <None Remove="assets\loaded.wav" />
+    <None Remove="assets\main_menu.mp3" />
+    <None Remove="assets\music.wav" />
+    <None Remove="assets\muzika10.wav" />
+    <None Remove="assets\walk.wav" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="error.mp3">
+    <Content Include="assets\bossfightloop.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="fightScene.wav">
+    <Content Include="assets\doorOpenClose.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="fightStart.wav">
+    <Content Include="assets\error.mp3">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="loaded.wav">
+    <Content Include="assets\fightScene.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="main_menu.mp3">
+    <Content Include="assets\fightStart.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="muzika10.wav">
+    <Content Include="assets\hitHurt.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\loaded.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\main_menu.mp3">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\music.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\muzika10.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\walk.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

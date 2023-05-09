@@ -12,16 +12,17 @@ namespace DungeonCrawler
     {
         private static object inputLock = new object();
 
-        private static int enemyFightHealth = enemyHealth;
-        private static int enemyFightHealthFull = enemyHealth;
-        private static int enemycount;
+        public static int enemyFightHealth = enemyHealth;
+        public static int enemyFightHealthFull = enemyHealth;
+        private static int allEnemyDamage = enemyAttack;
+        private static int enemycount = 1;
         private static byte option = 1;
         private static string emotion = "Angry";
 
         public static void BeginFight( string sides, int healthMultiplier = 1)
         {
             StopMusic();
-            PlaySound("fightStart.wav");
+            PlaySound("assets/fightStart.wav");
             int enemyCount = 0;
             for (int i = 0; i < sides.Length; i++)
             {
@@ -32,22 +33,25 @@ namespace DungeonCrawler
             enemyFightHealth = enemyFightHealthFull;
             enemyFightHealth *= enemyCount;
             enemyFightHealthFull *= enemyCount;
+            allEnemyDamage *= enemyCount;
             enemycount = enemyCount;
+            PlayMusic("assets/fightScene.wav");
             FightInProgress = true;
-            PlayMusic("fightScene.wav");
-            PlayerAttack();
+            PlayerAttack(allEnemyDamage);
             FightEnd(sides, playerHealth > 0);
 
             StopMusic();
-            PlayMusic("main_menu.mp3");
+            PlayMusic("assets/main_menu.mp3");
         }
 
         public static bool FightInProgress = true;
         public static bool playerTurn = true;
 
-        public static void PlayerAttack()
+        public static void PlayerAttack(int damage = 10)
         {
             Console.Clear();
+            playerTurn = true;
+            FightInProgress = true;
             while (FightInProgress)
             {
                 while (playerTurn)
@@ -65,6 +69,8 @@ namespace DungeonCrawler
                 Console.WriteLine("\n\n\n");
                 getCursorToCenter(42, false);
                 Console.WriteLine($"You've hit enemy with {CalculateDamage(cursorposition)} points of damage");
+                cursormotion = true;
+                cursorposition = 0;
                 Console.ReadKey();
                 if (enemyFightHealth <= 0)
                 {
@@ -73,15 +79,14 @@ namespace DungeonCrawler
                 // ENEMY TURN
                 Console.Clear();
                 Random random = new Random();
-                int enemyHit = random.Next(2,enemyAttack);
+                int enemyHit = random.Next(2*enemycount,damage);
                 playerHealth -= enemyHit;
                 FightEnemyStats();
                 Console.WriteLine("\n\n\n");
+                PlaySound("assets/hitHurt.wav", random.Next(-10, 10));
                 getCursorToCenter(42, false);
                 Console.WriteLine($"Enemy hit you with {enemyHit} points of damage");
                 Console.ReadKey();
-                cursormotion = true;
-                cursorposition = 0;
                 playerTurn = true;
                 if (playerHealth <= 0)
                 {
@@ -200,7 +205,7 @@ namespace DungeonCrawler
             Console.WriteLine($"Your health : {playerHealth}");
         }
         
-        private static void FightEnd(string sides, bool won)
+        public static void FightEnd(string sides, bool won)
         {
             if (won)
             {

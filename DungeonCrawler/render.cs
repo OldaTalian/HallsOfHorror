@@ -154,9 +154,15 @@ namespace DungeonCrawler
                 }
                 else if (Map[y][x] == ' ') // void; CZ: díra
                 {
-                    Console.BackgroundColor = ConsoleColor.DarkBlue;
+                    Console.BackgroundColor = ConsoleColor.Green;
                     Console.Write(" ");
                     Console.BackgroundColor = ConsoleColor.Black;
+                }
+                else if (Map[y][x] == '@') // EndGame; CZ: konec hry
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.Write("♥");
+                    Console.ForegroundColor = ConsoleColor.White;
                 }
                 else if (Map[y][x] == '☻') // enemy; CZ: zloduch
                 {

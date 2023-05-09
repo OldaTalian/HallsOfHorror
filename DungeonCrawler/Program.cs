@@ -15,13 +15,14 @@ namespace DungeonCrawler
     {
         private static void Main(string[] args)
         {
+            Console.CursorVisible = false;
             if (GetConfigValue("OS")!= "other"&&GetConfigValue("OS") != "win11")
             {
                 changeOS();
             }
             Console.Title = "Halls of Horror";
             LoadMusic();
-            PlayMusic("main_menu.mp3");
+            PlayMusic("assets/main_menu.mp3");
             while (true)
             {
                 int option = Menu();
@@ -33,6 +34,10 @@ namespace DungeonCrawler
                     SettingsMenu();
                 }
                 else if (option == 3)
+                {
+                    ShowCredits();
+                }
+                else if (option == 4)
                 {
                     Environment.Exit(0);
                 }
@@ -80,9 +85,11 @@ namespace DungeonCrawler
             bool gameIsPlaying = true;
             while (gameIsPlaying) // Game tick: 
             {
+                Random random = new Random();
                 if (lastStepOn == '#')
                 {
                     playerHealth -= 5;
+                    PlaySound("assets/hitHurt.wav", random.Next(-10, 10));
                 }
                 if (lastStepOn == '{')
                 {
@@ -96,17 +103,29 @@ namespace DungeonCrawler
                 {
                     playerHealth = 0;
                 }
+                else if (lastStepOn == '@')
+                {
+                    EnterBossFight();
+                }
                 if (playerHealth <= 0)
                 {
                     gameIsPlaying = false;
                     break;
                 }
                 if (FindOnMap('{', Map)[0] == -1)
+                {
                     if (FindOnMap('ł', Map)[0] != -1)
+                    {
                         Map[FindOnMap('ł', Map)[0]][FindOnMap('ł', Map)[1]] = 'Ł';
+                        PlaySound("assets/doorOpenClose.wav", random.Next(-10, 10));
+                    }
+                }
                 if (FindOnMap('}', Map)[0] == -1)
                     if (FindOnMap('Ł', Map)[0] != -1)
+                    {
                         Map[FindOnMap('Ł', Map)[0]][FindOnMap('Ł', Map)[1]] = 'ł';
+                        PlaySound("assets/doorOpenClose.wav", random.Next(-10, 10));
+                    }
                 do
                 {
                     Move();
@@ -121,18 +140,7 @@ namespace DungeonCrawler
                     Console.ReadKey(true);
                 }
             }
-            getCursorToCenter(42);
-            Console.WriteLine("You ded ¯\\_☺_/¯\nPress ESC to continue...");
-            bool ending = true;
-            while (ending)
-            {
-                switch (Console.ReadKey(true).Key)
-                {
-                    case ConsoleKey.Escape:
-                    case ConsoleKey.Enter:
-                        ending = false; break;
-                }
-            }
+            PlayerDeath();
         }
     }
 }

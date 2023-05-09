@@ -1,4 +1,5 @@
-﻿using static DungeonCrawler.Program;
+﻿using System.Reflection;
+using static DungeonCrawler.Program;
 using static DungeonCrawler.Variables;
 
 namespace DungeonCrawler
@@ -30,7 +31,7 @@ namespace DungeonCrawler
         /// CZ:
         /// Vypíše logo hry do středu konzole
         /// </summary>
-        public static void PrintLogo() {
+        public static void PrintLogo(int delay = 0) {
             for (int i = 0; i < logo.Length; i++)
             {
                 getCursorToCenter(32,false);
@@ -39,12 +40,14 @@ namespace DungeonCrawler
                     Console.Write(logo[i][j]);
                 }
                 Console.WriteLine();
+                Thread.Sleep(delay);
             }
         }
         private static string[] menuOptions =
         {
             "New Game",
             "Settings",
+            "Credits",
             "Quit app",
         };
         private static byte option = 1;
@@ -105,7 +108,7 @@ namespace DungeonCrawler
                         }
                         break;
                     case ConsoleKey.Enter:
-                        if (option >= 1 && option <= 3)
+                        if (option >= 1 && option <= 4)
                         {
                             didSelect = true;
                         }

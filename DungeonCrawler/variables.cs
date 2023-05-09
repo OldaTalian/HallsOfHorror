@@ -1,4 +1,8 @@
 using static DungeonCrawler.Settings;
+using static DungeonCrawler.Sounds;
+using static DungeonCrawler.menu;
+using Microsoft.VisualBasic;
+
 namespace DungeonCrawler
 {
     internal class Variables
@@ -248,65 +252,132 @@ namespace DungeonCrawler
             }
             return option;
         }
-    }
 
-
-    public class Dialog
-    {
-        // Properties
-        public string Text { get; set; }
-        public string StartingText { get; set; }
-        public string CurrentEmotion { get; set; }
-
-
-        public Dictionary<string, char[][]> EnemyData { get; set; }
-
-        public Dialog(string startingText, Dictionary<string, char[][]> enemyData, string emotion = "Happy", int aftertime = 3)
+        /// <summary>
+        /// This creates the effect of each character being typed out one by one.
+        /// CZ:
+        /// Udělá effekt psaní písmen po sobě
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="delay"></param>
+        public static void TypeWriterEffect(string text, int delay)
         {
-            StartingText = startingText; EnemyData = enemyData; CurrentEmotion = emotion;
-            Clear(emotion, afterTime:aftertime);
+            foreach (char c in text)
+            {
+                Console.Write(c);
+                Thread.Sleep(delay);
+            }
         }
-        public void Write(string text, int writeTime, int afterTime = 3, string emotion = "")
+
+        /// <summary>
+        /// When player Dies
+        /// CZ:
+        /// Když hráč umře
+        /// </summary>
+        public static void PlayerDeath()
         {
-            if (emotion != "")
-            {
-                CurrentEmotion = emotion;
-                Clear(emotion: emotion);
-            }
-            char[] charMap = text.ToCharArray();
-            double threadTime = Convert.ToDouble(writeTime) / Convert.ToDouble(charMap.Length);
-            for (int i = 0; i < charMap.Length; i++)
-            {
-                Console.Write(charMap[i]);
-                Thread.Sleep(Convert.ToInt32(threadTime * 1000));
-            }
-            Text = Text + text;
-            Thread.Sleep(afterTime * 1000);
-        }
-        public void Clear(string emotion = "", int afterTime = 0)
-        {
-            Text = "";
-            if (emotion == "")
-            {
-                emotion = CurrentEmotion;
-            }
             Console.Clear();
-            char[] charMap = StartingText.ToCharArray();
-            for (int i = 0; i < charMap.Length; i++)
+            StopMusic();
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\n\n\n\n");
+            getCursorToCenter(9, false);
+            Console.WriteLine("GAME OVER\n\n\n");
+            Thread.Sleep(1500);
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("\n\n\n");
+            getCursorToCenter(28, false);
+            Console.WriteLine("Press any key to continue...");
+            bool ending = true;
+            while (ending)
             {
-                Console.Write(charMap[i]);
-            }
-            Console.WriteLine();
-            for (int i = 0; i < EnemyData[emotion].Length; i++)
-            {
-                for (int j = 0; j < EnemyData[emotion][i].Length; j++)
+                switch (Console.ReadKey(true).Key)
                 {
-
-                    Console.Write(EnemyData[emotion][i][j]);
+                    case ConsoleKey.Escape:
+                    case ConsoleKey.Enter:
+                        ending = false; break;
                 }
-                Console.WriteLine();
             }
-            Thread.Sleep(afterTime * 1000);
+        }
+
+        /// <summary>
+        /// When player wons
+        /// CZ:
+        /// Když hráč vyhraje
+        /// </summary>
+        public static void GameWon()
+        {
+            Console.Clear();
+            StopMusic();
+            Thread.Sleep(300);
+            getCursorToCenter(32, false);
+            TypeWriterEffect("Congratulations, you have won the game!",50);
+            Thread.Sleep(2000);
+            getCursorToCenter(42, false);
+            TypeWriterEffect("You have successfully escaped the halls of horror.", 50);
+            Thread.Sleep(2000);
+            ShowCredits();
+            Thread.Sleep(1000);
+            getCursorToCenter(25, true);
+            Console.WriteLine("Thank you for playing.");
+            Thread.Sleep(2000);
+            getCursorToCenter(30, false);
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
+        }
+
+        /// <summary>
+        /// Displays creators and makers of this game
+        /// CZ:
+        /// Ukáže všechny vývojáře této hry
+        /// </summary>
+        public static void ShowCredits()
+        {
+            Console.Clear();
+            for (int i = 0; i <= Console.WindowHeight; i++)
+            {
+                Console.WriteLine();
+                if (Console.KeyAvailable)
+                {
+                    if (Console.ReadKey(true).Key == ConsoleKey.Enter)
+                    {
+                        return;
+                    }
+                }
+            }
+            int delay = 500;
+            PrintLogo(delay);
+            string[] credits = {"","","","made by:", "Olda Talián", "Lukáš Kotek", "Patrik Rychtařík","","",  "music by:", "Olda Talián", "Letorin#9895" };
+
+            Console.WriteLine();
+            Thread.Sleep(delay);
+
+            for (int i = 0; i < credits.Length; i++)
+            {
+                getCursorToCenter(credits[i].Length, false);
+                Console.WriteLine(credits[i]);
+                Thread.Sleep(delay);
+                Console.WriteLine();
+                Thread.Sleep(delay);
+                if (Console.KeyAvailable)
+                {
+                    if (Console.ReadKey(true).Key == ConsoleKey.Enter)
+                    {
+                        return;
+                    }
+                }
+            }
+            for (int i = 0; i <= Console.WindowHeight; i++)
+            {
+                Console.WriteLine();
+                Thread.Sleep(delay);
+                if (Console.KeyAvailable)
+                {
+                    if (Console.ReadKey(true).Key == ConsoleKey.Enter)
+                    {
+                        return;
+                    }
+                }
+            }
         }
     }
 }
