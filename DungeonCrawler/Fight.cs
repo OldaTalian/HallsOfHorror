@@ -15,27 +15,13 @@ namespace DungeonCrawler
         private static int enemyFightHealth = enemyHealth;
         private static int enemyFightHealthFull = enemyHealth;
         private static int enemycount;
-        private static int[] fightPlayerPos = { 4, 5 };
-
-        private static char[][] fightMap =
-        {
-            "█████████████".ToCharArray(),
-            "█           █".ToCharArray(),
-            "█           █".ToCharArray(),
-            "█           █".ToCharArray(),
-            "█           █".ToCharArray(),
-            "█           █".ToCharArray(),
-            "█           █".ToCharArray(),
-            "█████████████".ToCharArray(),
-        };
-
         private static byte option = 1;
         private static string emotion = "Angry";
 
         public static void BeginFight( string sides)
         {
             StopMusic();
-            PlaySound("fightStart.wav"); //////////////////// VOLUME
+            PlaySound("fightStart.wav");
             int enemyCount = 0;
             for (int i = 0; i < sides.Length; i++)
             {
@@ -47,61 +33,138 @@ namespace DungeonCrawler
             enemyFightHealth *= enemyCount;
             enemyFightHealthFull *= enemyCount;
             enemycount = enemyCount;
-            Dialog enemyAngry = new Dialog("You've encountered an enemy", EnemyEmotions, emotion, 1);
+            FightInProgress = true;
             PlayMusic("fightScene.wav");
-            enemyAngry.Write("I dont like you",1,0);
-
-
-            Fighting(sides);
+            PlayerAttack();
 
 
             StopMusic();
             PlayMusic("main_menu.mp3");
         }
 
+        public static bool FightInProgress = true;
 
+        public static void PlayerAttack()
+        {
+            Console.Clear();
+            while (FightInProgress)
+            {
+                AttackRender();
+                PlayerAttackControl();
+                Thread.Sleep(1);
+            }
+            Console.WriteLine(CalculateDamage(cursorposition));
+            
+            Console.ReadKey();
+        }
+        private static int CalculateDamage(int cursorPos)
+        {
+            if (cursorPos < 10)
+            {
+                return 3;
+            }
+            else if (cursorPos <17)
+            {
+                return 12;
+            }
+            else if(cursorPos == 18)
+            {
+                return 30;
+            }
+            else if (cursorPos < 25)
+            {
+                return 12;
+            }
+            else
+            {
+                return 3;
+            }
 
+        }
+        public static int cursorposition = 0;
+        public static bool cursormotion = true;
         private static string[] selectionMenu =
         {
             "Attack",
             "Use items",
         };
-
-        private static bool fightInProgress = true;
-        public static void Fighting(string sides)
+        public static void AttackRender()
         {
             Console.Clear();
-            Dialog angryEnemy = new Dialog("",EnemyEmotions, emotion, 0);
-            angryEnemy.Clear(emotion);
-            fightInProgress = true;
-            while (fightInProgress)
+            for(int i =0;i<5;i++)
             {
-                // Render enemy stats
-                FightEnemyStats();
-                // Render menu
-                FightMenu();
-                if (enemyFightHealth <= 0)
+                for (int j = 0; j < 36; j++)
                 {
-                    fightInProgress = false;
-                    FightEnd(sides, true);
-                    Console.ReadKey();
+                    if (j < 10)
+                    {
+                        Console.BackgroundColor = ConsoleColor.Red;
+                        Console.Write(" ");
+                        Console.BackgroundColor = ConsoleColor.Black;
+                    }
+                    else if (j < 17)
+                    {
+                        Console.BackgroundColor = ConsoleColor.Yellow;
+                        Console.Write(" ");
+                        Console.BackgroundColor = ConsoleColor.Black;
+                    }
+                    else if (j < 18)
+                    {
+                        Console.BackgroundColor = ConsoleColor.Green;
+                        Console.Write(" ");
+                        Console.BackgroundColor = ConsoleColor.Black;
+                    }
+                    else if (j < 25)
+                    {
+                        Console.BackgroundColor = ConsoleColor.Yellow;
+                        Console.Write(" ");
+                        Console.BackgroundColor = ConsoleColor.Black;  
+                    }
+                    else
+                    {
+                        Console.BackgroundColor = ConsoleColor.Red;
+                        Console.Write(" ");
+                        Console.BackgroundColor = ConsoleColor.Black;
+                    }
+                    if (j == cursorposition)
+                    {
+                        Console.SetCursorPosition(Console.CursorLeft-1, Console.CursorTop);
+                        Console.Write(" ");
+                    }
                 }
-                // Enemy attack
-                FightEnemyAttack();
-                if (playerHealth <= 0)
+                Console.WriteLine();
+            }
+            if (cursorposition == 36)
+            {
+                cursormotion = false;
+            }
+            else if (cursorposition == 0)
+            {
+                cursormotion = true;
+            }
+            if(cursormotion)
+            {
+                cursorposition++;
+            }
+            else
+            {
+                cursorposition--;
+            }
+        }
+        public static void PlayerAttackControl()
+        {
+            if (Console.KeyAvailable)
+            {
+                switch(Console.ReadKey().Key)
                 {
-                    fightInProgress = false;
-                    FightEnd(sides, false);
-                    Console.ReadKey();
-                }
-                if (enemyFightHealth <= 0)
-                {
-                    fightInProgress = false;
-                    FightEnd(sides, true);
-                    Console.ReadKey();
+                    case ConsoleKey.Enter:
+                        FightInProgress = false;
+                        break;
                 }
             }
         }
+
+        private static bool fightInProgress = true;
+        
         private static void FightEnemyStats()
         {
             Console.WriteLine();
@@ -134,7 +197,7 @@ namespace DungeonCrawler
             Console.WriteLine(damageMultiplier);
             if (option == 1)
             {
-                enemyFightHealth -= playerAttack * damageMultiplier;
+                PlayerAttack();
             }
             else
             {
@@ -150,7 +213,6 @@ namespace DungeonCrawler
             {
                 Console.Clear();
                 EnemyFace();
-                FightRender();
                 SelectionMenu(option);
                 ConsoleKey keyPressed = Console.ReadKey(true).Key;
                 switch (keyPressed)
@@ -190,186 +252,7 @@ namespace DungeonCrawler
 
         private static int time = 0;
         private static int timeAttack = 0;
-        private static bool enemyAttacks = true;
         private static bool isMenuActive = true;
-        private static void FightEnemyAttack()
-        {
-            time = 0;
-            timeAttack = 0;
-            enemyAttacks = true;
-            Console.Clear();
-
-            fightMove = true;
-            while (enemyAttacks)
-            {
-                Thread renderThread = new Thread(new ThreadStart(FightRender));
-                Thread moveThread = new Thread(new ThreadStart(FightMove));
-                FightEnemyCalcs();
-                if (fightMap[fightPlayerPos[0]][fightPlayerPos[1]] == '#' || fightMap[fightPlayerPos[0]][fightPlayerPos[1]] == '*')
-                {
-                    playerHealth -= 1;
-                }
-                if (playerHealth <= 0)
-                {
-                    enemyAttacks = false;
-                }
-                renderThread.Start();
-                moveThread.Start();
-                Thread.Sleep(50);
-                time += 50;
-                timeAttack += 50;
-            }
-        }
-
-        private static void FightEnemyCalcs()
-        {
-            Random rdn = new Random();
-            int safe = rdn.Next(2, fightMap.Length - 2);
-            int attackType = rdn.Next(1, 3);
-
-
-            // SPAWN ATTACK 
-            if (time < 50)
-            {
-                // FALLING #
-                if (attackType == 1)
-                {
-                    for (int i = 1; i < fightMap[1].Length; i++)
-                    {
-                        if (i != fightMap[1].Length - 1 && i != safe)
-                        {
-                            fightMap[1][i] = '#';
-                        }
-                    }
-                }
-                // METEORS
-                else if (attackType == 2)
-                {
-                    int column = rdn.Next(1, fightMap[0].Length - 1);
-                    fightMap[1][column] = '*';
-                }
-                timeAttack = 0;
-            }
-
-            // Stop enemy turn
-            if (time > 900)
-            {
-                enemyAttacks = false;
-                fightMove = false;
-            }
-
-            // Calculate Attacks
-
-            for (int i = 1; i < fightMap.Length - 1; i++)
-            {
-                for (int j = 1; j < fightMap[i].Length - 1; j++)
-                {
-                    if (fightMap[i - 1][j] == '*' && fightMap[i][j] == ' ')
-                    {
-                        fightMap[i][j] = '*';
-                        fightMap[i - 1][j] = ' ';
-                        i++;
-                    }
-                    else if (fightMap[i - 1][j] == '#' && fightMap[i][j] == ' ')
-                    {
-                        fightMap[i][j] = '#';
-                        fightMap[i - 1][j] = ' ';
-                        if(j == fightMap[i].Length - 2)
-                        {
-                            i++;
-                        }
-                    }
-                    else if (fightMap[i - 1][j] == '#' && fightMap[i][j] == '#')
-                    {
-                        fightMap[i - 1][j] = ' ';
-                    }
-                }
-            }
-
-            // REMOVE LAST LAYER
-            if(timeAttack < 300)
-            {
-                for (int i = 1; i < fightMap[fightMap.Length - 2].Length; i++)
-                {
-                    if (i != fightMap[fightMap.Length - 2].Length - 1 && i != safe)
-                    {
-                        fightMap[fightMap.Length - 2][i] = ' ';
-                    }
-                }
-            }
-        }
-        private static bool fightMove = true;
-        private static void FightMove()
-        {
-            if (Console.KeyAvailable && !isMenuActive)
-            {
-                ConsoleKey keyPressed;
-                lock (inputLock)
-                {
-                    keyPressed = Console.ReadKey(true).Key;
-                }
-                switch (keyPressed)
-                {
-                    case ConsoleKey.W:
-                    case ConsoleKey.UpArrow:
-                    if (fightMap[fightPlayerPos[0] - 1][fightPlayerPos[1]] != '█')
-                        fightPlayerPos[0]--;
-                        break;
-                    case ConsoleKey.S:
-                    case ConsoleKey.DownArrow:
-                    if (fightMap[fightPlayerPos[0] + 1][fightPlayerPos[1]] != '█')
-                        fightPlayerPos[0]++;
-                    break;
-                    case ConsoleKey.A:
-                    case ConsoleKey.LeftArrow:
-                    if (fightMap[fightPlayerPos[0]][fightPlayerPos[1] - 1] != '█')
-                        fightPlayerPos[1]--;
-                    break;
-                    case ConsoleKey.D:
-                    case ConsoleKey.RightArrow:
-                    if (fightMap[fightPlayerPos[0]][fightPlayerPos[1] + 1] != '█')
-                        fightPlayerPos[1]++;
-                    break;
-            }
-            }
-            else
-            {
-                return;
-            }
-
-        }
-        private static void FightRender()
-        {
-            Console.Clear();
-            FightEnemyStats();
-            for (int i = 0; i < fightMap.Length; i++)
-            {
-                for (int j = 0; j < fightMap[i].Length; j++)
-                {
-                    if (i == fightPlayerPos[0] && j == fightPlayerPos[1])
-                    {
-                        Console.Write(player);
-                    }
-                    else if (fightMap[i][j] == '#')
-                    {
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        Console.Write(fightMap[i][j]);
-                        Console.ForegroundColor= ConsoleColor.White;
-                    }
-                    else if (fightMap[i][j] == '*')
-                    {
-                        Console.ForegroundColor = ConsoleColor.DarkRed;
-                        Console.Write(fightMap[i][j]);
-                        Console.ForegroundColor = ConsoleColor.White;
-                    }
-                    else
-                    {
-                        Console.Write(fightMap[i][j]);
-                    }
-                }
-                Console.WriteLine();
-            }
-        }
         private static void FightEnd(string sides, bool won)
         {
             if (sides[0] == 'u')

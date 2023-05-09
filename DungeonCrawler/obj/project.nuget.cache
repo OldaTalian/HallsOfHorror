@@ -1,15 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "QpGGKeh7uQ8XbH0ShMQuoLtbjJdmUD+9t3/Wfq+iwKq2fo0oR8uX3squIHIxY8FjpD9Pv1f/1K3B33s3hZTvzQ==",
+  "dgSpecHash": "7WA8XSmwmV9TNpaZ3uT9CircKCu6wKqv2bV2ZQorK32av7o5SJs41EXJ8GLYHNNCsntBMjo3DL/fUKoWd0sQnA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\oldat\\source\\repos\\DungeonCrawlerC-\\DungeonCrawler\\DungeonCrawler.csproj",
+  "projectFilePath": "D:\\MVS Projects\\DungeonCrawlerC-\\DungeonCrawler\\DungeonCrawler.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\oldat\\.nuget\\packages\\microsoft.win32.systemevents\\7.0.0\\microsoft.win32.systemevents.7.0.0.nupkg.sha512",
-    "C:\\Users\\oldat\\.nuget\\packages\\system.configuration.configurationmanager\\7.0.0\\system.configuration.configurationmanager.7.0.0.nupkg.sha512",
-    "C:\\Users\\oldat\\.nuget\\packages\\system.drawing.common\\7.0.0\\system.drawing.common.7.0.0.nupkg.sha512",
-    "C:\\Users\\oldat\\.nuget\\packages\\system.security.cryptography.protecteddata\\7.0.0\\system.security.cryptography.protecteddata.7.0.0.nupkg.sha512",
-    "C:\\Users\\oldat\\.nuget\\packages\\system.security.permissions\\7.0.0\\system.security.permissions.7.0.0.nupkg.sha512",
-    "C:\\Users\\oldat\\.nuget\\packages\\system.windows.extensions\\7.0.0\\system.windows.extensions.7.0.0.nupkg.sha512"
+    "C:\\Users\\Patrik Rychtařík\\.nuget\\packages\\microsoft.win32.systemevents\\7.0.0\\microsoft.win32.systemevents.7.0.0.nupkg.sha512",
+    "C:\\Users\\Patrik Rychtařík\\.nuget\\packages\\system.configuration.configurationmanager\\7.0.0\\system.configuration.configurationmanager.7.0.0.nupkg.sha512",
+    "C:\\Users\\Patrik Rychtařík\\.nuget\\packages\\system.drawing.common\\7.0.0\\system.drawing.common.7.0.0.nupkg.sha512",
+    "C:\\Users\\Patrik Rychtařík\\.nuget\\packages\\system.security.cryptography.protecteddata\\7.0.0\\system.security.cryptography.protecteddata.7.0.0.nupkg.sha512",
+    "C:\\Users\\Patrik Rychtařík\\.nuget\\packages\\system.security.permissions\\7.0.0\\system.security.permissions.7.0.0.nupkg.sha512",
+    "C:\\Users\\Patrik Rychtařík\\.nuget\\packages\\system.windows.extensions\\7.0.0\\system.windows.extensions.7.0.0.nupkg.sha512"
   ],
   "logs": []
 }
