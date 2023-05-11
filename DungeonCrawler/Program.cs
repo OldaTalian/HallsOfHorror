@@ -19,6 +19,7 @@ namespace DungeonCrawler
             if (GetConfigValue("OS")!= "other"&&GetConfigValue("OS") != "win11")
             {
                 changeOS();
+                Console.Clear();
             }
             Console.Title = "Halls of Horror";
             LoadMusic();
@@ -106,7 +107,10 @@ namespace DungeonCrawler
                 else if (lastStepOn == '@')
                 {
                     EnterBossFight();
-                    return;
+                    if (playerHealth > 0)
+                    {
+                        return;
+                    }
                 }
                 if (playerHealth <= 0)
                 {

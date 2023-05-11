@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using static DungeonCrawler.Variables;
+using static DungeonCrawler.Settings;
 
 namespace DungeonCrawler
 {
@@ -26,14 +27,15 @@ namespace DungeonCrawler
         /// </summary>
         public static void changeFFplay()
         {
+            Console.CursorVisible = true;
             getCursorToCenter(35, false);
             Console.WriteLine("If you want to have music, then install ffmpeg");
             getCursorToCenter(35, false);
             Console.WriteLine("and write here the path to the /bin folder");
             getCursorToCenter(35, false);
             Console.WriteLine("example: C:\\Program Files (x86)\\ffmpeg\\bin");
-            getCursorToCenter(35, false);
-            File.WriteAllText("music.yaml", (Console.ReadLine()));
+            SetConfigValue("ffmpegLocation", (Console.ReadLine()));
+            Console.CursorVisible = false;
             Console.Clear();
         }
 
@@ -45,24 +47,7 @@ namespace DungeonCrawler
         /// <returns></returns>
         public static string Get_ffPlay_location()
         {
-            try
-            {
-                string filename = "music.yaml";
-                if (File.Exists(filename))
-                {
-                    return File.ReadAllText(filename);
-                }
-                else
-                {
-                    File.WriteAllText(filename, (""));
-                    return File.ReadAllText(filename);
-                }
-            }
-            catch (Exception)
-            {
-                Console.WriteLine("Error occured when opening music.yaml");
-                throw;
-            }
+            return GetConfigValue("ffmpegLocation");
         }
         private static Process musicProcess;
 

@@ -91,6 +91,15 @@ namespace DungeonCrawler
                 changeOS();
                 return;
             }
+            else if (key == "* on GitHub →")
+            {
+                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+                {
+                    FileName = "https://github.com/OldaTalian/HallsOfHorror/",
+                    UseShellExecute = true
+                });
+                return;
+            }
             // If the variable is bool; CZ: Pokud je hodnota true/false
             if (key.Split(" = ")[1].ToLower() == "true" || key.Split(" = ")[1].ToLower() == "false") 
             {
@@ -245,7 +254,7 @@ namespace DungeonCrawler
                     roomConfigs.Add($"{key} = {value}");
                 }
             }
-            roomConfigs.Add("ffmpegLocation = " + Get_ffPlay_location()); // DungeonCrawler.Sound;;
+            roomConfigs.Add("* on GitHub →");
             return roomConfigs.ToArray();
         }
 
