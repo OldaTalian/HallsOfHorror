@@ -63,7 +63,7 @@ namespace DungeonCrawler
             RevertOriginalMaps();
             RandomMaps(true);
             // Load map; CZ: Načte mapu
-            if (DO_DEBUG)
+            if (DEBUG_ROOM)
             {
                 Map = AllRooms()[0];
             }
@@ -106,6 +106,7 @@ namespace DungeonCrawler
                 else if (lastStepOn == '@')
                 {
                     EnterBossFight();
+                    return;
                 }
                 if (playerHealth <= 0)
                 {

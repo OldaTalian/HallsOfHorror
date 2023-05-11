@@ -15,13 +15,27 @@ namespace DungeonCrawler
         {
             Console.Clear();
             if (Map == null) return; // Dont try to render when there is no map; CZ: Nerendrovat, když není mapa
-            getCursorToCenter(34, false);
-            Console.WriteLine("Rooms: " + (ThisRoom) + "/" + (AllRooms().Length - 1) + " |  x:" + mainPlayerPos[0] + " y:" + mainPlayerPos[1] +
-                " Health: " + ((playerHealth > 0) ? playerHealth : 0)); //DEBUG zpráva
-
-            if(Variables.OperatingSystem == "win11")
+            if (showDebug)
             {
-                for (int i = 0; i < Console.BufferHeight / 2 - (Map.Length / 2 + 1); i++)
+                getCursorToCenter(30, false);
+                Console.Write("NM[1][1]:"); // Next Map on [1][1], good for debuging maps
+                char nextMapChar = (ThisRoom < AllRooms().Length - 1) ? RandomMaps()[ThisRoom + 1][1][1] : ' ';
+                Console.Write(nextMapChar);    
+                Console.Write("|M:");// all maps
+                Console.Write((ThisRoom) + "/" + (AllRooms().Length - 1)); 
+                Console.Write("|x:" + mainPlayerPos[0] + "y:" + mainPlayerPos[1]); // cordinates
+                Console.WriteLine();
+            }
+            getCursorToCenter(6, false);
+            Console.WriteLine("Health");
+            getCursorToCenter(20, false);
+            HealthBar(playerHealth, defaultPlayerHealth);
+            getCursorToCenter(9, false);
+            Console.WriteLine($"{playerHealth} / {defaultPlayerHealth}");
+
+            if (Variables.OperatingSystem == "win11")
+            {
+                for (int i = 0; i < Console.WindowHeight / 2 - (Map.Length / 2 + 3); i++)
                 {
                     Console.WriteLine();
                 }
@@ -154,9 +168,13 @@ namespace DungeonCrawler
                 }
                 else if (Map[y][x] == ' ') // void; CZ: díra
                 {
-                    Console.BackgroundColor = ConsoleColor.Green;
+                    Console.BackgroundColor = ConsoleColor.DarkCyan;
                     Console.Write(" ");
                     Console.BackgroundColor = ConsoleColor.Black;
+                }
+                else if (Map[y][x] == '\\') // back Door; CZ: zpáteční dveře
+                {
+                    Console.Write("|");
                 }
                 else if (Map[y][x] == '@') // EndGame; CZ: konec hry
                 {
@@ -245,5 +263,28 @@ namespace DungeonCrawler
                 Console.WriteLine();
             }
         }
+        public static void HealthBar(int health, int maxHealth, ConsoleColor color = ConsoleColor.Gray)
+        {
+            int maxLength = 20;
+            double scalingFactor = (double)maxLength / maxHealth;
+            int renderedHealth = (int)(health * scalingFactor);
+            Console.ForegroundColor = color;
+            Console.BackgroundColor = ConsoleColor.DarkGray;
+            for (int i = 0; i < maxLength; i++)
+            {
+                if (i < renderedHealth)
+                {
+                    Console.Write("█");
+                }
+                else
+                {
+                    Console.Write(" ");
+                }
+            }
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.BackgroundColor = ConsoleColor.Black;
+        }
+
     }
 }

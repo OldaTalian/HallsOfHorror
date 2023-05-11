@@ -22,7 +22,8 @@ namespace DungeonCrawler
         public static int ThisRoom = 0;
         public static long currentTick = 0;
 
-        public static bool DO_DEBUG = bool.Parse(GetConfigValue("roomDebugEnabled"));
+        public static bool DEBUG_ROOM = bool.Parse(GetConfigValue("roomDebugEnabled"));
+        public static bool showDebug = bool.Parse(GetConfigValue("showDebug"));
         public static bool MusicEnabled = bool.Parse(GetConfigValue("musicEnabled"));
         public static int MusicVolume = int.Parse(GetConfigValue("musicVolume"));
         public static bool SoundsEnabled = bool.Parse(GetConfigValue("soundEnabled"));
@@ -67,6 +68,10 @@ namespace DungeonCrawler
             bool output = false;
             int x = pos[0];
             int y = pos[1];
+            if (y > Map.Length -1)
+            {
+                return false;
+            }
             if (direction == 'u') // UP
             {
                 if (y != 0 && Map[y - 1][x] == tile)
@@ -312,11 +317,13 @@ namespace DungeonCrawler
             getCursorToCenter(32, false);
             TypeWriterEffect("Congratulations, you have won the game!",50);
             Thread.Sleep(2000);
+            Console.WriteLine();
             getCursorToCenter(42, false);
             TypeWriterEffect("You have successfully escaped the halls of horror.", 50);
             Thread.Sleep(2000);
             ShowCredits();
             Thread.Sleep(1000);
+            Console.Clear() ;
             getCursorToCenter(25, true);
             Console.WriteLine("Thank you for playing.");
             Thread.Sleep(2000);

@@ -173,7 +173,7 @@ namespace DungeonCrawler
                         if (Map[enemyY][enemyX + direction] != '█' && Map[enemyY][enemyX + direction] != player && Map[enemyY][enemyX + direction] != enemyType)
                         {
                             // If the enemy character was previously standing on a tile, replace it with that tile.
-                            Map[enemyY][enemyX] = (enemyLastTile[i] != ' ') ? enemyLastTile[i] : '░';
+                            Map[enemyY][enemyX] =  enemyLastTile[i];
 
                             // Update the record of the tile the enemy character is now standing on.
                             enemyLastTile[i] = Map[enemyY][enemyX + direction];
@@ -199,7 +199,7 @@ namespace DungeonCrawler
                         // Check whether the tile to the left or right of the enemy character is available to move into.
                         if (Map[enemyY + direction][enemyX] != '█' && Map[enemyY + direction][enemyX] != player && Map[enemyY + direction][enemyX] != enemyType)
                         {
-                            Map[enemyY][enemyX] = (enemyLastTile[i] != ' ') ? enemyLastTile[i] : '░';
+                            Map[enemyY][enemyX] = enemyLastTile[i];
                             enemyLastTile[i] = Map[enemyY + direction][enemyX];
                             Map[enemyY + direction][enemyX] = enemyType;
                         }
@@ -258,10 +258,9 @@ namespace DungeonCrawler
             {
                 GameWon();
             }
-
             StopMusic();
             PlayMusic("assets/main_menu.mp3");
-
+            return;
         }
     }
 }

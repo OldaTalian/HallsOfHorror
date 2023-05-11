@@ -88,6 +88,10 @@ namespace DungeonCrawler
                         moved = false;
                     }
                     break;
+                case ConsoleKey.F3:
+                    // Toggles Debug
+                    showDebug = !showDebug;
+                    break;
                 default: moved = false; break;
             }
         }

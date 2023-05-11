@@ -1,10 +1,8 @@
-﻿using System.Threading.Tasks;
-using static DungeonCrawler.Enemy;
+﻿using static DungeonCrawler.Enemy;
+using static DungeonCrawler.Render;
 
 using static DungeonCrawler.Variables;
 using static DungeonCrawler.Sounds;
-using System.Text;
-using System.Data.Common;
 
 namespace DungeonCrawler
 {
@@ -54,10 +52,12 @@ namespace DungeonCrawler
             FightInProgress = true;
             while (FightInProgress)
             {
+                Random random = new Random();
                 while (playerTurn)
                 {
                     Console.Clear();
                     FightEnemyStats();
+                    Console.WriteLine("\n\n\n");
                     AttackRender();
                     PlayerAttackControl();
                     Thread.Sleep(Math.Abs(CalculateDamage(cursorposition) - 35));
@@ -69,8 +69,8 @@ namespace DungeonCrawler
                 Console.WriteLine("\n\n\n");
                 getCursorToCenter(42, false);
                 Console.WriteLine($"You've hit enemy with {CalculateDamage(cursorposition)} points of damage");
-                cursormotion = true;
-                cursorposition = 0;
+                cursormotion = random.NextSingle() > 0.5;
+                cursorposition = random.Next(0,20);
                 Console.ReadKey();
                 if (enemyFightHealth <= 0)
                 {
@@ -78,7 +78,6 @@ namespace DungeonCrawler
                 }
                 // ENEMY TURN
                 Console.Clear();
-                Random random = new Random();
                 int enemyHit = random.Next(2*enemycount,damage);
                 playerHealth -= enemyHit;
                 FightEnemyStats();
@@ -105,7 +104,7 @@ namespace DungeonCrawler
             {
                 return 12;
             }
-            else if(cursorPos == 18)
+            else if(cursorPos == 17)
             {
                 return 30;
             }
@@ -124,7 +123,23 @@ namespace DungeonCrawler
 
         public static void AttackRender()
         {
-            for(int i =0;i<5;i++)
+            if (cursorposition == 35)
+            {
+                cursormotion = false;
+            }
+            else if (cursorposition == 0)
+            {
+                cursormotion = true;
+            }
+            if (cursormotion)
+            {
+                cursorposition++;
+            }
+            else
+            {
+                cursorposition--;
+            }
+            for (int i =0;i<5;i++)
             {
                 getCursorToCenter(36,false);
                 for (int j = 0; j < 36; j++)
@@ -141,7 +156,7 @@ namespace DungeonCrawler
                         Console.Write(" ");
                         Console.BackgroundColor = ConsoleColor.Black;
                     }
-                    else if (j < 18)
+                    else if (j == 17)
                     {
                         Console.BackgroundColor = ConsoleColor.Green;
                         Console.Write(" ");
@@ -167,22 +182,6 @@ namespace DungeonCrawler
                 }
                 Console.WriteLine();
             }
-            if (cursorposition == 36)
-            {
-                cursormotion = false;
-            }
-            else if (cursorposition == 0)
-            {
-                cursormotion = true;
-            }
-            if(cursormotion)
-            {
-                cursorposition++;
-            }
-            else
-            {
-                cursorposition--;
-            }
         }
         public static void PlayerAttackControl()
         {
@@ -199,12 +198,21 @@ namespace DungeonCrawler
         
         private static void FightEnemyStats()
         {
-            getCursorToCenter(25,false);
-            Console.WriteLine(enemycount > 1 ? $"{enemycount} enemies" : "Enemy" + $" - Health : {enemyFightHealth}/{enemyFightHealthFull}");
-            getCursorToCenter(15,false);
-            Console.WriteLine($"Your health : {playerHealth}");
+            getCursorToCenter(7, false);
+            Console.WriteLine("Your HP");
+            getCursorToCenter(20, false);
+            HealthBar(playerHealth, defaultPlayerHealth);
+            getCursorToCenter(9, false);
+            Console.WriteLine($"{playerHealth} / {defaultPlayerHealth}");
+            Console.WriteLine();
+            getCursorToCenter(10, false);
+            Console.WriteLine(enemycount > 1?"Enemies HP":"Enemy's HP");
+            getCursorToCenter(20,false);
+            HealthBar(enemyFightHealth,enemyFightHealthFull,ConsoleColor.DarkMagenta);
+            getCursorToCenter(9, false);
+            Console.WriteLine($"{enemyFightHealth} / {enemyFightHealthFull}");
         }
-        
+
         public static void FightEnd(string sides, bool won)
         {
             if (won)
