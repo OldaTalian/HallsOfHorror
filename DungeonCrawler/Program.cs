@@ -8,6 +8,7 @@ using static DungeonCrawler.Render;
 using static DungeonCrawler.Sounds;
 using static DungeonCrawler.Variables;
 using static DungeonCrawler.IntroLore;
+using static DungeonCrawler.roomMaker;
 
 namespace DungeonCrawler
 {
@@ -31,14 +32,19 @@ namespace DungeonCrawler
                 if (option == 1) {
                     StartNewGame();
                 }
-                else if(option == 2) {
+                else if(option == 2)
+                {
+                    Console.Clear();
+                    CreateRoom();
+                }
+                else if(option == 3) {
                     SettingsMenu();
                 }
-                else if (option == 3)
+                else if (option == 4)
                 {
                     ShowCredits();
                 }
-                else if (option == 4)
+                else if (option == 5)
                 {
                     Environment.Exit(0);
                 }

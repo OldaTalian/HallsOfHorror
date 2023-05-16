@@ -46,6 +46,7 @@ namespace DungeonCrawler
         private static string[] menuOptions =
         {
             "New Game",
+            "Room maker",
             "Settings",
             "Credits",
             "Quit app",

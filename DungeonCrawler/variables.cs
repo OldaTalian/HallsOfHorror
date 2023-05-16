@@ -258,6 +258,16 @@ namespace DungeonCrawler
             return option;
         }
 
+        public static int ConsoleReadInt(string message = "")
+        {
+            int output = 0;
+            do
+            {
+                Console.Write(message);
+            } while (!int.TryParse(Console.ReadLine(), out output));
+            return output;
+        }
+
         /// <summary>
         /// This creates the effect of each character being typed out one by one.
         /// CZ:
