@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\kotek\\Source\\Repos\\HallsOfHorror\\DungeonCrawler\\DungeonCrawler.csproj": {}
+    "C:\\Users\\oldat\\source\\repos\\HallsOfHorror\\DungeonCrawler\\DungeonCrawler.csproj": {}
   },
   "projects": {
-    "C:\\Users\\kotek\\Source\\Repos\\HallsOfHorror\\DungeonCrawler\\DungeonCrawler.csproj": {
+    "C:\\Users\\oldat\\source\\repos\\HallsOfHorror\\DungeonCrawler\\DungeonCrawler.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\kotek\\Source\\Repos\\HallsOfHorror\\DungeonCrawler\\DungeonCrawler.csproj",
+        "projectUniqueName": "C:\\Users\\oldat\\source\\repos\\HallsOfHorror\\DungeonCrawler\\DungeonCrawler.csproj",
         "projectName": "Halls of Horror",
-        "projectPath": "C:\\Users\\kotek\\Source\\Repos\\HallsOfHorror\\DungeonCrawler\\DungeonCrawler.csproj",
-        "packagesPath": "C:\\Users\\kotek\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\kotek\\Source\\Repos\\HallsOfHorror\\DungeonCrawler\\obj\\",
+        "projectPath": "C:\\Users\\oldat\\source\\repos\\HallsOfHorror\\DungeonCrawler\\DungeonCrawler.csproj",
+        "packagesPath": "C:\\Users\\oldat\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\oldat\\source\\repos\\HallsOfHorror\\DungeonCrawler\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\kotek\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\oldat\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -65,7 +61,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }

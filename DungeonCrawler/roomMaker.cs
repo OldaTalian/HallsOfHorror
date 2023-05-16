@@ -12,6 +12,7 @@ namespace DungeonCrawler
         static Dictionary<char, ConsoleColor> paletteColors = new Dictionary<char, ConsoleColor>()
         {
             { '█', ConsoleColor.White },    // Wall
+            { '▓', ConsoleColor.White },    // Wall
             { '░', ConsoleColor.White },    // Floor
             { '▒', ConsoleColor.White },    // Floor
             { '*', ConsoleColor.Magenta },  // Spawn Point
@@ -26,6 +27,26 @@ namespace DungeonCrawler
             { '☻', ConsoleColor.Red },      // Enemy
             { '|', ConsoleColor.Cyan },     // Door to the next room
             { '\\', ConsoleColor.Cyan }     // Door to the previous room
+        };
+
+        static Dictionary<char, string> paletteDescriptions = new Dictionary<char, string>()
+        {
+            { '█', "Wall"},    // Wall
+            { '▓', "Light"},    // Wall
+            { '░', "Floor"},    // Floor
+            { '▒', "messy Floor"},    // Floor
+            { '*', "Player spawn point"},  // Spawn Point
+            { '$', "Walk through wall"},    // Walk Through Wall
+            { '{', "Closed Lever"},      // Closed Lever
+            { '}', "Open Lever"},    // Open Lever
+            { 'ł', "Closed Door"},      // Closed Door
+            { 'Ł', "Open Door"},    // Open Door
+            { '#', "Magma"},      // Magma (deals damage)
+            { ' ', "Void"}, // Void (kills instantly)
+            { '@', "Boss"},  // BOSS
+            { '☻', "Enemy"},      // Enemy
+            { '|', "Door to the next room"},     // Door to the next room
+            { '\\',"Door to the previous room" }     // Door to the previous room
         };
 
         static string GetPalette()
@@ -65,7 +86,10 @@ namespace DungeonCrawler
                 DisplayPalette(selectedBlock);
                 Console.WriteLine();
                 DisplayMap(map, cursorX, cursorY);
-
+                while (Console.KeyAvailable)
+                {
+                    Console.ReadKey(true);
+                }
                 switch (Console.ReadKey(true).Key)
                 {
                     case ConsoleKey.UpArrow:
@@ -115,20 +139,36 @@ namespace DungeonCrawler
         static void DisplayPalette(char selectedBlock)
         {
             string palette = GetPalette();
-            Console.WriteLine("Block Palette:");
+            getCursorToCenter(palette.Length * 2, false);
+            for (int i = 0; i <= palette.Length * 2; i++)
+            {
+                Console.Write("=");
+            }
+            Console.WriteLine();
+            getCursorToCenter(palette.Length * 2, false);
             for (int i = 0; i < palette.Length; i++)
             {
                 if (palette[i] == selectedBlock)
                 {
-                    Console.BackgroundColor = ConsoleColor.Black;
-                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.BackgroundColor = ConsoleColor.White;
+                    Console.ForegroundColor = ConsoleColor.Black;
+                    Console.Write("(" + palette[i] + ")");
                 }
                 else
                 {
-                    Console.ResetColor();
+                    Console.Write(" " + palette[i]);
                 }
-                Console.Write(palette[i]);
+                Console.ResetColor();
             }
+            Console.WriteLine();
+            getCursorToCenter(palette.Length * 2, false);
+            for (int i = 0; i <= palette.Length * 2; i++)
+            {
+                Console.Write("=");
+            }
+            Console.WriteLine();
+            getCursorToCenter(paletteDescriptions[selectedBlock].Length, false);
+            Console.WriteLine(paletteDescriptions[selectedBlock]);
             Console.ResetColor();
         }
 
@@ -136,10 +176,9 @@ namespace DungeonCrawler
         {
             int mapHeight = map.Length;
             int mapWidth = map[0].Length;
-            //getCursorToCenter(Console.WindowWidth - 5, true);
             for (int y = 0; y < mapHeight; y++)
             {
-                //getCursorToCenter(mapWidth, false);
+                getCursorToCenter(mapWidth, false);
                 for (int x = 0; x < mapWidth; x++)
                 {
                     char block = map[y][x];
@@ -155,6 +194,7 @@ namespace DungeonCrawler
                     }
                     Console.Write(block);
                 }
+                Console.ResetColor();
                 Console.WriteLine();
             }
             Console.ResetColor();
