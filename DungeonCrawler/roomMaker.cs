@@ -13,16 +13,16 @@ namespace DungeonCrawler
         {
             { '█', ConsoleColor.White },    // Wall
             { '▓', ConsoleColor.White },    // Wall
-            { '░', ConsoleColor.White },    // Floor
-            { '▒', ConsoleColor.White },    // Floor
-            { '*', ConsoleColor.Magenta },  // Spawn Point
+            { '░', ConsoleColor.DarkGray },    // Floor
+            { '▒', ConsoleColor.DarkGray },    // Floor
+            { '*', ConsoleColor.Yellow },  // Spawn Point
             { '$', ConsoleColor.White },    // Walk Through Wall
-            { '{', ConsoleColor.Red },      // Closed Lever
-            { '}', ConsoleColor.Green },    // Open Lever
+            { '{', ConsoleColor.DarkRed },      // Closed Lever
+            { '}', ConsoleColor.DarkGreen },    // Open Lever
             { 'ł', ConsoleColor.Red },      // Closed Door
             { 'Ł', ConsoleColor.Green },    // Open Door
-            { '#', ConsoleColor.Red },      // Magma (deals damage)
-            { ' ', ConsoleColor.DarkBlue }, // Void (kills instantly)
+            { '#', ConsoleColor.DarkRed },      // Magma (deals damage)
+            { ' ', ConsoleColor.DarkCyan }, // Void (kills instantly)
             { '@', ConsoleColor.DarkRed },  // BOSS
             { '☻', ConsoleColor.Red },      // Enemy
             { '|', ConsoleColor.Cyan },     // Door to the next room
@@ -34,7 +34,7 @@ namespace DungeonCrawler
             { '█', "Wall"},    // Wall
             { '▓', "Light"},    // Wall
             { '░', "Floor"},    // Floor
-            { '▒', "messy Floor"},    // Floor
+            { '▒', "Messy Floor"},    // Floor
             { '*', "Player spawn point"},  // Spawn Point
             { '$', "Walk through wall"},    // Walk Through Wall
             { '{', "Closed Lever"},      // Closed Lever
@@ -72,7 +72,7 @@ namespace DungeonCrawler
                 map[i] = new char[mapWidth];
                 for (int j = 0; j < mapWidth; j++)
                 {
-                    map[i][j] = ' ';
+                    map[i][j] = '░';
                 }
             }
 
@@ -189,7 +189,7 @@ namespace DungeonCrawler
                     }
                     else
                     {
-                        Console.BackgroundColor = ConsoleColor.DarkGray;
+                        Console.ResetColor();
                         Console.ForegroundColor = paletteColors.ContainsKey(block) ? paletteColors[block] : ConsoleColor.White;
                     }
                     Console.Write(block);

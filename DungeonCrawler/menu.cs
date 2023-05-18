@@ -109,7 +109,7 @@ namespace DungeonCrawler
                         }
                         break;
                     case ConsoleKey.Enter:
-                        if (option >= 1 && option <= 4)
+                        if (option >= 1 && option <= menuOptions.Length)
                         {
                             didSelect = true;
                         }

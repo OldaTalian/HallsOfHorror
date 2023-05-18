@@ -79,6 +79,9 @@ namespace DungeonCrawler
             }
         }
 
+        private static Process[] SoundProcesses = new Process[5];
+        private static int SoundProcessesIndex = 0;
+
         /// <summary>
         /// Plays sound effect from file
         /// CZ:
@@ -91,11 +94,24 @@ namespace DungeonCrawler
             if (SoundsEnabled)
             {
                 string fileLocation = $"{AppDomain.CurrentDomain.BaseDirectory}{name}";
+                if (SoundProcessesIndex + 1 == SoundProcesses.Length)
+                {
+                    SoundProcessesIndex = 0; // Reset index
+                }
                 try
                 {
+                    Process SoundProcess = SoundProcesses[SoundProcessesIndex];
+                    if (SoundProcess != null && !SoundProcess.HasExited)
+                    {
+                        SoundProcess.Kill(); // Kill the ffplay process if it's running
+                    }
+                    SoundProcess = new Process();
                     double pitch = Math.Pow(2, pitchVariation / 12.0);
                     string ffplayArgs = $"{fileLocation} -volume {SoundVolume} -loglevel quiet -nodisp -af \"atempo={pitch}\"";
-                    System.Diagnostics.Process.Start('"' + Get_ffPlay_location() + "\\ffplay" + '"', ffplayArgs);
+                    SoundProcess.StartInfo.FileName = Get_ffPlay_location() + "\\ffplay";
+                    SoundProcess.StartInfo.Arguments=ffplayArgs;
+                    SoundProcess.Start();
+                    SoundProcessesIndex++;
                 }
                 catch (Exception e)
                 {

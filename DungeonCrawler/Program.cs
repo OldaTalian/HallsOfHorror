@@ -28,7 +28,6 @@ namespace DungeonCrawler
             while (true)
             {
                 int option = Menu();
-
                 if (option == 1) {
                     StartNewGame();
                 }
@@ -44,7 +43,7 @@ namespace DungeonCrawler
                 {
                     ShowCredits();
                 }
-                else if (option == 5)
+                else
                 {
                     Environment.Exit(0);
                 }
