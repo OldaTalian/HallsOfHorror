@@ -208,12 +208,17 @@ namespace DungeonCrawler
         {
             int option = defaultOption;
             bool hasTyped = false;
+            int optionsLenght = 0;
+            for (int i = 0; i < options.Length; i++)
+            {
+                optionsLenght += options[i].Length + 1;
+            }
             while (!hasTyped)
             {
                 Console.SetCursorPosition(0, Console.CursorTop - 1);
                 if (centerMenu)
                 {
-                    getCursorToCenter(37, false);   
+                    getCursorToCenter(optionsLenght, false);   
                 }
                 for (int i = 0; i < options.Length; i++)
                 {

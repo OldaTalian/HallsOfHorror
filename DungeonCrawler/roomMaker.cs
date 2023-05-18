@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static DungeonCrawler.Settings;
 using static DungeonCrawler.Variables;
 
 namespace DungeonCrawler
@@ -48,6 +49,7 @@ namespace DungeonCrawler
             { '|', "Door to the next room"},     // Door to the next room
             { '\\',"Door to the previous room" }     // Door to the previous room
         };
+        private static bool paint = false;
 
         static string GetPalette()
         {
@@ -58,6 +60,7 @@ namespace DungeonCrawler
             }
             return paletteBuilder.ToString();
         }
+
 
         public static void CreateRoom()
         {
@@ -119,11 +122,20 @@ namespace DungeonCrawler
                         selectedBlock = ChangeSelectedBlock(selectedBlock, 1);
                         break;
                     case ConsoleKey.Escape:
+                        SaveMapToConfig(map);
                         return;
                     case ConsoleKey.Enter:
                     case ConsoleKey.Spacebar:
                         map[cursorY][cursorX] = selectedBlock;
                         break;
+                    case ConsoleKey.Tab:
+                    case ConsoleKey.NumPad0:
+                        paint = !paint;
+                        break;
+                }
+                if (paint == true)
+                {
+                    map[cursorY][cursorX] = selectedBlock;
                 }
             }
         }
@@ -168,6 +180,10 @@ namespace DungeonCrawler
             }
             Console.WriteLine();
             getCursorToCenter(paletteDescriptions[selectedBlock].Length, false);
+            if (paint)
+            {
+                Console.BackgroundColor = ConsoleColor.DarkGreen;
+            }
             Console.WriteLine(paletteDescriptions[selectedBlock]);
             Console.ResetColor();
         }
@@ -198,6 +214,27 @@ namespace DungeonCrawler
                 Console.WriteLine();
             }
             Console.ResetColor();
+        }
+    
+        static void SaveMapToConfig(char[][] map)
+        {
+            getCursorToCenter(29, false);
+            Console.WriteLine("Would you like to save the map?");
+            Console.WriteLine();
+            int option = MenuWithOptions(new string[] { "Yes", "No" }, centerMenu: true);
+            if (option == 0)
+            {
+                string output = string.Empty;
+                for (int y = 0; y < map.Length; y++)
+                {
+                    for (int x = 0; x < map[y].Length; x++)
+                    {
+                        output += map[y][x];
+                    }
+                    output += "\n";
+                }
+                SetConfigValue("CustomRoom", output);
+            }
         }
     }
 }
