@@ -19,10 +19,10 @@ namespace DungeonCrawler
             {
                 getCursorToCenter(30, false);
                 Console.Write("NM[1][1]:"); // Next Map on [1][1], good for debuging maps
-                char nextMapChar = (ThisRoom < AllRooms().Length - 1) ? RandomMaps()[ThisRoom + 1][1][1] : ' ';
+                char nextMapChar = (ThisRoom < AllRooms.Length - 1) ? RandomMaps()[ThisRoom + 1][1][1] : ' ';
                 Console.Write(nextMapChar);    
                 Console.Write("|M:");// all maps
-                Console.Write((ThisRoom) + "/" + (AllRooms().Length - 1)); 
+                Console.Write((ThisRoom) + "/" + (AllRooms.Length - 1)); 
                 Console.Write("|x:" + mainPlayerPos[0] + "y:" + mainPlayerPos[1]); // cordinates
                 Console.WriteLine();
             }

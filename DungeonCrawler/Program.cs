@@ -71,11 +71,11 @@ namespace DungeonCrawler
             // Load map; CZ: Načte mapu
             if (DEBUG_ROOM)
             {
-                Map = AllRooms()[0];
+                Map = AllRooms[0];
             }
             else
             {
-                Map = AllRooms()[1];
+                Map = AllRooms[1];
                 ThisRoom = 1;
             }
             RegisterSpawns();
