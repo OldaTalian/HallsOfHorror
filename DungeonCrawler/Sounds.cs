@@ -94,10 +94,7 @@ namespace DungeonCrawler
             if (SoundsEnabled)
             {
                 string fileLocation = $"{AppDomain.CurrentDomain.BaseDirectory}{name}";
-                if (SoundProcessesIndex + 1 == SoundProcesses.Length)
-                {
-                    SoundProcessesIndex = 0; // Reset index
-                }
+                SoundProcessesIndex = SoundProcessesIndex % SoundProcesses.Length; // Reset index
                 try
                 {
                     Process SoundProcess = SoundProcesses[SoundProcessesIndex];
@@ -109,7 +106,7 @@ namespace DungeonCrawler
                     double pitch = Math.Pow(2, pitchVariation / 12.0);
                     string ffplayArgs = $"{fileLocation} -volume {SoundVolume} -loglevel quiet -nodisp -af \"atempo={pitch}\"";
                     SoundProcess.StartInfo.FileName = Get_ffPlay_location() + "\\ffplay";
-                    SoundProcess.StartInfo.Arguments=ffplayArgs;
+                    SoundProcess.StartInfo.Arguments = ffplayArgs;
                     SoundProcess.Start();
                     SoundProcessesIndex++;
                 }
