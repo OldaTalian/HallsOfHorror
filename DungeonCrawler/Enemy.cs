@@ -251,7 +251,6 @@ namespace DungeonCrawler
             FightInProgress = true;
             enemyFightHealthFull = 250;
             enemyFightHealth = enemyFightHealthFull;
-            Thread.Sleep(1000);
             PlayMusic("assets/bossfightloop.wav");
             PlayerAttack(15);
             if (playerHealth > 0)

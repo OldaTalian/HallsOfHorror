@@ -239,8 +239,7 @@ namespace DungeonCrawler
             {
                 case 0:
                     Console.WriteLine("Paste your map string here:");
-                    map = Console.ReadLine().Replace("\r\n", "\n")
-                        .Split('\n', StringSplitOptions.RemoveEmptyEntries)
+                    map = Console.ReadLine().Split("\\n", StringSplitOptions.RemoveEmptyEntries)
                         .Select(row => row.Trim().ToArray())
                         .ToArray();
                     break;
@@ -289,7 +288,7 @@ namespace DungeonCrawler
                 }
                 if (MapName == string.Empty)
                 {
-                    MapName = "CustomMap" + random.Next(0,999999999);
+                    MapName = "CustomRoom" + random.Next(0,999999999);
                 }
                 SetConfigValue(MapName, output);
                 Console.WriteLine("Map saved as " + MapName);
