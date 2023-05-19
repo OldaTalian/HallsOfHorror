@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Configuration;
 using System.Text;
-using System.Threading.Tasks;
 using static DungeonCrawler.Settings;
 using static DungeonCrawler.Variables;
 
@@ -60,15 +58,28 @@ namespace DungeonCrawler
             }
             return paletteBuilder.ToString();
         }
+        static int cursorX = 0;
+        static int cursorY = 0;
+        static char selectedBlock = '█';
+        static int mapHeight = 5;
+        static int mapWidth = 5;
+        static char[][] map = new char[0][];
+        static string MapName = string.Empty;
 
 
         public static void CreateRoom()
         {
-            int mapWidth = ConsoleReadInt("Width: ");
-            int mapHeight = ConsoleReadInt("Height: ");
+            getCursorToCenter(20, false);
+            Console.WriteLine("Welcome to RoomMaker");
+            getCursorToCenter(26, false);
+            Console.WriteLine("What's your desired map...");
+            getCursorToCenter(15, false);
+            mapWidth = ConsoleReadInt("Width: ");
+            getCursorToCenter(15, false);
+            mapHeight = ConsoleReadInt("Height: ");
             Console.WriteLine();
 
-            char[][] map = new char[mapHeight][];
+            map = new char[mapHeight][];
 
             for (int i = 0; i < mapHeight; i++)
             {
@@ -78,11 +89,11 @@ namespace DungeonCrawler
                     map[i][j] = '░';
                 }
             }
+            Drawing();
+        }
 
-            int cursorX = 0;
-            int cursorY = 0;
-            char selectedBlock = '█';
-
+        static void Drawing()
+        {
             while (true)
             {
                 Console.Clear();
@@ -124,6 +135,10 @@ namespace DungeonCrawler
                     case ConsoleKey.Escape:
                         SaveMapToConfig(map);
                         return;
+                    case ConsoleKey.I:
+                    case ConsoleKey.OemPlus:
+                        ImportMap();
+                        break;
                     case ConsoleKey.Enter:
                     case ConsoleKey.Spacebar:
                         map[cursorY][cursorX] = selectedBlock;
@@ -216,13 +231,52 @@ namespace DungeonCrawler
             Console.ResetColor();
         }
     
+        static void ImportMap()
+        {
+            Console.WriteLine("How do you want to import the map?");
+            int option = MenuWithOptions(new string[] { "Paste", "Config", "Go back"}, defaultOption: 0, centerMenu: true);
+            switch (option)
+            {
+                case 0:
+                    Console.WriteLine("Paste your map string here:");
+                    map = Console.ReadLine().Replace("\r\n", "\n")
+                        .Split('\n', StringSplitOptions.RemoveEmptyEntries)
+                        .Select(row => row.Trim().ToArray())
+                        .ToArray();
+                    break;
+                case 1:
+                    string[] MapNames = new string[0];
+                    for (int i = 0; i < ConfigurationManager.AppSettings.AllKeys.Length; i++)
+                    {
+                        if (ConfigurationManager.AppSettings.AllKeys[i].Contains("Room"))
+                        {
+                            Array.Resize(ref MapNames, MapNames.Length + 1);
+                            MapNames[MapNames.Length - 1] = ConfigurationManager.AppSettings.AllKeys[i];
+                        }
+                    }
+                    Console.Clear();
+                    Console.WriteLine();
+                    int option1 = verticalOptionMenu(MapNames, centerMenu: true);
+                    map = GetConfigValue(MapNames[option1]).Replace("\r\n", "\n")
+                        .Split('\n', StringSplitOptions.RemoveEmptyEntries)
+                        .Select(row => row.Trim().ToArray())
+                        .ToArray();
+                    MapName = MapNames[option1];
+                    break;
+            }
+            mapHeight = map.Length;
+            mapWidth = map[0].Length;
+            cursorX = 0;
+            cursorY = 0;
+        }
         static void SaveMapToConfig(char[][] map)
         {
             getCursorToCenter(29, false);
             Console.WriteLine("Would you like to save the map?");
             Console.WriteLine();
-            int option = MenuWithOptions(new string[] { "Yes", "No" }, centerMenu: true);
-            if (option == 0)
+            int option = MenuWithOptions(new string[] { "No", "Yes", "Go back"}, defaultOption: 1, centerMenu: true);
+            Random random = new Random();
+            if (option == 1)
             {
                 string output = string.Empty;
                 for (int y = 0; y < map.Length; y++)
@@ -233,7 +287,19 @@ namespace DungeonCrawler
                     }
                     output += "\n";
                 }
-                SetConfigValue("CustomRoom", output);
+                if (MapName == string.Empty)
+                {
+                    MapName = "CustomMap" + random.Next(0,999999999);
+                }
+                SetConfigValue(MapName, output);
+                Console.WriteLine("Map saved as " + MapName);
+                Console.ReadKey();
+                return;
+            }
+            else if (option == 2)
+            {
+                Drawing();
+                return;
             }
         }
     }

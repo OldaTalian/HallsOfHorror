@@ -86,8 +86,8 @@ namespace DungeonCrawler
 
             // The actual game ↓
 
-            RenderScreen();
             playerHealth = defaultPlayerHealth;
+            RenderScreen();
             bool gameIsPlaying = true;
             while (gameIsPlaying) // Game tick: 
             {

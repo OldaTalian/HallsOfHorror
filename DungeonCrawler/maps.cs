@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration; // (external)
 using static DungeonCrawler.Variables;
+using static DungeonCrawler.Settings;
 using static System.Formats.Asn1.AsnWriter;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -60,7 +61,7 @@ namespace DungeonCrawler
 
             for (int i = 0; i < ConfigurationManager.AppSettings.AllKeys.Length; i++)
             {
-                if (ConfigurationManager.AppSettings.AllKeys[i].Contains("Room"))
+                if (ConfigurationManager.AppSettings.AllKeys[i].Contains("Room") && ConfigurationManager.AppSettings.AllKeys[i] != "endRoom")
                 {
                     // Get the room string from the config
                     string roomString = ConfigurationManager.AppSettings[ConfigurationManager.AppSettings.AllKeys[i]];
@@ -75,6 +76,10 @@ namespace DungeonCrawler
                     output.Add(room);
                 }
             }
+            output.Add(GetConfigValue("endRoom").Replace("\r\n", "\n")
+                  .Split('\n', StringSplitOptions.RemoveEmptyEntries)
+                  .Select(row => row.Trim().ToArray())
+                  .ToArray());
             AllRooms = output.ToArray();
         }
 
