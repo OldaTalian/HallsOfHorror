@@ -105,9 +105,12 @@ namespace DungeonCrawler
         /// <param name="y"></param>
         public static void MoveUp(int x, int y)
         {
-            Map[y][x] = lastStepOn; 
-            lastStepOn = Map[y - 1][x]; 
-            Map[y - 1][x] = player;
+            if (y - 1 >= 0)
+            {
+                Map[y][x] = lastStepOn;
+                lastStepOn = Map[y - 1][x];
+                Map[y - 1][x] = player;
+            }
         }
 
         /// <summary>
@@ -119,9 +122,12 @@ namespace DungeonCrawler
         /// <param name="y"></param>
         public static void MoveDown(int x, int y)
         {
-            Map[y][x] = lastStepOn;
-            lastStepOn = Map[y + 1][x];
-            Map[y + 1][x] = player;
+            if (y + 1 < Map.Length)
+            {
+                Map[y][x] = lastStepOn;
+                lastStepOn = Map[y + 1][x];
+                Map[y + 1][x] = player;
+            }
         }
 
         /// <summary>
@@ -133,9 +139,12 @@ namespace DungeonCrawler
         /// <param name="y"></param>
         public static void MoveLeft(int x, int y)
         {
-            Map[y][x] = lastStepOn; 
-            lastStepOn = Map[y][x - 1]; 
-            Map[y][x - 1] = player; 
+            if (x - 1 >= 0)
+            {
+                Map[y][x] = lastStepOn;
+                lastStepOn = Map[y][x - 1];
+                Map[y][x - 1] = player;
+            }
         }
 
         /// <summary>
@@ -147,9 +156,12 @@ namespace DungeonCrawler
         /// <param name="y"></param>
         public static void MoveRight(int x, int y)
         {
-            Map[y][x] = lastStepOn; 
-            lastStepOn = Map[y][x + 1]; 
-            Map[y][x + 1] = player; 
+            if (x + 1 < Map[y].Length)
+            {
+                Map[y][x] = lastStepOn;
+                lastStepOn = Map[y][x + 1];
+                Map[y][x + 1] = player;
+            }
         }
 
         /// <summary>

@@ -8,6 +8,7 @@ using static DungeonCrawler.Render;
 using static DungeonCrawler.Sounds;
 using static DungeonCrawler.Variables;
 using static DungeonCrawler.IntroLore;
+using static DungeonCrawler.roomMaker;
 
 namespace DungeonCrawler
 {
@@ -27,18 +28,22 @@ namespace DungeonCrawler
             while (true)
             {
                 int option = Menu();
-
                 if (option == 1) {
                     StartNewGame();
                 }
-                else if(option == 2) {
+                else if(option == 2)
+                {
+                    Console.Clear();
+                    CreateRoom();
+                }
+                else if(option == 3) {
                     SettingsMenu();
                 }
-                else if (option == 3)
+                else if (option == 4)
                 {
                     ShowCredits();
                 }
-                else if (option == 4)
+                else
                 {
                     Environment.Exit(0);
                 }
@@ -66,11 +71,11 @@ namespace DungeonCrawler
             // Load map; CZ: Načte mapu
             if (DEBUG_ROOM)
             {
-                Map = AllRooms()[0];
+                Map = AllRooms[0];
             }
             else
             {
-                Map = AllRooms()[1];
+                Map = AllRooms[1];
                 ThisRoom = 1;
             }
             RegisterSpawns();
@@ -81,8 +86,8 @@ namespace DungeonCrawler
 
             // The actual game ↓
 
-            RenderScreen();
             playerHealth = defaultPlayerHealth;
+            RenderScreen();
             bool gameIsPlaying = true;
             while (gameIsPlaying) // Game tick: 
             {

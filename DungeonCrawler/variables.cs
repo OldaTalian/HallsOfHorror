@@ -204,16 +204,21 @@ namespace DungeonCrawler
         /// <param name="defaultOption"></param>
         /// <param name="centerMenu"></param>
         /// <returns>the option index</returns>
-        public static int MenuWithOptions(string[] options,int defaultOption = 0, bool centerMenu = true)
+        public static int MenuWithOptions(string[] options,int defaultOption = 0, bool centerMenu = true, bool canEscape = false)
         {
             int option = defaultOption;
             bool hasTyped = false;
+            int optionsLenght = 0;
+            for (int i = 0; i < options.Length; i++)
+            {
+                optionsLenght += options[i].Length + 1;
+            }
             while (!hasTyped)
             {
                 Console.SetCursorPosition(0, Console.CursorTop - 1);
                 if (centerMenu)
                 {
-                    getCursorToCenter(37, false);   
+                    getCursorToCenter(optionsLenght, false);   
                 }
                 for (int i = 0; i < options.Length; i++)
                 {
@@ -241,7 +246,10 @@ namespace DungeonCrawler
                         }
                         break;
                     case ConsoleKey.Escape:
-                        hasTyped = true;
+                        if (canEscape)
+                        {
+                            hasTyped = true;    
+                        }
                         break;
                     case ConsoleKey.RightArrow:
                         if (option < options.Length - 1)
@@ -256,6 +264,75 @@ namespace DungeonCrawler
                 }
             }
             return option;
+        }
+
+        public static int verticalOptionMenu(string[] options, int defaultOption = 0, bool centerMenu = true, bool canEscape = false)
+        {
+            int option = defaultOption;
+            bool hasTyped = false;
+            int optionsLenght = 0;
+            for (int i = 0; i < options.Length; i++)
+            {
+                optionsLenght += options[i].Length + 1;
+            }
+            while (!hasTyped)
+            {
+                Console.Clear();
+                for (int i = 0; i < options.Length; i++)
+                {
+                    if (centerMenu)
+                    {
+                        getCursorToCenter(options[i].Length, false);
+                    }
+                    if (i == option)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Black;
+                        Console.BackgroundColor = ConsoleColor.White;
+                        Console.WriteLine(options[i]);
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.BackgroundColor = ConsoleColor.Black;
+                    }
+                    else
+                    {
+                        Console.WriteLine(options[i]);
+                    }
+                }
+                Console.WriteLine();
+                switch (Console.ReadKey(true).Key)
+                {
+                    case ConsoleKey.UpArrow:
+                        if (option > 0)
+                        {
+                            option--;
+                        }
+                        break;
+                    case ConsoleKey.Escape:
+                        if (canEscape)
+                        {
+                            hasTyped = true;
+                        }
+                        break;
+                    case ConsoleKey.DownArrow:
+                        if (option < options.Length - 1)
+                        {
+                            option++;
+                        }
+                        break;
+                    case ConsoleKey.Enter:
+                        return option;
+                }
+            }
+            return option;
+        }
+
+        public static int ConsoleReadInt(string message = "")
+        {
+            int output = 0;
+            do
+            {
+                Console.Write(message);
+            } while (!int.TryParse(Console.ReadLine(), out output));
+            return output;
         }
 
         /// <summary>
